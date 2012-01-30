@@ -95,6 +95,7 @@
 		2C95A1D9137DB24D0025B28D /* FacilitiesSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C95A1D7137DB24D0025B28D /* FacilitiesSummaryViewController.xib */; };
 		2C99DCAF1370508D00114A9A /* HighlightLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C99DCAE1370508D00114A9A /* HighlightLabel.m */; };
 		2C99DCE01370782200114A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C99DCDF1370782200114A9A /* CoreText.framework */; };
+		2C9FD03114D6FC300030151B /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C9FD03014D6FC300030151B /* ArcGIS.bundle */; };
 		2CA454F213C7468F00891428 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA454F113C7468F00891428 /* AssetsLibrary.framework */; };
 		2CAFCBE213F1C3F0007983D8 /* TBXML+MIT.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAFCBE113F1C3F0007983D8 /* TBXML+MIT.m */; };
 		2CB383361486A01600D4B168 /* LibrariesHoldingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB383351486A01600D4B168 /* LibrariesHoldingsDetailViewController.m */; };
@@ -578,6 +579,7 @@
 		2C99DCAD1370508D00114A9A /* HighlightLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightLabel.h; sourceTree = "<group>"; };
 		2C99DCAE1370508D00114A9A /* HighlightLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightLabel.m; sourceTree = "<group>"; };
 		2C99DCDF1370782200114A9A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		2C9FD03014D6FC300030151B /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = ../../../../Library/SDKs/ArcGIS/iOS.sdk/usr/local/resources/ArcGIS.bundle; sourceTree = "<group>"; };
 		2CA454F113C7468F00891428 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2CAFCBE013F1C3F0007983D8 /* TBXML+MIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+MIT.h"; sourceTree = "<group>"; };
 		2CAFCBE113F1C3F0007983D8 /* TBXML+MIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+MIT.m"; sourceTree = "<group>"; };
@@ -1247,6 +1249,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2C9FD03014D6FC300030151B /* ArcGIS.bundle */,
 				2CD12D4E1360584F00A73ACA /* facilities */,
 				2CDF301E134DF504007C6813 /* qrreader */,
 				EB07B06912B8971D005D6A4C /* calendar */,
@@ -2567,6 +2570,7 @@
 				4B667064140330A000714C6A /* LibrariesViewController.xib in Resources */,
 				4BE4D2FF14115DD200E723F0 /* LibrariesLocationsHoursDetailViewController.xib in Resources */,
 				4BE4D3011416EB4D00E723F0 /* libraries in Resources */,
+				2C9FD03114D6FC300030151B /* ArcGIS.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2933,16 +2937,19 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/ZXing/ZXingWidget/Classes\"",
 					"\"$(SRCROOT)/ZXing/ZXingWidget/CoreSrc\"",
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"Facebook Connect\"",
+					"\"$(ARCGIS_SDK)/usr/local/include/**\"",
 				);
 				INFOPLIST_FILE = "MIT_Mobile-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
+					"\"$(ARCGIS_SDK)/usr/local/lib/**\"",
 				);
 				PRODUCT_NAME = MITMobile;
 				SDKROOT = iphoneos;
@@ -2957,16 +2964,19 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/ZXing/ZXingWidget/Classes\"",
 					"\"$(SRCROOT)/ZXing/ZXingWidget/CoreSrc\"",
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"Facebook Connect\"",
+					"\"$(ARCGIS_SDK)/usr/local/include/**\"",
 				);
 				INFOPLIST_FILE = "MIT_Mobile-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
+					"\"$(ARCGIS_SDK)/usr/local/lib/**\"",
 				);
 				PRODUCT_NAME = MITMobile;
 				SDKROOT = iphoneos;
@@ -2976,12 +2986,14 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
 				ARCHS = (
 					armv6,
 					armv7,
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -3003,12 +3015,14 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
 				ARCHS = (
 					armv6,
 					armv7,
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -3028,12 +3042,14 @@
 		DE30C9EE112205BA00598A1A /* Distribution - App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
 				ARCHS = (
 					armv6,
 					armv7,
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Massachusetts Institute of Technology";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -3061,16 +3077,19 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/ZXing/ZXingWidget/Classes\"",
 					"\"$(SRCROOT)/ZXing/ZXingWidget/CoreSrc\"",
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"Facebook Connect\"",
+					"\"$(ARCGIS_SDK)/usr/local/include/**\"",
 				);
 				INFOPLIST_FILE = "MIT_Mobile-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
+					"\"$(ARCGIS_SDK)/usr/local/lib/**\"",
 				);
 				PRODUCT_NAME = MITMobile;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -3081,6 +3100,7 @@
 		DEF93C661110C9C4009DF154 /* Distribution - Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
 				ARCHS = (
 					armv6,
 					armv7,
@@ -3088,6 +3108,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Massachusetts Institute of Technology";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -3115,16 +3136,19 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/ZXing/ZXingWidget/Classes\"",
 					"\"$(SRCROOT)/ZXing/ZXingWidget/CoreSrc\"",
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"Facebook Connect\"",
+					"\"$(ARCGIS_SDK)/usr/local/include/**\"",
 				);
 				INFOPLIST_FILE = "MIT_Mobile-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
+					"\"$(ARCGIS_SDK)/usr/local/lib/**\"",
 				);
 				PRODUCT_NAME = MITMobile;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
