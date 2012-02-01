@@ -42,8 +42,6 @@
 
 
 @interface MITMapView : UIView <MKMapViewDelegate> {
-
-    MKMapView *_mapView;
 	BOOL _stayCenteredOnUserLocation;
 	id<MITMapViewDelegate> _mapDelegate;
 
@@ -65,7 +63,6 @@
 - (void)fixateOnCampus;
 
 @property (nonatomic, assign) id<MITMapViewDelegate> delegate;
-@property (nonatomic, retain) MKMapView *mapView;
 @property BOOL stayCenteredOnUserLocation;
 @property CGFloat zoomLevel;
 
@@ -88,6 +85,7 @@
 - (void)refreshCallout;
 - (void)adjustCustomCallOut;
 - (void)positionAnnotationView:(MITMapAnnotationView*)annotationView;
+- (void)calloutAccessoryControlTapped:(id)sender forAnnotationView:(MITMapAnnotationView*)annotationView;
 - (MKCoordinateRegion)regionForAnnotations:(NSArray *)annotations;
 
 - (void)selectAnnotation:(id<MKAnnotation>)annotation;

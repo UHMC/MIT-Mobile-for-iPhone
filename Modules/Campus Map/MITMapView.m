@@ -35,6 +35,10 @@
 
 @end
 
+@interface MITMapView ()
+@property (nonatomic, retain) MKMapView *mapView;
+@end
+
 
 @implementation MITMapView
 
@@ -262,6 +266,12 @@
 		[_mapView selectAnnotation:annotationView.annotation animated:NO];
 	
 	
+}
+
+
+- (void)calloutAccessoryControlTapped:(id)sender forAnnotationView:(MITMapAnnotationView*)annotationView
+{
+    [self mapView:self.mapView annotationView:annotationView calloutAccessoryControlTapped:sender];
 }
 
 - (id<MKAnnotation>) currentAnnotation {
