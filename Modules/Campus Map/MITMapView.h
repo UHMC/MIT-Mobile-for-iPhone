@@ -10,11 +10,8 @@
 #import "MITMapRoute.h"
 
 @class MapLevel;
-@class MITMapUserLocation;
 @class MITMapView;
 @class MITMapSearchResultAnnotation;
-@class RouteView;
-@class GridLayer; // not used
 @class MapTileOverlay;
 
 @protocol MITMapViewDelegate<NSObject>
@@ -68,7 +65,6 @@
 
 #pragma mark MKMapView forwarding
 
-//- (void)didUpdateUserLocation:(MKUserLocation *)userLocation;
 - (void)setCenterCoordinate:(CLLocationCoordinate2D)coord animated:(BOOL)animated;
 - (CGPoint)convertCoordinate:(CLLocationCoordinate2D)coordinate toPointToView:(UIView *)view;
 - (CLLocationCoordinate2D)convertPoint:(CGPoint)point toCoordinateFromView:(UIView *)view;

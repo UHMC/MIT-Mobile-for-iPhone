@@ -327,7 +327,7 @@
         NSInteger count = [[route pathLocations] count];
         CLLocationCoordinate2D *pointArr = malloc(sizeof(CLLocationCoordinate2D) * count);
         
-        for (int idx = 0; idx < count; idx++){
+        for (int idx = 0; idx < count; idx++) {
             CLLocation *location = [[route pathLocations] objectAtIndex:idx];
             CLLocationCoordinate2D coordinate = location.coordinate;
             pointArr[idx] = coordinate;
@@ -465,14 +465,6 @@
 
 
 #pragma mark MKMapView delegation
-/*
-// this is being called by other classes
-- (void)didUpdateUserLocation:(MKUserLocation *)userLocation {
-    // this is the proper delegate method
-    [self mapView:_mapView didUpdateUserLocation:userLocation];
-}
-*/
-
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     // there are better ways to do this, this is just a lazy solution
     // http://stackoverflow.com/questions/214416/set-the-location-in-iphone-simulator
@@ -515,12 +507,6 @@
         [self.delegate locateUserFailed:self];
     }
 }
-
-/*
-- (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews {
-
-}
-*/
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
