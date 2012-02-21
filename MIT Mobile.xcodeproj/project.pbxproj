@@ -615,6 +615,7 @@
 		2CED98F313534B5C0034F6F1 /* QRReaderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRReaderDetailViewController.xib; sourceTree = "<group>"; };
 		2CED98F913537DEC0034F6F1 /* QRReaderOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRReaderOverlayView.h; sourceTree = "<group>"; };
 		2CED98FA13537DEC0034F6F1 /* QRReaderOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRReaderOverlayView.m; sourceTree = "<group>"; };
+		2CF67FA214E4224500156B15 /* MITMapViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MITMapViewDelegate.h; sourceTree = "<group>"; };
 		2CFB87D11416B1AC0014E141 /* MITSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITSegmentControl.h; sourceTree = "<group>"; };
 		2CFB87D21416B1AC0014E141 /* MITSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITSegmentControl.m; sourceTree = "<group>"; };
 		2CFB87D31416B1AC0014E141 /* MITTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITTabBar.h; sourceTree = "<group>"; };
@@ -1947,12 +1948,12 @@
 				EBBFAF97129C2A92009AAEE0 /* ArcGIS */,
 				44C1A26011A2E865000FD653 /* Model */,
 				44C1A3C511A3388A000FD653 /* Selection */,
-				4463CC8710D6F4A50048CA83 /* CMModule.h */,
-				4463CC8810D6F4A50048CA83 /* CMModule.m */,
 				441009DC110A6DAF00451B23 /* CampusMapToolbar.h */,
 				441009DD110A6DAF00451B23 /* CampusMapToolbar.m */,
 				4463CC7910D6F4A50048CA83 /* CampusMapViewController.h */,
 				4463CC7A10D6F4A50048CA83 /* CampusMapViewController.m */,
+				4463CC8710D6F4A50048CA83 /* CMModule.h */,
+				4463CC8810D6F4A50048CA83 /* CMModule.m */,
 				44259C6F10DBDCDC008FCAF1 /* MITMapAnnotationCalloutView.h */,
 				44259C7010DBDCDC008FCAF1 /* MITMapAnnotationCalloutView.m */,
 				4463CC8F10D6F4A50048CA83 /* MITMapAnnotationView.h */,
@@ -1971,6 +1972,7 @@
 				44293C3410DAE88500273119 /* MITMapSearchResultsVC.xib */,
 				4463CC8B10D6F4A50048CA83 /* MITMapUserLocation.h */,
 				4463CC8C10D6F4A50048CA83 /* MITMapUserLocation.m */,
+				2CF67FA214E4224500156B15 /* MITMapViewDelegate.h */,
 				4463D5E010DA74240048CA83 /* MITMapView.h */,
 				4463D5E110DA74240048CA83 /* MITMapView.m */,
 				4420F31910E96EBE00A8CD05 /* ShuttleStopMapAnnotation.h */,
