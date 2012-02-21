@@ -2492,7 +2492,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MIT Mobile" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2987,10 +2987,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
-				ARCHS = (
-					armv6,
-					armv7,
-				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -3016,10 +3012,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
-				ARCHS = (
-					armv6,
-					armv7,
-				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -3043,10 +3035,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
-				ARCHS = (
-					armv6,
-					armv7,
-				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Massachusetts Institute of Technology";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -3101,10 +3089,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCGIS_SDK = "${USER_LIBRARY_DIR}/SDKs/ArcGIS/iOS.sdk";
-				ARCHS = (
-					armv6,
-					armv7,
-				);
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Massachusetts Institute of Technology";
 				GCC_C_LANGUAGE_STANDARD = c99;
