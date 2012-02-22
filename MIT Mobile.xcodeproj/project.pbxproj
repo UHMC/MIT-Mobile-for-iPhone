@@ -116,6 +116,7 @@
 		2CED98F413534B5C0034F6F1 /* QRReaderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CED98F213534B5C0034F6F1 /* QRReaderDetailViewController.m */; };
 		2CED98F513534B5C0034F6F1 /* QRReaderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CED98F313534B5C0034F6F1 /* QRReaderDetailViewController.xib */; };
 		2CED98FB13537DEC0034F6F1 /* QRReaderOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CED98FA13537DEC0034F6F1 /* QRReaderOverlayView.m */; };
+		2CF67FA114E420AC00156B15 /* MITAGSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF67FA014E420AC00156B15 /* MITAGSMapView.m */; };
 		2CFB87D71416B1AC0014E141 /* MITSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB87D21416B1AC0014E141 /* MITSegmentControl.m */; };
 		2CFB87D81416B1AC0014E141 /* MITTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB87D41416B1AC0014E141 /* MITTabBar.m */; };
 		2CFB87D91416B1AC0014E141 /* MITTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB87D61416B1AC0014E141 /* MITTabView.m */; };
@@ -615,6 +616,8 @@
 		2CED98F313534B5C0034F6F1 /* QRReaderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRReaderDetailViewController.xib; sourceTree = "<group>"; };
 		2CED98F913537DEC0034F6F1 /* QRReaderOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRReaderOverlayView.h; sourceTree = "<group>"; };
 		2CED98FA13537DEC0034F6F1 /* QRReaderOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRReaderOverlayView.m; sourceTree = "<group>"; };
+		2CF67F9F14E420AC00156B15 /* MITAGSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITAGSMapView.h; sourceTree = "<group>"; };
+		2CF67FA014E420AC00156B15 /* MITAGSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITAGSMapView.m; sourceTree = "<group>"; };
 		2CF67FA214E4224500156B15 /* MITMapViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MITMapViewDelegate.h; sourceTree = "<group>"; };
 		2CFB87D11416B1AC0014E141 /* MITSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITSegmentControl.h; sourceTree = "<group>"; };
 		2CFB87D21416B1AC0014E141 /* MITSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITSegmentControl.m; sourceTree = "<group>"; };
@@ -1975,6 +1978,8 @@
 				2CF67FA214E4224500156B15 /* MITMapViewDelegate.h */,
 				4463D5E010DA74240048CA83 /* MITMapView.h */,
 				4463D5E110DA74240048CA83 /* MITMapView.m */,
+				2CF67F9F14E420AC00156B15 /* MITAGSMapView.h */,
+				2CF67FA014E420AC00156B15 /* MITAGSMapView.m */,
 				4420F31910E96EBE00A8CD05 /* ShuttleStopMapAnnotation.h */,
 				4420F31A10E96EBE00A8CD05 /* ShuttleStopMapAnnotation.m */,
 			);
@@ -2916,6 +2921,7 @@
 				DEBF5FE314886F1A00B5719A /* LibrariesLoanTabController.m in Sources */,
 				DEBF5FE414886F1A00B5719A /* LibrariesLoanTableViewCell.m in Sources */,
 				DEBF5FE514886F1A00B5719A /* LibrariesRenewResultViewController.m in Sources */,
+				2CF67FA114E420AC00156B15 /* MITAGSMapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
