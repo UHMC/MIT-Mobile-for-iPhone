@@ -28,15 +28,20 @@ static NSUInteger kWGS84Wkid = 4326;
 #pragma mark - ArgGIS Conversion Methods
 - (CLLocationCoordinate2D)convertPointToCLLocation:(AGSPoint*)point
 {
-    AGSPoint *wgs84Point = [self.geometryEngine projectGeometry:point
-                                             toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:kWGS84Wkid]];
+    AGSPoint *wgs84Point = (AGSPoint*)[self.geometryEngine projectGeometry:point
+                                                        toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:kWGS84Wkid]];
     
-    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(wgs84Point.x, wgs84Point.y);
+    return CLLocationCoordinate2DMake(wgs84Point.x, wgs84Point.y);
 }
 
 - (AGSPoint*)convertCLLocationToPoint:(CLLocationCoordinate2D)point
 {
+    AGSPoint *wgs84Point = [AGSPoint pointWithX:point.latitude
+                                              y:point.longitude
+                               spatialReference:[AGSSpatialReference spatialReferenceWithWKID:kWGS84Wkid]];
     
+    return (AGSPoint*)[self.geometryEngine projectGeometry:wgs84Point
+			                toSpatialReference:self.mapView.spatialReference];
 }
 
 @end
