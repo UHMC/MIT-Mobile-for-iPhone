@@ -54,6 +54,8 @@
 @property (readonly) MKUserLocation *userLocation;
 
 #pragma mark Annotations
+@property (nonatomic, readonly) NSArray *annotations;
+@property (nonatomic, readonly) id<MKAnnotation> currentAnnotation;
 
 // programmatically select and recenter on an annotation. Must be in our list of annotations
 - (void)refreshCallout;
@@ -71,8 +73,6 @@
 - (void)removeAnnotation:(id<MKAnnotation>)annotation;
 - (void)removeAllAnnotations:(BOOL)includeUserLocation;
 
-@property (nonatomic, readonly) NSArray *annotations;
-@property (nonatomic, readonly) id<MKAnnotation> currentAnnotation;
 
 #pragma mark Overlays
 

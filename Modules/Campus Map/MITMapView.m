@@ -236,20 +236,16 @@
 	for(id<MKAnnotation> annotation in _mapView.selectedAnnotations) {
         // TODO: don't we want MITMapView to handle this?
 		MKAnnotationView *annoView = [_mapView viewForAnnotation:annotation];
-		if (nil != annoView) {
-            
-			if (annoView.selected) {
-                [_mapView deselectAnnotation:annotation animated:NO];
-				[_mapView selectAnnotation:annotation animated:NO];
-            }
+        if (annoView && annoView.selected) {
+            [_mapView deselectAnnotation:annotation animated:NO];
+            [_mapView selectAnnotation:annotation animated:NO];
 		}
 	}
 }
 
-
+/* FIXME: Never called, remove dead code */
 -(void) positionAnnotationView:(MITMapAnnotationView*)annotationView
 {
-	
 	BOOL isSelected = NO;
 	
 	if ([_mapView.selectedAnnotations containsObject:annotationView.annotation])
@@ -264,10 +260,7 @@
 	
 	if (isSelected == YES)
 		[_mapView selectAnnotation:annotationView.annotation animated:NO];
-	
-	
 }
-
 
 - (void)calloutAccessoryControlTapped:(id)sender forAnnotationView:(MITMapAnnotationView*)annotationView
 {
@@ -275,18 +268,14 @@
 }
 
 - (id<MKAnnotation>) currentAnnotation {
-	//return _currentCallout.annotation;
-	
 	if (nil != [_mapView.selectedAnnotations lastObject])
 		return [_mapView.selectedAnnotations lastObject];
 	else
 		return nil;
-    
 }
 
 
 - (void) adjustCustomCallOut {
-	
 	if (nil != customCallOutView) {
         id<MKAnnotation>annotation = customCallOutView.annotationView.annotation;
 		CGPoint point =  [_mapView convertCoordinate:annotation.coordinate toPointToView:self];
@@ -666,9 +655,8 @@
         }
         customCallOutView = [[MITMapAnnotationCalloutView alloc] initWithAnnotationView:(MITMapAnnotationView *)view mapView:self];
         
-        // this calls [self adjustCustomCallOut] as a side effect
-        [_mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
-        //[self adjustCustomCallOut];
+        [_mapView setCenterCoordinate:view.annotation.coordinate
+                             animated:YES];
     }
 }
 
