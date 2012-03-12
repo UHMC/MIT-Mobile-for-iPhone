@@ -76,3 +76,15 @@ void MyLog(const char *level, const char *filepath, int line, NSString *format, 
     #define WLog(...)
     #define ELog(...)
 #endif
+
+#ifndef DO_PRAGMA
+#   define DO_PRAGMA(x) _Pragma (#x)
+#endif
+
+#ifndef __TODO
+#   define __TODO(x) DO_PRAGMA(message ("TODO - " #x))
+#endif
+
+#ifndef __FIXME
+#define __FIXME(x) DO_PRAGMA(message ("FIXME - " #x))
+#endif
