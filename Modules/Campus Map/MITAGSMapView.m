@@ -1,5 +1,5 @@
 #import "MITAGSMapView.h"
-#import <ArcGIS.h>
+#import "ArcGIS.h"
 
 static NSUInteger kWGS84Wkid = 4326;
 
@@ -40,8 +40,9 @@ static NSUInteger kWGS84Wkid = 4326;
                                               y:point.longitude
                                spatialReference:[AGSSpatialReference spatialReferenceWithWKID:kWGS84Wkid]];
     
-    return (AGSPoint*)[self.geometryEngine projectGeometry:wgs84Point
-			                toSpatialReference:self.mapView.spatialReference];
+    //return (AGSPoint*)[self.geometryEngine projectGeometry:wgs84Point
+	//		                toSpatialReference:self.mapView.spatialReference];
+    return nil;
 }
 
 @end
