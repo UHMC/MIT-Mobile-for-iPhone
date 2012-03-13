@@ -71,8 +71,6 @@
 		2C203330135F64C00033E80A /* FacilitiesRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20332E135F64C00033E80A /* FacilitiesRootViewController.xib */; };
 		2C2E95421382F00200FA5557 /* FacilitiesConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E95401382F00200FA5557 /* FacilitiesConstants.m */; };
 		2C32BD25136F27D40015ACF6 /* FacilitiesLocations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C32BD23136F27D40015ACF6 /* FacilitiesLocations.xcdatamodeld */; };
-		2C351E0F150914D400C60D48 /* MGSModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C351E0E150914D400C60D48 /* MGSModule.m */; };
-		2C351E121509155E00C60D48 /* MGSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C351E111509155E00C60D48 /* MGSMapViewController.m */; };
 		2C3676B513C5F6B1003CB7A4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3676B413C5F6B1003CB7A4 /* ImageIO.framework */; };
 		2C3676B813C5F854003CB7A4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3676B613C5F7FF003CB7A4 /* MobileCoreServices.framework */; };
 		2C544BA01358A24500685545 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C544B9C1358A24400685545 /* UIImage+Resize.m */; };
@@ -88,6 +86,18 @@
 		2C7661D41369C466000CA2B0 /* FacilitiesCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7661D31369C466000CA2B0 /* FacilitiesCategory.m */; };
 		2C77F0321355EE2500CD11D6 /* QRReaderResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C77F0311355EE2500CD11D6 /* QRReaderResult.m */; };
 		2C82DDAA13BCCA9C0055D96D /* FacilitiesLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C82DDA913BCCA9C0055D96D /* FacilitiesLocation.m */; };
+		2C8D4C70150FC33E00FE7286 /* TouchstoneResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE951814EAAA4D000271BD /* TouchstoneResponse.m */; };
+		2C8D4C71150FC34500FE7286 /* MGSModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C351E0E150914D400C60D48 /* MGSModule.m */; };
+		2C8D4C72150FC36E00FE7286 /* GDataHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE951214EAAA2B000271BD /* GDataHTMLDocument.m */; };
+		2C8D4C73150FC36E00FE7286 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE951414EAAA2B000271BD /* GDataXMLNode.m */; };
+		2C8D4C74150FC3AA00FE7286 /* MGSAnnotationMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3F2150905BC004E7BF0 /* MGSAnnotationMapLayer.m */; };
+		2C8D4C76150FC3AA00FE7286 /* MGSMapCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3F9150905BC004E7BF0 /* MGSMapCoordinate.m */; };
+		2C8D4C77150FC3AA00FE7286 /* MGSMapQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3FB150905BC004E7BF0 /* MGSMapQuery.m */; };
+		2C8D4C78150FC3AA00FE7286 /* MGSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3FE150905BC004E7BF0 /* MGSMapView.m */; };
+		2C8D4C79150FC3AA00FE7286 /* MGSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C351E111509155E00C60D48 /* MGSMapViewController.m */; };
+		2C8D4C7A150FC3B300FE7286 /* MGSRouteMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3F5150905BC004E7BF0 /* MGSRouteMapLayer.m */; };
+		2C8D4C7B150FC59F00FE7286 /* LocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6DD7D150A4F6600CD383B /* LocationSearchController.m */; };
+		2C8D4C7C150FC59F00FE7286 /* MITLocationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6DD80150A520900CD383B /* MITLocationQuery.m */; };
 		2C95A1D3137D677A0025B28D /* FacilitiesRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C95A1D2137D677A0025B28D /* FacilitiesRoomViewController.m */; };
 		2C95A1D8137DB24D0025B28D /* FacilitiesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C95A1D6137DB24D0025B28D /* FacilitiesSummaryViewController.m */; };
 		2C95A1D9137DB24D0025B28D /* FacilitiesSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C95A1D7137DB24D0025B28D /* FacilitiesSummaryViewController.xib */; };
@@ -95,11 +105,6 @@
 		2C99DCE01370782200114A9A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C99DCDF1370782200114A9A /* CoreText.framework */; };
 		2C9FD03114D6FC300030151B /* ArcGIS.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C9FD03014D6FC300030151B /* ArcGIS.bundle */; };
 		2CA454F213C7468F00891428 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA454F113C7468F00891428 /* AssetsLibrary.framework */; };
-		2CAAF3FF150905BC004E7BF0 /* MGSAnnotationMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3F2150905BC004E7BF0 /* MGSAnnotationMapLayer.m */; };
-		2CAAF400150905BC004E7BF0 /* MGSRouteMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3F5150905BC004E7BF0 /* MGSRouteMapLayer.m */; };
-		2CAAF402150905BC004E7BF0 /* MGSMapCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3F9150905BC004E7BF0 /* MGSMapCoordinate.m */; };
-		2CAAF403150905BC004E7BF0 /* MGSMapQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3FB150905BC004E7BF0 /* MGSMapQuery.m */; };
-		2CAAF404150905BC004E7BF0 /* MGSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3FE150905BC004E7BF0 /* MGSMapView.m */; };
 		2CB383361486A01600D4B168 /* LibrariesHoldingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB383351486A01600D4B168 /* LibrariesHoldingsDetailViewController.m */; };
 		2CB6459F134CAF1A00E85E64 /* QRReaderModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB6459E134CAF1A00E85E64 /* QRReaderModule.m */; };
 		2CB645EC134CC63800E85E64 /* QRReaderHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB645EA134CC63800E85E64 /* QRReaderHistoryViewController.m */; };
@@ -110,20 +115,14 @@
 		2CCB85F91361F44E0024E474 /* FacilitiesLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB85F81361F44E0024E474 /* FacilitiesLocationData.m */; };
 		2CD12D4F1360584F00A73ACA /* facilities in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12D4E1360584F00A73ACA /* facilities */; };
 		2CD8FEEE13565E8B00B00B28 /* QRReaderResult.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8FEEC13565E8B00B00B28 /* QRReaderResult.xcdatamodeld */; };
-		2CDE951514EAAA2B000271BD /* GDataHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE951214EAAA2B000271BD /* GDataHTMLDocument.m */; };
-		2CDE951614EAAA2B000271BD /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE951414EAAA2B000271BD /* GDataXMLNode.m */; };
-		2CDE951914EAAA4D000271BD /* TouchstoneResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE951814EAAA4D000271BD /* TouchstoneResponse.m */; };
 		2CDF301F134DF504007C6813 /* qrreader in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF301E134DF504007C6813 /* qrreader */; };
 		2CDF3022134E05EE007C6813 /* QRReaderHistoryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF3021134E05ED007C6813 /* QRReaderHistoryData.m */; };
 		2CE6631E13144D4F00ED2A25 /* MFMailComposeViewController+RFC2368.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6631D13144D4F00ED2A25 /* MFMailComposeViewController+RFC2368.m */; };
 		2CE6AC6613BDFB2C0043CFBE /* FacilitiesPropertyOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AC6513BDFB2C0043CFBE /* FacilitiesPropertyOwner.m */; };
 		2CE6AC6913BE007C0043CFBE /* FacilitiesLeasedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AC6813BE007C0043CFBE /* FacilitiesLeasedViewController.m */; };
-		2CE6DD7E150A4F6600CD383B /* LocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6DD7D150A4F6600CD383B /* LocationSearchController.m */; };
-		2CE6DD81150A520900CD383B /* MITLocationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6DD80150A520900CD383B /* MITLocationQuery.m */; };
 		2CED98F413534B5C0034F6F1 /* QRReaderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CED98F213534B5C0034F6F1 /* QRReaderDetailViewController.m */; };
 		2CED98F513534B5C0034F6F1 /* QRReaderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CED98F313534B5C0034F6F1 /* QRReaderDetailViewController.xib */; };
 		2CED98FB13537DEC0034F6F1 /* QRReaderOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CED98FA13537DEC0034F6F1 /* QRReaderOverlayView.m */; };
-		2CF67FA114E420AC00156B15 /* MITAGSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF67FA014E420AC00156B15 /* MITAGSMapView.m */; };
 		2CFB87D71416B1AC0014E141 /* MITSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB87D21416B1AC0014E141 /* MITSegmentControl.m */; };
 		2CFB87D81416B1AC0014E141 /* MITTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB87D41416B1AC0014E141 /* MITTabBar.m */; };
 		2CFB87D91416B1AC0014E141 /* MITTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB87D61416B1AC0014E141 /* MITTabView.m */; };
@@ -2783,6 +2782,7 @@
 				EBA2867910E082010003BA01 /* MITLoadingActivityView.m in Sources */,
 				DE12901A134B748E00BEBDA2 /* MITLogging.m in Sources */,
 				EBF8B37412B581AC00D39AE6 /* MITMailComposeController.m in Sources */,
+				2C8D4C70150FC33E00FE7286 /* TouchstoneResponse.m in Sources */,
 				44259C7110DBDCDC008FCAF1 /* MITMapAnnotationCalloutView.m in Sources */,
 				4463CC9C10D6F4A50048CA83 /* MITMapAnnotationView.m in Sources */,
 				4463D09410D92CB00048CA83 /* MITMapDetailViewController.m in Sources */,
@@ -2851,6 +2851,7 @@
 				44BF5B431100A75C00E150D5 /* RouteInfoTitleCell.m in Sources */,
 				442C192A10F3AE3400CB44EC /* RouteMapViewController.m in Sources */,
 				442C19AE10F3D70900CB44EC /* RouteView.m in Sources */,
+				2C8D4C71150FC34500FE7286 /* MGSModule.m in Sources */,
 				BD1E930B103B5D60004429AA /* SBJSON.m in Sources */,
 				BD1E930C103B5D60004429AA /* SBJsonBase.m in Sources */,
 				BD1E930D103B5D60004429AA /* SBJsonParser.m in Sources */,
@@ -2861,6 +2862,8 @@
 				EB6FD1F910E19D7900D56BE1 /* SecondaryGroupedTableViewCell.m in Sources */,
 				EB13860D12F1FC8E004DBB7C /* Secret.m in Sources */,
 				DE9EFBD210FE7D8900F5F07E /* SettingsModule.m in Sources */,
+				2C8D4C72150FC36E00FE7286 /* GDataHTMLDocument.m in Sources */,
+				2C8D4C73150FC36E00FE7286 /* GDataXMLNode.m in Sources */,
 				DE6D9401110AD1ED00DAF213 /* SettingsTableViewController.m in Sources */,
 				EB74ED2F11924E7C006673F9 /* ShareDetailViewController.m in Sources */,
 				4420F23110E9513700A8CD05 /* ShuttleDataManager.m in Sources */,
@@ -2929,6 +2932,8 @@
 				2CFBF916138EC2610080883D /* FacilitiesSubmitViewController.m in Sources */,
 				2C603012139EA21700D34F1B /* FacilitiesRepairType.m in Sources */,
 				2C09824C13A8F21D00778B53 /* ModuleVersions.m in Sources */,
+				2C8D4C7B150FC59F00FE7286 /* LocationSearchController.m in Sources */,
+				2C8D4C7C150FC59F00FE7286 /* MITLocationQuery.m in Sources */,
 				2C6FE84913B2717700AFD8B8 /* FacilitiesContent.m in Sources */,
 				2CC487CF13B3854700E58350 /* FacilitiesLocationSearch.m in Sources */,
 				DEAF6EF013B3C7B40078AB8F /* PlaceholderTextView.m in Sources */,
@@ -2983,6 +2988,12 @@
 				DEBF5FE314886F1A00B5719A /* LibrariesLoanTabController.m in Sources */,
 				DEBF5FE414886F1A00B5719A /* LibrariesLoanTableViewCell.m in Sources */,
 				DEBF5FE514886F1A00B5719A /* LibrariesRenewResultViewController.m in Sources */,
+				2C8D4C74150FC3AA00FE7286 /* MGSAnnotationMapLayer.m in Sources */,
+				2C8D4C76150FC3AA00FE7286 /* MGSMapCoordinate.m in Sources */,
+				2C8D4C77150FC3AA00FE7286 /* MGSMapQuery.m in Sources */,
+				2C8D4C78150FC3AA00FE7286 /* MGSMapView.m in Sources */,
+				2C8D4C7A150FC3B300FE7286 /* MGSRouteMapLayer.m in Sources */,
+				2C8D4C79150FC3AA00FE7286 /* MGSMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
