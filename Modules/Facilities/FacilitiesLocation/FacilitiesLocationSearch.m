@@ -58,16 +58,18 @@ NSString * const FacilitiesMatchTypeContentCategory = @"FacilitiesMatchTypeConte
 }
 
 - (void)setSearchString:(NSString *)searchString {
-    self.cachedResults = nil;
-    
     [_searchString release];
-    if (searchString) {
+    _searchString = nil;
+    if (searchString)
+    {
         _searchString = [[NSString alloc] initWithString:searchString];
     }
+    
+    self.cachedResults = nil;
 }
 
 - (NSString *)searchString {
-    return [[_searchString copy] autorelease];
+    return _searchString;
 }
 
 #pragma mark - Public Methods
