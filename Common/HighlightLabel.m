@@ -2,6 +2,7 @@
 
 @interface HighlightLabel ()
 @property (nonatomic,retain) NSAttributedString *attributedString;
+@property (nonatomic,retain) NSSet *observedPaths;
 @end
 
 @implementation HighlightLabel
@@ -9,6 +10,7 @@
 @synthesize searchString = _searchString;
 @synthesize highlightAllMatches = _highlightAllMatches;
 @synthesize attributedString = _attributedString;
+@synthesize observedPaths = _observedPaths;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -24,38 +26,26 @@
         self.highlightedTextColor = [UIColor whiteColor];
         self.highlightAllMatches = YES;
         
-        [self addObserver:self
-               forKeyPath:@"font"
-                  options:0
-                  context:NULL];
-        [self addObserver:self
-               forKeyPath:@"text"
-                  options:0
-                  context:NULL];
-        [self addObserver:self
-               forKeyPath:@"highlightedTextColor"
-                  options:0
-                  context:NULL];
-        [self addObserver:self
-               forKeyPath:@"searchString"
-                  options:0
-                  context:NULL];
+        self.observedPaths = [NSSet setWithObjects:@"font", @"text", @"highlightedTextColor", @"searchString", nil];
+        [self.observedPaths enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+            [self addObserver:self
+                   forKeyPath:obj
+                      options:0
+                      context:NULL];
+        }];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [self removeObserver:self
-              forKeyPath:@"font"];
-    [self removeObserver:self
-              forKeyPath:@"highlightedTextColor"];
-    [self removeObserver:self
-              forKeyPath:@"text"];
-    [self removeObserver:self
-              forKeyPath:@"searchString"];
+    [self.observedPaths enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        [self removeObserver:self
+                  forKeyPath:obj];
+    }];
     
     self.attributedString = nil;
+    self.searchString = nil;
     
     [super dealloc];
 }
