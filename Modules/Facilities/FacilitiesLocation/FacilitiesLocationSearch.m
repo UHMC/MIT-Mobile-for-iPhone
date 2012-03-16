@@ -84,7 +84,13 @@ NSString * const FacilitiesMatchTypeContentCategory = @"FacilitiesMatchTypeConte
 #pragma mark - Private Methods
 - (void)rebuildSearchResults {
     FacilitiesLocationData *fld = [FacilitiesLocationData sharedData];
-    NSString *searchString = [NSString stringWithString:self.searchString];
+    
+    NSString *searchString = @"";
+    if ([self.searchString length])
+    {
+        searchString = [NSString stringWithString:self.searchString];
+    }
+    
     NSMutableArray *locations = nil;
     NSMutableSet *matchedLocations = [NSMutableSet set];
     NSMutableSet *searchResults = [NSMutableSet set];
@@ -143,7 +149,7 @@ NSString * const FacilitiesMatchTypeContentCategory = @"FacilitiesMatchTypeConte
 - (NSDictionary*)searchNameAndNumberForLocation:(FacilitiesLocation*)location forSubstring:(NSString*)substring {
     NSRange substringRange = [[location displayString] rangeOfString:substring
                                                              options:NSCaseInsensitiveSearch];
-    if (substringRange.location != NSNotFound) {
+    if (([substring length] == 0) || (substringRange.location != NSNotFound)) {
         NSMutableDictionary *matchData = [NSMutableDictionary dictionary];
         [matchData setObject:location
                       forKey:FacilitiesSearchResultLocationKey];
