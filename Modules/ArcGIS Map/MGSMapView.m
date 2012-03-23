@@ -28,7 +28,8 @@ static NSString *MITBuildingsMapPath = @"base/WhereIs_Base/MapServer/9";
 @property (nonatomic,strong) NSMutableDictionary *layerDelegates;
 @property (nonatomic,strong) NSMutableSet *routes;
 
-- (void)loadView;
+- (void)initView;
+- (void)initLayers;
 
 - (AGSGraphicsLayer*)graphicsLayerWithName:(NSString*)layerName;
 
@@ -48,6 +49,9 @@ static NSString *MITBuildingsMapPath = @"base/WhereIs_Base/MapServer/9";
 
 @synthesize mapLayers = _mapLayers;
 
+@synthesize orderedLayers = _orderedLayers;
+@synthesize lockedLayers = _lockedLayers;
+
 @dynamic showUserLocation;
 @dynamic layers;
 
@@ -62,13 +66,14 @@ static NSString *MITBuildingsMapPath = @"base/WhereIs_Base/MapServer/9";
     
     if (self)
     {
-        [self loadView];
+        [self initView];
+        [self initLayers];
     }
     
     return self;
 }
 
-- (void)loadView
+- (void)initView
 {
     if (self.mapView == nil)
     {
@@ -94,7 +99,7 @@ static NSString *MITBuildingsMapPath = @"base/WhereIs_Base/MapServer/9";
     }
 }
 
-- (void)viewDidLoad
+- (void)initLayers
 {
     if (self.lockedLayers == nil)
     {
