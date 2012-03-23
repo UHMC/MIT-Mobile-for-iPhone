@@ -37,6 +37,7 @@ NSString * const MapQueryOptionFloor = @"edu.mit.mobile.map.query.Floor";
     self.marker = nil;
     self.color = nil;
     self.searchType = nil;
+    [super dealloc];
 }
 
 - (void)removeQueryOptionForKey:(NSString*)key
