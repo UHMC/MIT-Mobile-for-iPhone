@@ -8,17 +8,19 @@ typedef enum {
     MITMapRouteLineStyleSolid,
 } MITMapRouteLineStyle;
 
+@protocol MGSMapRouteDelegate;
+
 @protocol MGSMapRoute <NSObject>
 - (NSString *)routeName;
 - (NSArray *)pathCoordinates;
-- (NSArray *)annotations;
+- (NSSet *)annotations;
 
 - (UIColor *)fillColor;
 - (UIColor *)strokeColor;
 - (CGFloat)lineWidth;
 - (MITMapRouteLineStyle)lineStyle;
 
-- (id)delegate;
+- (id<MGSMapRouteDelegate>)delegate;
 
 - (NSUInteger)steps;
 - (NSString*)descriptionForStep:(NSUInteger)stepIndex;
@@ -26,4 +28,10 @@ typedef enum {
 - (NSUInteger)currentStep;
 - (NSString*)nextStep;
 - (NSString*)previousStep;
+@end
+
+@protocol MGSMapRouteDelegate <NSObject>
+- (void)route:(id<MGSMapRoute>)route didLoadSteps:(NSArray*)steps;
+- (void)route:(id<MGSMapRoute>)route willMoveToStep:(NSUInteger)stepIndex;
+- (void)route:(id<MGSMapRoute>)route didMoveToStep:(NSUInteger)stepIndex;
 @end
