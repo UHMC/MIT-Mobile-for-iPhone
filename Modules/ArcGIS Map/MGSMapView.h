@@ -2,6 +2,7 @@
 
 @protocol MGSMapRoute;
 @protocol MGSMapCoordinate;
+@protocol MGSMapAnnotation;
 @class MGSMapQuery;
 @class MGSRouteMapLayer;
 @class MGSAnnotationMapLayer;
@@ -27,9 +28,10 @@
 - (void)deleteAnnotationLayer:(NSString*)layerName;
 
 #pragma mark - Callouts
-- (void)showCalloutForAnnotation:(id<MGSMapCoordinate>)annotation;
-- (void)showCalloutWithView:(UIView*)view forAnnotation:(id<MGSMapCoordinate>)annotation;
+- (void)showCalloutForAnnotation:(id<MGSMapAnnotation>)annotation;
+- (void)showCalloutWithView:(UIView*)view forAnnotation:(id<MGSMapAnnotation>)annotation;
 - (void)hideCallout;
+
 
 #pragma mark - Routing
 - (MGSRouteMapLayer*)routeMapLayerWithName:(NSString*)layerName;
