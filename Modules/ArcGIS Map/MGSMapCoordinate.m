@@ -35,11 +35,12 @@ static AGSGeometryEngine *_sharedEngine = nil;
 }
 
 + (MGSMapCoordinate*)projectCoordinate:(MGSMapCoordinate*)coordinate
+                  fromCoordinateSystem:(MITCoordinateSystem)srcProjection
                     toCoordinateSystem:(MITCoordinateSystem)projection
 {
     AGSPoint *srcPoint = [AGSPoint pointWithX:coordinate.x
                                             y:coordinate.y
-                             spatialReference:[AGSSpatialReference spatialReferenceWithWKID:MITCoordinateWebMercator]];
+                             spatialReference:[AGSSpatialReference spatialReferenceWithWKID:srcProjection]];
     AGSPoint *projectedPoint = (AGSPoint*)[[self sharedGeometryEngine] projectGeometry:srcPoint
                                                                     toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:projection]];
     
@@ -122,6 +123,7 @@ static AGSGeometryEngine *_sharedEngine = nil;
 - (CLLocationCoordinate2D)wgs84Location
 {
     MGSMapCoordinate *projectedCoord = [MGSMapCoordinate projectCoordinate:self
+                                                      fromCoordinateSystem:MITCoordinateWebMercator
                                                         toCoordinateSystem:MITCoordinateWGS84];
     return CLLocationCoordinate2DMake(projectedCoord.latitude,
                                       projectedCoord.longitude);
