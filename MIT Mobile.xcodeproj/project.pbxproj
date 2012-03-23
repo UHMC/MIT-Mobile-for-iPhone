@@ -117,6 +117,7 @@
 		2CD8FEEE13565E8B00B00B28 /* QRReaderResult.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8FEEC13565E8B00B00B28 /* QRReaderResult.xcdatamodeld */; };
 		2CDF301F134DF504007C6813 /* qrreader in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF301E134DF504007C6813 /* qrreader */; };
 		2CDF3022134E05EE007C6813 /* QRReaderHistoryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF3021134E05ED007C6813 /* QRReaderHistoryData.m */; };
+		2CE008CA151B595E000BCE4B /* MGSMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE008C9151B595E000BCE4B /* MGSMapLayer.m */; };
 		2CE6631E13144D4F00ED2A25 /* MFMailComposeViewController+RFC2368.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6631D13144D4F00ED2A25 /* MFMailComposeViewController+RFC2368.m */; };
 		2CE6AC6613BDFB2C0043CFBE /* FacilitiesPropertyOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AC6513BDFB2C0043CFBE /* FacilitiesPropertyOwner.m */; };
 		2CE6AC6913BE007C0043CFBE /* FacilitiesLeasedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6AC6813BE007C0043CFBE /* FacilitiesLeasedViewController.m */; };
@@ -582,6 +583,7 @@
 		2C99DCAD1370508D00114A9A /* HighlightLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightLabel.h; sourceTree = "<group>"; };
 		2C99DCAE1370508D00114A9A /* HighlightLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightLabel.m; sourceTree = "<group>"; };
 		2C99DCDF1370782200114A9A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		2C9A4BD215191490006B8588 /* MGSRouteMapLayer+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MGSRouteMapLayer+Private.h"; sourceTree = "<group>"; };
 		2C9FD03014D6FC300030151B /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = "~/Library/SDKs/ArcGIS/iOS.sdk/usr/local/resources/ArcGIS.bundle"; sourceTree = "<absolute>"; };
 		2CA454F113C7468F00891428 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2CAAF3F1150905BC004E7BF0 /* MGSAnnotationMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSAnnotationMapLayer.h; sourceTree = "<group>"; };
@@ -624,6 +626,8 @@
 		2CDF301E134DF504007C6813 /* qrreader */ = {isa = PBXFileReference; lastKnownFileType = folder; name = qrreader; path = Resources/qrreader; sourceTree = "<group>"; };
 		2CDF3020134E05ED007C6813 /* QRReaderHistoryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRReaderHistoryData.h; sourceTree = "<group>"; };
 		2CDF3021134E05ED007C6813 /* QRReaderHistoryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRReaderHistoryData.m; sourceTree = "<group>"; };
+		2CE008C9151B595E000BCE4B /* MGSMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSMapLayer.m; sourceTree = "<group>"; };
+		2CE008CB151B5A3D000BCE4B /* MGSMapLayer+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MGSMapLayer+Private.h"; sourceTree = "<group>"; };
 		2CE6631C13144D4F00ED2A25 /* MFMailComposeViewController+RFC2368.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFMailComposeViewController+RFC2368.h"; sourceTree = "<group>"; };
 		2CE6631D13144D4F00ED2A25 /* MFMailComposeViewController+RFC2368.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFMailComposeViewController+RFC2368.m"; sourceTree = "<group>"; };
 		2CE6AC6413BDFB2C0043CFBE /* FacilitiesPropertyOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacilitiesPropertyOwner.h; sourceTree = "<group>"; };
@@ -1607,10 +1611,13 @@
 		2CAAF3F0150905BC004E7BF0 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				2CAAF3F3150905BC004E7BF0 /* MGSMapLayer.h */,
+				2CE008CB151B5A3D000BCE4B /* MGSMapLayer+Private.h */,
+				2CE008C9151B595E000BCE4B /* MGSMapLayer.m */,
 				2CAAF3F1150905BC004E7BF0 /* MGSAnnotationMapLayer.h */,
 				2CAAF3F2150905BC004E7BF0 /* MGSAnnotationMapLayer.m */,
-				2CAAF3F3150905BC004E7BF0 /* MGSMapLayer.h */,
 				2CAAF3F4150905BC004E7BF0 /* MGSRouteMapLayer.h */,
+				2C9A4BD215191490006B8588 /* MGSRouteMapLayer+Private.h */,
 				2CAAF3F5150905BC004E7BF0 /* MGSRouteMapLayer.m */,
 			);
 			path = Internal;
@@ -2994,6 +3001,7 @@
 				2C8D4C78150FC3AA00FE7286 /* MGSMapView.m in Sources */,
 				2C8D4C7A150FC3B300FE7286 /* MGSRouteMapLayer.m in Sources */,
 				2C8D4C79150FC3AA00FE7286 /* MGSMapViewController.m in Sources */,
+				2CE008CA151B595E000BCE4B /* MGSMapLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

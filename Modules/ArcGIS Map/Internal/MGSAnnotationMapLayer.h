@@ -1,16 +1,13 @@
 #import "MGSMapLayer.h"
+#import "MGSMapLayer+Private.h"
 
-@interface MGSAnnotationMapLayer : NSObject <MGSMapLayer>
-@property (nonatomic,strong) NSString *name;
-@property (nonatomic,strong) AGSGraphicsLayer *mapLayer;
-@property (nonatomic,strong) AGSDynamicLayerView *mapLayerView;
-@property (nonatomic,assign) id layerDelegate;
+@protocol MGSMapAnnotation;
+@class MGSMapCoordinate;
 
+@interface MGSAnnotationMapLayer : MGSMapLayer
 @property (nonatomic,strong) NSSet *annotations;
 
-@property (nonatomic,getter=isHidden) BOOL hidden;
-
-- (id)initWithMapLayerView:(UIView<AGSLayerView>*)layerView;
-- (BOOL)containsGraphic:(AGSGraphic*)graphic;
-- (void)removeLayer;
+- (void)addAnnotation:(id<MGSMapAnnotation>)annotation;
+- (void)deleteAnnotation:(id<MGSMapAnnotation>)annotation;
+- (void)deleteAllAnnotations;
 @end

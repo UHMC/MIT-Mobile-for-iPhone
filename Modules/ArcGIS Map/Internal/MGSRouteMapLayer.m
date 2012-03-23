@@ -1,9 +1,26 @@
 #import "MGSRouteMapLayer.h"
+#import "MGSRouteMapLayer+Private.h"
 
 @implementation MGSRouteMapLayer
-@synthesize name = _name;
-@synthesize mapLayerView = _mapLayerView;
-@synthesize mapLayer = _mapLayer;
-@synthesize layerDelegate = _layerDelegate;
+@synthesize possibleRoutes = _possibleRoutes;
+@synthesize activeRoute = _activeRoute;
 
+@synthesize steps = _steps;
+@synthesize currentStepDescription = _currentStepDescription;
+@synthesize currentStepIndex = _currentStepIndex;
+
+- (void)advanceToStep:(NSUInteger)stepIndex
+{
+    
+}
+
+- (void)nextStep
+{
+
+}
+
+- (void)previousStep
+{
+    
+}
 @end

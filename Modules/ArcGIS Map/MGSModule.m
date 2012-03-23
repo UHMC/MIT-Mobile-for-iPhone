@@ -6,7 +6,7 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        self.tag = LibrariesTag;
+        self.tag = @"arcgis";
         self.shortName = @"ArcGIS";
         self.longName = @"ArcGIS Map";
         self.iconName = @"map";

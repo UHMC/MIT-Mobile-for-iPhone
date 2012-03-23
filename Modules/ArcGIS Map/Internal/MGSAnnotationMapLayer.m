@@ -1,4 +1,5 @@
 #import "MGSAnnotationMapLayer.h"
+#import "MGSMapLayer+Private.h"
 #import "MGSMapAnnotation.h"
 #import "MGSMapCoordinate.h"
 
@@ -25,7 +26,6 @@
         self.name = layerView.name;
         self.mapLayerView = layerView;
         self.mapLayer = (AGSGraphicsLayer*)[layerView agsLayer];
-        //self.mapLayer.delegate = self;
         
         self.annotationGraphics = [NSMutableDictionary dictionary];
     }
@@ -33,30 +33,7 @@
     return self;
 }
 
-- (BOOL)containsGraphic:(AGSGraphic*)graphic
-{
-    return (graphic.layer && [graphic.layer isEqual:self.mapLayer]);
-}
-
-- (void)removeLayer
-{
-    AGSMapView *mapView = self.mapLayerView.mapView;
-    
-    if (mapView)
-        [mapView removeMapLayerWithName:self.mapLayerView.name];
-}
-
 #pragma mark - Dynamic Properties
-- (void)setHidden:(BOOL)hidden
-{
-    self.mapLayerView.hidden = hidden;
-}
-
-- (BOOL)isHidden
-{
-    return self.mapLayerView.isHidden;
-}
-
 - (void)setAnnotations:(NSSet *)annotations
 {
     NSSet *activeAnnotations = self.annotations;
@@ -93,5 +70,20 @@
     }];
     
     [self.mapLayer dataChanged];
+}
+
+- (void)addAnnotation:(id<MGSMapAnnotation>)annotation
+{
+    
+}
+
+- (void)deleteAnnotation:(id<MGSMapAnnotation>)annotation
+{
+    
+}
+
+- (void)deleteAllAnnotations
+{
+    
 }
 @end

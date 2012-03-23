@@ -1,10 +1,13 @@
 #import "ArcGIS.h"
 
 #import "MGSMapView.h"
-#import "MGSMapQuery.h"
+
+#import "MGSMapLayer+Private.h"
 #import "MGSMapAnnotation.h"
-#import "MGSMapCoordinate.h"
 #import "MGSMapRoute.h"
+
+#import "MGSMapQuery.h"
+#import "MGSMapCoordinate.h"
 #import "MGSAnnotationMapLayer.h"
 #import "MITLogging.h"
 
@@ -210,12 +213,12 @@ __TODO(Implement this method)
 }
 
 
-- (id<MGSMapLayer>)layerForName:(NSString *)layerName
+- (MGSMapLayer*)layerForName:(NSString *)layerName
 {
     return [self.mapLayers objectForKey:layerName];
 }
 
-- (void)setLayer:(id<MGSMapLayer>)layer forName:(NSString*)layerName
+- (void)setLayer:(MGSMapLayer*)layer forName:(NSString*)layerName
 {
     if ([self layerForName:layerName])
     {
@@ -229,11 +232,12 @@ __TODO(Implement this method)
 
 - (void)removeLayerWithName:(NSString*)layerName
 {
-    id<MGSMapLayer> layer = [self layerForName:layerName];
+    MGSMapLayer* layer = [self layerForName:layerName];
     
     if (layer)
     {
-        [layer removeLayer];
+        [self.mapView removeMapLayerWithName:layer.name];
+        layer.mapLayerView = nil;
         [self.orderedLayers removeObject:layerName];
         [self.mapLayers removeObjectForKey:layerName];
     }
@@ -248,7 +252,7 @@ __TODO(Implement this method)
 - (MGSAnnotationMapLayer*)annotationLayerForName:(NSString*)layerName
                                   createIfNeeded:(BOOL)shouldCreate
 {
-    id<MGSMapLayer> mapLayer = [self layerForName:layerName];
+    MGSMapLayer* mapLayer = [self layerForName:layerName];
     
     if (mapLayer && ([mapLayer isKindOfClass:[MGSAnnotationMapLayer class]] == NO))
     {

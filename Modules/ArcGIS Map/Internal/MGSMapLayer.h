@@ -1,15 +1,9 @@
-#import <UIKit/UIKit.h>
-#import "ArcGIS.h"
+#import <Foundation/Foundation.h>
 
-@protocol MGSMapLayer <NSObject>
-- (NSString *)name;
-- (AGSGraphicsLayer *)mapLayer;
-- (AGSDynamicLayerView *)mapLayerView;
-- (id)layerDelegate;
+@interface MGSMapLayer : NSObject
+@property (nonatomic,getter=isHidden) BOOL hidden;
+@property (nonatomic,assign) id layerDelegate;
+@property (nonatomic,readonly,strong) NSString *name;
 
-- (void)setHidden:(BOOL)hidden;
-- (BOOL)isHidden;
-
-- (BOOL)containsGraphic:(AGSGraphic*)graphic;
-- (void)removeLayer;
+- (id)initWithName:(NSString*)name;
 @end
