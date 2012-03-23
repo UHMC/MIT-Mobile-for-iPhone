@@ -97,7 +97,6 @@
 		2C8D4C79150FC3AA00FE7286 /* MGSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C351E111509155E00C60D48 /* MGSMapViewController.m */; };
 		2C8D4C7A150FC3B300FE7286 /* MGSRouteMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAF3F5150905BC004E7BF0 /* MGSRouteMapLayer.m */; };
 		2C8D4C7B150FC59F00FE7286 /* LocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6DD7D150A4F6600CD383B /* LocationSearchController.m */; };
-		2C8D4C7C150FC59F00FE7286 /* MITLocationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6DD80150A520900CD383B /* MITLocationQuery.m */; };
 		2C95A1D3137D677A0025B28D /* FacilitiesRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C95A1D2137D677A0025B28D /* FacilitiesRoomViewController.m */; };
 		2C95A1D8137DB24D0025B28D /* FacilitiesSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C95A1D6137DB24D0025B28D /* FacilitiesSummaryViewController.m */; };
 		2C95A1D9137DB24D0025B28D /* FacilitiesSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C95A1D7137DB24D0025B28D /* FacilitiesSummaryViewController.xib */; };
@@ -636,8 +635,6 @@
 		2CE6AC6813BE007C0043CFBE /* FacilitiesLeasedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacilitiesLeasedViewController.m; sourceTree = "<group>"; };
 		2CE6DD7C150A4F6600CD383B /* LocationSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchController.h; sourceTree = "<group>"; };
 		2CE6DD7D150A4F6600CD383B /* LocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchController.m; sourceTree = "<group>"; };
-		2CE6DD7F150A520900CD383B /* MITLocationQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MITLocationQuery.h; path = ../Model/MITLocationQuery.h; sourceTree = "<group>"; };
-		2CE6DD80150A520900CD383B /* MITLocationQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MITLocationQuery.m; path = ../Model/MITLocationQuery.m; sourceTree = "<group>"; };
 		2CE6DD8C150A993100CD383B /* LocationSearchDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationSearchDelegate.h; sourceTree = "<group>"; };
 		2CED98F113534B5C0034F6F1 /* QRReaderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRReaderDetailViewController.h; sourceTree = "<group>"; };
 		2CED98F213534B5C0034F6F1 /* QRReaderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRReaderDetailViewController.m; sourceTree = "<group>"; };
@@ -1495,8 +1492,6 @@
 				2CE6DD8C150A993100CD383B /* LocationSearchDelegate.h */,
 				2CE6DD7C150A4F6600CD383B /* LocationSearchController.h */,
 				2CE6DD7D150A4F6600CD383B /* LocationSearchController.m */,
-				2CE6DD7F150A520900CD383B /* MITLocationQuery.h */,
-				2CE6DD80150A520900CD383B /* MITLocationQuery.m */,
 			);
 			path = "Location Search";
 			sourceTree = "<group>";
@@ -2940,7 +2935,6 @@
 				2C603012139EA21700D34F1B /* FacilitiesRepairType.m in Sources */,
 				2C09824C13A8F21D00778B53 /* ModuleVersions.m in Sources */,
 				2C8D4C7B150FC59F00FE7286 /* LocationSearchController.m in Sources */,
-				2C8D4C7C150FC59F00FE7286 /* MITLocationQuery.m in Sources */,
 				2C6FE84913B2717700AFD8B8 /* FacilitiesContent.m in Sources */,
 				2CC487CF13B3854700E58350 /* FacilitiesLocationSearch.m in Sources */,
 				DEAF6EF013B3C7B40078AB8F /* PlaceholderTextView.m in Sources */,
