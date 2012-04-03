@@ -83,7 +83,7 @@ typedef enum {
     
     MobileRequestOperation *request = [[[MobileRequestOperation alloc] initWithModule:LibrariesTag command:@"search" parameters:parameters] autorelease];
     
-    request.completeBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
+    request.requestCompleteBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
         UIView *loadingView = [self.searchResultsTableView viewWithTag:LOADING_ACTIVITY_TAG];
         [loadingView removeFromSuperview];
         

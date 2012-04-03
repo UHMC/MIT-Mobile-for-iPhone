@@ -548,7 +548,7 @@ NSString* placeholderText(NSString *displayLabel, BOOL required) {
                                                                            parameters:[NSDictionary dictionary]] autorelease];
     
     
-    request.completeBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
+    request.requestCompleteBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
         [self.loadingView removeFromSuperview];
         
         if (error && (error.code != NSUserCancelledError)) {
@@ -918,7 +918,7 @@ NSString* placeholderText(NSString *displayLabel, BOOL required) {
     [self.navigationController pushViewController:thanksController animated:NO];
     [thanksController release];
     
-    request.completeBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
+    request.requestCompleteBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
         NSDictionary *jsonDict = jsonResult;
         BOOL success = [(NSNumber *)[jsonDict objectForKey:@"success"] boolValue];
         if (error || !success) {

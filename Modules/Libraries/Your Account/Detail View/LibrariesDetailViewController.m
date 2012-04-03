@@ -283,7 +283,7 @@
     MobileRequestOperation *operation = [MobileRequestOperation operationWithModule:@"libraries"
                                                                             command:@"renewBooks"
                                                                          parameters:params];
-    [operation setCompleteBlock:^(MobileRequestOperation *operation, id jsonData, NSError *error) {
+    [operation setRequestCompleteBlock:^(MobileRequestOperation *operation, id jsonData, NSError *error) {
         self.request = nil;
         self.navigationItem.titleView = nil;
         self.renewButton.enabled = YES;

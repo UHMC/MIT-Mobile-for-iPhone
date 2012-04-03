@@ -212,7 +212,7 @@
     
     self.headerView.renewButton.enabled = ([[self.loanData objectForKey:@"items"] count] > 0);
     
-    operation.completeBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
+    operation.requestCompleteBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
         if ([self.loadingView isDescendantOfView:self.tableView]) {
             [self.loadingView removeFromSuperview];
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -313,7 +313,7 @@
     MobileRequestOperation *operation = [MobileRequestOperation operationWithModule:@"libraries"
                                                                             command:@"renewBooks"
                                                                          parameters:params];
-    [operation setCompleteBlock:^(MobileRequestOperation *operation, id jsonData, NSError *error) {
+    [operation setRequestCompleteBlock:^(MobileRequestOperation *operation, id jsonData, NSError *error) {
         self.renewOperation = nil;
         
         if (error)

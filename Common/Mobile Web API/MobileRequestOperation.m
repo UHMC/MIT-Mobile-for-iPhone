@@ -72,7 +72,7 @@ typedef enum {
             parameters = _parameters,
             usePOST = _usePOST,
             presetCredentials = _presetCredentials,
-            completeBlock = _completeBlock,
+            requestCompleteBlock = _requestCompleteBlock,
             progressBlock = _progressBlock;
 
 @synthesize activeRequest = _activeRequest,
@@ -87,7 +87,8 @@ typedef enum {
             touchstoneUser = _touchstoneUser,
             touchstonePassword = _touchstonePassword;
 
-@dynamic isFinished, isExecuting;
+@dynamic isExecuting;
+@dynamic isFinished;
 
 #pragma mark - Class Methods
 + (void)initialize {
@@ -221,7 +222,7 @@ typedef enum {
     self.command = nil;
     self.parameters = nil;
     self.progressBlock = nil;
-    self.completeBlock = nil;
+    self.requestCompleteBlock = nil;
     
     self.activeRequest = nil;
     self.connection = nil;
@@ -401,6 +402,7 @@ typedef enum {
     }
 }
 
+
 - (BOOL)isFinished {
     return _isFinished;
 }
@@ -412,7 +414,6 @@ typedef enum {
         [self didChangeValueForKey:@"isFinished"];
     }
 }
-
 
 #pragma mark - Public Methods
 - (NSURLRequest*)urlRequest {
@@ -518,9 +519,9 @@ typedef enum {
 }
 
 - (void)dispatchCompleteBlockWithResult:(id)jsonResult error:(NSError*)error {
-    if (self.completeBlock) {
+    if (self.requestCompleteBlock) {
         dispatch_sync(dispatch_get_main_queue(), ^(void) {
-            self.completeBlock(self,jsonResult,error);
+            self.requestCompleteBlock(self,jsonResult,error);
         });
     }
 }

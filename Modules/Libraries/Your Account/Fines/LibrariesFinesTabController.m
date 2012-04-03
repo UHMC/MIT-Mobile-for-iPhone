@@ -133,7 +133,7 @@
                                                                             command:@"fines"
                                                                          parameters:[NSDictionary dictionaryWithObject:[[NSNumber numberWithInteger:NSIntegerMax] stringValue]
                                                                                                                 forKey:@"limit"]];
-    operation.completeBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
+    operation.requestCompleteBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
         if ([self.loadingView isDescendantOfView:self.tableView]) {
             [self.loadingView removeFromSuperview];
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;

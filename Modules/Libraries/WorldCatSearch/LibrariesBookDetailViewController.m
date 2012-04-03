@@ -73,7 +73,7 @@ typedef enum {
     
     self.loadingStatus = BookLoadingStatusPartial;
     
-    request.completeBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
+    request.requestCompleteBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
         [self.activityView removeFromSuperview];
         
         if (error) {

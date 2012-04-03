@@ -28,7 +28,7 @@ typedef void (^MobileRequestCompleteBlock)(MobileRequestOperation *operation, id
  *  should either be dispatched onto a new queue/background
  *  thread to avoid blocking the main UI
  */
-@property (nonatomic,copy) void (^completeBlock)(MobileRequestOperation *operation, id jsonResult, NSError *error);
+@property (nonatomic,copy) void (^requestCompleteBlock)(MobileRequestOperation *operation, id jsonResult, NSError *error);
 @property (nonatomic,copy) void (^progressBlock)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger expectedBytesWritten);
 
 + (id)operationWithModule:(NSString*)aModule command:(NSString*)theCommand parameters:(NSDictionary*)params;
