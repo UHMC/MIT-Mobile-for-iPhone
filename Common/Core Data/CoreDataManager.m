@@ -192,6 +192,20 @@
     return ([objects count] > 0) ? [objects lastObject] : nil;
 }
 
+- (NSSet*)objectsForObjectIDs:(NSSet*)objectIDs
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSMutableSet *managedObjects = [NSMutableSet setWithCapacity:[objectIDs count]];
+    
+    [objectIDs enumerateObjectsUsingBlock:^(id obj, BOOL *stop)
+    {
+        NSManagedObjectID *objectID = (NSManagedObjectID*)obj;
+        [managedObjects addObject:[context objectWithID:objectID]];
+    }];
+    
+    return [NSSet setWithSet:managedObjects];
+}
+
 -(void)saveData {
 	NSError *error = nil;
 	if (![self.managedObjectContext save:&error]) {
