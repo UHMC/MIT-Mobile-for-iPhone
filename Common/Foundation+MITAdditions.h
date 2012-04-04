@@ -35,3 +35,8 @@
 - (NSString*)sysInfoByName:(NSString*)typeSpecifier;
 - (NSString*)cpuType;
 @end
+
+
+@interface NSObject (MITAdditions)
+- (void)performBlockOnMainThread:(dispatch_block_t)block waitUntilDone:(BOOL)wait;
+@end

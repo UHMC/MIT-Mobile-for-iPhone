@@ -321,3 +321,24 @@ typedef struct {
     }
 }
 @end
+
+@implementation NSObject (MITAdditions)
+- (void)performBlockOnMainThread:(dispatch_block_t)block waitUntilDone:(BOOL)wait
+{
+    if (block)
+    {
+        if (wait && [NSThread isMainThread])
+        {
+            block();
+        }
+        else if (wait)
+        {
+            dispatch_sync(dispatch_get_main_queue(), block);
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), block);
+        }
+    }
+}
+@end
