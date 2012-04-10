@@ -1,5 +1,5 @@
 #import "MGSMapLayer.h"
-#import "MGSMapLayer+Private.h"
+#import "MGSMapLayer+AGS.h"
 
 @protocol MGSMapAnnotation;
 @class MGSMapCoordinate;

@@ -2,7 +2,7 @@
 
 #import "MGSMapView.h"
 
-#import "MGSMapLayer+Private.h"
+#import "MGSMapLayer+AGS.h"
 #import "MGSMapAnnotation.h"
 #import "MGSMapRoute.h"
 

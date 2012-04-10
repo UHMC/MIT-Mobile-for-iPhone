@@ -1,27 +1,21 @@
 #import <MapKit/MapKit.h>
 #import "MGSMapCoordinate.h"
-#import "ArcGIS.h"
-
-typedef enum {
-    MITCoordinateWGS84 = 4326,
-    MITCoordinateWebMercator = 102113
-} MITCoordinateSystem;
+#import "MGSMapCoordinate+AGS.h"
 
 static AGSGeometryEngine *_sharedEngine = nil;
 
 @interface MGSMapCoordinate ()
-@property (nonatomic,strong) AGSPoint *point;
 @property (nonatomic,assign) double longitude;
 @property (nonatomic,assign) double x;
 @property (nonatomic,assign) double latitude;
 @property (nonatomic,assign) double y;
-
-+ (AGSGeometryEngine*)sharedGeometryEngine;
-+ (MGSMapCoordinate*)projectCoordinate:(MGSMapCoordinate*)coordinate toCoordinateSystem:(MITCoordinateSystem)projection;
 @end
 
 @implementation MGSMapCoordinate
-@dynamic longitude, latitude;
+@synthesize longitude = _longitude;
+@synthesize latitude = _latitude;
+
+@dynamic point;
 @dynamic x, y;
 
 + (AGSGeometryEngine*)sharedGeometryEngine
@@ -32,21 +26,6 @@ static AGSGeometryEngine *_sharedEngine = nil;
     });
     
     return _sharedEngine;
-}
-
-+ (MGSMapCoordinate*)projectCoordinate:(MGSMapCoordinate*)coordinate
-                  fromCoordinateSystem:(MITCoordinateSystem)srcProjection
-                    toCoordinateSystem:(MITCoordinateSystem)projection
-{
-    AGSPoint *srcPoint = [AGSPoint pointWithX:coordinate.x
-                                            y:coordinate.y
-                             spatialReference:[AGSSpatialReference spatialReferenceWithWKID:srcProjection]];
-    AGSPoint *projectedPoint = (AGSPoint*)[[self sharedGeometryEngine] projectGeometry:srcPoint
-                                                                    toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:projection]];
-    
-    MGSMapCoordinate *coord = [[MGSMapCoordinate alloc] initWithX:projectedPoint.x
-                                                                y:projectedPoint.y];
-    return [coord autorelease];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -65,13 +44,8 @@ static AGSGeometryEngine *_sharedEngine = nil;
 
 - (id)initWithLocation:(CLLocationCoordinate2D)location
 {
-    AGSPoint *srcPoint = [AGSPoint pointWithX:location.longitude
-                                            y:location.latitude
-                             spatialReference:[AGSSpatialReference spatialReferenceWithWKID:MITCoordinateWGS84]];
-    AGSPoint *projectedPoint = (AGSPoint*)[[MGSMapCoordinate sharedGeometryEngine] projectGeometry:srcPoint
-                                                                                toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:MITCoordinateWebMercator]];
-    return [self initWithX:projectedPoint.x
-                         y:projectedPoint.y];
+    return [self initWithX:location.longitude
+                         y:location.latitude];
 }
 
 
@@ -122,14 +96,11 @@ static AGSGeometryEngine *_sharedEngine = nil;
 
 - (CLLocationCoordinate2D)wgs84Location
 {
-    MGSMapCoordinate *projectedCoord = [MGSMapCoordinate projectCoordinate:self
-                                                      fromCoordinateSystem:MITCoordinateWebMercator
-                                                        toCoordinateSystem:MITCoordinateWGS84];
-    return CLLocationCoordinate2DMake(projectedCoord.latitude,
-                                      projectedCoord.longitude);
+    return CLLocationCoordinate2DMake(self.latitude,
+                                      self.longitude);
 }
 
-#pragma mark - Dynamic Properties
+#pragma mark - Properties
 - (void)setX:(double)x
 {
     self.longitude = x;
@@ -148,6 +119,27 @@ static AGSGeometryEngine *_sharedEngine = nil;
 - (double)y
 {
     return self.latitude;
+}
+
+- (void)setPoint:(AGSPoint *)point
+{
+    AGSPoint *sourcePoint = point;
+    
+    if ([[point spatialReference] wkid] != WKID_WGS84)
+    {
+        sourcePoint = (AGSPoint*)[[AGSGeometryEngine defaultGeometryEngine] projectGeometry:point
+                                                                         toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:WKID_WGS84]];
+    }
+    
+    self.x = point.x;
+    self.y = point.y;
+}
+
+- (AGSPoint*)point
+{
+    return [AGSPoint pointWithX:self.x
+                              y:self.y
+               spatialReference:[AGSSpatialReference spatialReferenceWithWKID:WKID_WGS84]];
 }
 
 @end
