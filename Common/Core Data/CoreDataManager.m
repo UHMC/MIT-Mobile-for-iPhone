@@ -192,6 +192,25 @@
     return ([objects count] > 0) ? [objects lastObject] : nil;
 }
 
+
+- (NSSet*)objectIDsForEntity:(NSString*)entityName matchingPredicate:(NSPredicate*)predicate
+{
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    request.predicate = predicate;
+    request.resultType = NSManagedObjectIDResultType;
+    
+    NSError *fetchError = nil;
+    NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:request
+                                                                    error:&fetchError];
+    
+    if (fetchError)
+    {
+        ELog(@"Fetch of entity '%@' failed with error: %@", entityName, [fetchError localizedDescription]);
+    }
+    
+    return [NSSet setWithArray:fetchResult];
+}
+
 - (NSSet*)objectsForObjectIDs:(NSSet*)objectIDs
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -484,13 +503,6 @@
 	return YES;
 	
 }
-
-
-
-
-
-
-
 
 #pragma mark -
 

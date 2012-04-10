@@ -45,6 +45,8 @@
 -(id)objectsForEntity:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors;
 -(id)objectsForEntity:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate;
 -(id)getObjectForEntity:(NSString *)entityName attribute:(NSString *)attributeName value:(id)value; //added by blpatt
+
+- (NSSet*)objectIDsForEntity:(NSString*)entityName matchingPredicate:(NSPredicate*)predicate;
 - (NSSet*)objectsForObjectIDs:(NSSet*)objectIDs;
 
 -(void)deleteObjects:(NSArray *)objects;
