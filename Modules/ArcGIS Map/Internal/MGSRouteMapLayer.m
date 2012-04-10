@@ -1,5 +1,5 @@
 #import "MGSRouteMapLayer.h"
-#import "MGSRouteMapLayer+Private.h"
+#import "MGSRouteMapLayer+AGS.h"
 
 @implementation MGSRouteMapLayer
 @synthesize possibleRoutes = _possibleRoutes;
