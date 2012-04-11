@@ -24,8 +24,8 @@
 
 #pragma mark - Annotation Management
 - (MGSAnnotationMapLayer*)annotationLayerWithName:(NSString*)layerName;
-- (void)clearAnnotationsForLayer:(NSString*)layerName;
-- (void)deleteAnnotationLayer:(NSString*)layerName;
+- (MGSAnnotationMapLayer*)annotationLayerWithName:(NSString*)layerName shouldCreateLayer:(BOOL)createLayer;
+- (void)removeAnnotationLayer:(NSString*)layerName;
 
 #pragma mark - Callouts
 - (void)showCalloutForAnnotation:(id<MGSMapAnnotation>)annotation;
@@ -35,5 +35,6 @@
 
 #pragma mark - Routing
 - (MGSRouteMapLayer*)routeMapLayerWithName:(NSString*)layerName;
+- (MGSRouteMapLayer*)routeMapLayerWithName:(NSString*)layerName shouldCreateLayer:(BOOL)createLayer;
 
 @end

@@ -251,11 +251,12 @@ __TODO(Implement this method)
 #pragma mark - Annotation Management
 - (MGSAnnotationMapLayer*)annotationLayerForName:(NSString*)layerName
 {
-    return [self annotationLayerForName:layerName createIfNeeded:NO];
+    return [self annotationLayerForName:layerName
+                      shouldCreateLayer:NO];
 }
 
 - (MGSAnnotationMapLayer*)annotationLayerForName:(NSString*)layerName
-                                  createIfNeeded:(BOOL)shouldCreate
+                               shouldCreateLayer:(BOOL)shouldCreate
 {
     MGSMapLayer* mapLayer = [self layerForName:layerName];
     
@@ -281,53 +282,12 @@ __TODO(Implement this method)
     return annotationLayer;
 }
 
-- (void)setDelegate:(id)delegate
- forAnnotationLayer:(NSString*)layerName
+- (void)removeAnnotationLayer:(NSString*)layerName
 {
     MGSAnnotationMapLayer *annotationLayer = [self annotationLayerForName:layerName];
     
     if (annotationLayer)
     {
-        annotationLayer.layerDelegate = delegate;
-    }
-}
-
-- (void)setAnnotations:(NSSet*)annotations
-    forAnnotationLayer:(NSString*)layerName
-{
-    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerForName:layerName
-                                                           createIfNeeded:YES];
-    annotationLayer.annotations = annotations;
-}
-
-- (void)addAnnotations:(NSSet*)annotations
-     toAnnotationLayer:(NSString*)layerName
-{
-    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerForName:layerName
-                                                           createIfNeeded:YES];
-    annotationLayer.annotations = [annotationLayer.annotations setByAddingObjectsFromSet:annotations];
-}
-
-- (void)deleteAnnotations:(NSSet*)annotations
-       forAnnotationLayer:(NSString*)layerName
-{
-    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerForName:layerName];
-    
-    if (annotationLayer)
-    {
-        NSMutableSet *newAnnotations = [annotationLayer.annotations mutableCopy];
-        [newAnnotations minusSet:annotations];
-        annotationLayer.annotations = newAnnotations;
-    }
-}
-
-- (void)deleteAnnotationLayer:(NSString*)layerName
-{
-    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerForName:layerName];
-    
-    if (annotationLayer)
-    {
-        [annotationLayer removeLayer];
         [self.mapLayers removeObjectForKey:layerName];
     }
 }
@@ -343,59 +303,24 @@ __TODO(Implement this method)
 }
 
 #pragma mark - Callouts
-__TODO(Implement this method)
 - (void)showCalloutForAnnotation:(id<MGSMapAnnotation>)annotation
 {
-    
+    self.mapView.callout.title = [annotation title];
+    self.mapView.callout.detail = [annotation detail];
+    [self.mapView showCalloutAtPoint:[[annotation coordinate] point]];
 }
 
-__TODO(Implement this method)
 - (void)showCalloutWithView:(UIView*)view forAnnotation:(id<MGSMapAnnotation>)annotation
 {
-    
+    self.mapView.callout.customView = view;
+    [self showCalloutForAnnotation:annotation];
 }
 
-__TODO(Implement this method)
+__TODO("Implement this method")
 - (void)hideCallout
 {
     
 }
-
-#pragma mark - Routing
-__TODO(Implement this method)
-- (id)addRoute:(id<MGSMapRoute>)route
-{
-    return nil;
-}
-
-__TODO(Implement this method)
-- (id)removeRoute:(id<MGSMapRoute>)route
-{
-    return nil;
-}
-
-__TODO(Implement this method)
-- (id)hideRoute:(id<MGSMapRoute>)route
-{
-    return nil;
-}
-
-
-#pragma mark - Private Methods
-- (void)setGraphic:(AGSGraphic*)graphic
-     forAnnotation:(id<MGSMapAnnotation>)annotation
-           inLayer:(NSString*)layerName
-{
-    
-}
-
-__TODO(Implement this method)
-- (AGSGraphic*)graphicForAnnotation:(id<MGSMapAnnotation>)annotation
-                            inLayer:(NSString*)layerName
-{
-    return nil;
-}
-
 
 #pragma mark - AGSMapViewTouchDelegate
 - (void)mapView:(AGSMapView *)mapView didClickAtPoint:(CGPoint)screen mapPoint:(AGSPoint *)mappoint graphics:(NSDictionary *)graphics
