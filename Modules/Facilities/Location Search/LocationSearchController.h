@@ -2,6 +2,10 @@
 #import "LocationSearchDelegate.h"
 
 @interface LocationSearchController : NSObject <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+{
+    CGRect _keyboardFrame;
+}
+
 @property (nonatomic,readonly,strong) UIViewController *contentsController;
 @property (nonatomic,readonly,strong) UISearchBar *searchBar;
 @property (nonatomic,assign) id<LocationSearchDelegate> resultDelegate;

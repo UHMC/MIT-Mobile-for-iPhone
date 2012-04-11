@@ -6,14 +6,16 @@
 #import "FacilitiesRoomViewController.h"
 #import "MITLoadingActivityView.h"
 #import "MITLogging.h"
+#import "CoreDataManager.h"
 
 static const NSUInteger kMaxResultCount = 10;
 
 @interface FacilitiesUserLocationViewController ()
-@property (nonatomic,retain) NSArray* filteredData;
-@property (nonatomic,retain) CLLocation *currentLocation;
-@property (nonatomic,retain) NSTimer *locationTimeout;
-- (void)displayTableForCurrentLocation;
+@property (nonatomic,strong) NSArray* filteredData;
+@property (nonatomic,strong) CLLocation *currentLocation;
+@property (nonatomic,strong) NSTimer *locationTimeout;
+
+- (void)updateDataForCurrentLocation;
 - (void)startUpdatingLocation;
 - (void)stopUpdatingLocation;
 - (void)locationUpdateTimedOut;
@@ -112,23 +114,11 @@ static const NSUInteger kMaxResultCount = 10;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [[FacilitiesLocationData sharedData] addObserver:self
-                                           withBlock:^(NSString *name, BOOL dataUpdated, id userData) {
-                                               BOOL commandMatch = ([userData isEqualToString:FacilitiesLocationsKey]);
-                                               if (commandMatch && dataUpdated) {
-                                                   self.filteredData = nil;
-                                                   [self displayTableForCurrentLocation];
-                                               }
-                                           }];
-    
     [self startUpdatingLocation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [[FacilitiesLocationData sharedData] removeObserver:self];
     [self stopUpdatingLocation];
 }
 
@@ -145,32 +135,55 @@ static const NSUInteger kMaxResultCount = 10;
 }
 
 #pragma mark - Private Methods
-- (void)displayTableForCurrentLocation {
-    if (self.currentLocation == nil) {
-        return;
-    }
-    
-    NSMutableArray *locArray = [NSMutableArray arrayWithArray:[[FacilitiesLocationData sharedData] locationsWithinRadius:CGFLOAT_MAX
-                                                                                                              ofLocation:self.currentLocation
-                                                                                                            withCategory:nil]];
-    [locArray removeObjectsInArray:[[FacilitiesLocationData sharedData] hiddenBuildings]];
-    self.filteredData = locArray;
-    
-    if ([self.filteredData count] == 0) {
-        return;
-    } else {
-        
-        NSUInteger filterLimit = MIN([self.filteredData count],kMaxResultCount);
-        self.filteredData = [self.filteredData objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, filterLimit)]];
-        
-        if (self.loadingView) {
-            [self.loadingView removeFromSuperview];
-            self.loadingView = nil;
-            self.tableView.hidden = NO;
-            [self.view setNeedsDisplay];
-        }
-        
-        [self.tableView reloadData];
+- (void)updateDataForCurrentLocation {
+    if (self.currentLocation)
+    {
+        [[FacilitiesLocationData sharedData] allLocations:^(NSSet *objectIDs, NSError *error) {
+            NSMutableArray *array = [NSMutableArray array];
+            [array addObjectsFromArray:[[[CoreDataManager coreDataManager] objectsForObjectIDs:objectIDs] allObjects]];
+            [array filterUsingPredicate:[NSPredicate predicateWithFormat:@"isLeased == YES"]];
+            
+            [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                FacilitiesLocation *b1 = (FacilitiesLocation*)obj1;
+                FacilitiesLocation *b2 = (FacilitiesLocation*)obj2;
+                
+                CLLocation *loc1 = [[[CLLocation alloc] initWithLatitude:[b1.latitude doubleValue]
+                                                               longitude:[b1.longitude doubleValue]] autorelease];
+                CLLocation *loc2 = [[[CLLocation alloc] initWithLatitude:[b2.latitude doubleValue]
+                                                               longitude:[b2.longitude doubleValue]] autorelease];
+                
+                CLLocationDistance d1 = [loc1 distanceFromLocation:self.currentLocation];
+                CLLocationDistance d2 = [loc2 distanceFromLocation:self.currentLocation];
+                
+                if (d1 > d2) {
+                    return NSOrderedDescending;
+                } else if (d2 < d1) {
+                    return NSOrderedAscending;
+                } else {
+                    return NSOrderedSame;
+                }
+            }];
+            
+            if ([array count])
+            {
+                NSUInteger filterLimit = MIN([self.filteredData count],kMaxResultCount);
+                self.filteredData = [self.filteredData objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, filterLimit)]];
+                
+                if (self.loadingView) {
+                    [self.loadingView removeFromSuperview];
+                    self.loadingView = nil;
+                    self.tableView.hidden = NO;
+                    [self.view setNeedsDisplay];
+                }
+                
+                [self.tableView reloadData];
+            }
+            else
+            {
+                self.filteredData = [NSArray array];
+            }
+            
+        }];
     }
 }
 
@@ -200,7 +213,7 @@ static const NSUInteger kMaxResultCount = 10;
 
 - (void)locationUpdateTimedOut {
     DLog(@"Timeout triggered at accuracy of %f meters", [self.currentLocation horizontalAccuracy]);
-    [self displayTableForCurrentLocation];
+    [self updateDataForCurrentLocation];
     [self stopUpdatingLocation];
 }
 
@@ -307,7 +320,7 @@ static const NSUInteger kMaxResultCount = 10;
         [self stopUpdatingLocation];
     }
     
-    [self displayTableForCurrentLocation];
+    [self updateDataForCurrentLocation];
 }
 
 #pragma mark -

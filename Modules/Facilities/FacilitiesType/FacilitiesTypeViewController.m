@@ -1,15 +1,26 @@
+#import <QuartzCore/QuartzCore.h>
+
 #import "FacilitiesTypeViewController.h"
 #import "FacilitiesSummaryViewController.h"
 #import "FacilitiesConstants.h"
 #import "FacilitiesLocationData.h"
 #import "UIKit+MITAdditions.h"
 #import "FacilitiesRepairType.h"
-#import <QuartzCore/QuartzCore.h>
+#import "CoreDataManager.h"
+
+@interface FacilitiesTypeViewController ()
+@property (nonatomic, strong) UITableView* tableView;
+@property (nonatomic, strong) MITLoadingActivityView *loadingView;
+@property (nonatomic, strong) NSArray *repairTypes;
+
+@end
 
 @implementation FacilitiesTypeViewController
 @synthesize userData = _userData;
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
+@synthesize repairTypes = _repairTypes;
+
 
 - (id)init {
     self = [super init];

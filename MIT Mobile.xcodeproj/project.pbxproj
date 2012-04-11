@@ -71,6 +71,7 @@
 		2C203330135F64C00033E80A /* FacilitiesRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20332E135F64C00033E80A /* FacilitiesRootViewController.xib */; };
 		2C2E95421382F00200FA5557 /* FacilitiesConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E95401382F00200FA5557 /* FacilitiesConstants.m */; };
 		2C32BD25136F27D40015ACF6 /* FacilitiesLocations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C32BD23136F27D40015ACF6 /* FacilitiesLocations.xcdatamodeld */; };
+		2C32D3F115237DA2000873C4 /* LocationSearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C32D3F015237DA2000873C4 /* LocationSearchOperation.m */; };
 		2C3676B513C5F6B1003CB7A4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3676B413C5F6B1003CB7A4 /* ImageIO.framework */; };
 		2C3676B813C5F854003CB7A4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3676B613C5F7FF003CB7A4 /* MobileCoreServices.framework */; };
 		2C544BA01358A24500685545 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C544B9C1358A24400685545 /* UIImage+Resize.m */; };
@@ -109,7 +110,6 @@
 		2CB645EC134CC63800E85E64 /* QRReaderHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB645EA134CC63800E85E64 /* QRReaderHistoryViewController.m */; };
 		2CB64608134CF13500E85E64 /* QRReaderScanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2CB64606134CF13500E85E64 /* QRReaderScanViewController.mm */; };
 		2CC2E9CC144DC9B000151C71 /* MITTabHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2E9CB144DC9B000151C71 /* MITTabHeaderView.m */; };
-		2CC487CF13B3854700E58350 /* FacilitiesLocationSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC487CE13B3854600E58350 /* FacilitiesLocationSearch.m */; };
 		2CC689B012F73071002B9A50 /* MITMobileServerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC689AE12F73071002B9A50 /* MITMobileServerConfiguration.m */; };
 		2CCB85F91361F44E0024E474 /* FacilitiesLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB85F81361F44E0024E474 /* FacilitiesLocationData.m */; };
 		2CD12D4F1360584F00A73ACA /* facilities in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12D4E1360584F00A73ACA /* facilities */; };
@@ -542,6 +542,8 @@
 		2C2E95401382F00200FA5557 /* FacilitiesConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacilitiesConstants.m; sourceTree = "<group>"; };
 		2C2E95411382F00200FA5557 /* FacilitiesConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacilitiesConstants.h; sourceTree = "<group>"; };
 		2C32BD24136F27D40015ACF6 /* FacilitiesLocations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FacilitiesLocations.xcdatamodel; sourceTree = "<group>"; };
+		2C32D3EF15237DA2000873C4 /* LocationSearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchOperation.h; sourceTree = "<group>"; };
+		2C32D3F015237DA2000873C4 /* LocationSearchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchOperation.m; sourceTree = "<group>"; };
 		2C351E0D150914D400C60D48 /* MGSModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSModule.h; sourceTree = "<group>"; };
 		2C351E0E150914D400C60D48 /* MGSModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSModule.m; sourceTree = "<group>"; };
 		2C351E101509155E00C60D48 /* MGSMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSMapViewController.h; sourceTree = "<group>"; };
@@ -609,8 +611,6 @@
 		2CB64606134CF13500E85E64 /* QRReaderScanViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QRReaderScanViewController.mm; sourceTree = "<group>"; };
 		2CC2E9CA144DC9B000151C71 /* MITTabHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITTabHeaderView.h; sourceTree = "<group>"; };
 		2CC2E9CB144DC9B000151C71 /* MITTabHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITTabHeaderView.m; sourceTree = "<group>"; };
-		2CC487CD13B3854600E58350 /* FacilitiesLocationSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacilitiesLocationSearch.h; path = ../FacilitiesLocation/FacilitiesLocationSearch.h; sourceTree = "<group>"; };
-		2CC487CE13B3854600E58350 /* FacilitiesLocationSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacilitiesLocationSearch.m; path = ../FacilitiesLocation/FacilitiesLocationSearch.m; sourceTree = "<group>"; };
 		2CC689AD12F73071002B9A50 /* MITMobileServerConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITMobileServerConfiguration.h; sourceTree = "<group>"; };
 		2CC689AE12F73071002B9A50 /* MITMobileServerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITMobileServerConfiguration.m; sourceTree = "<group>"; };
 		2CCB85F71361F44E0024E474 /* FacilitiesLocationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacilitiesLocationData.h; sourceTree = "<group>"; };
@@ -1488,9 +1488,9 @@
 		2C351E1C1509493900C60D48 /* Location Search */ = {
 			isa = PBXGroup;
 			children = (
-				2CC487CD13B3854600E58350 /* FacilitiesLocationSearch.h */,
-				2CC487CE13B3854600E58350 /* FacilitiesLocationSearch.m */,
 				2CE6DD8C150A993100CD383B /* LocationSearchDelegate.h */,
+				2C32D3EF15237DA2000873C4 /* LocationSearchOperation.h */,
+				2C32D3F015237DA2000873C4 /* LocationSearchOperation.m */,
 				2CE6DD7C150A4F6600CD383B /* LocationSearchController.h */,
 				2CE6DD7D150A4F6600CD383B /* LocationSearchController.m */,
 			);
@@ -2938,7 +2938,6 @@
 				2C09824C13A8F21D00778B53 /* ModuleVersions.m in Sources */,
 				2C8D4C7B150FC59F00FE7286 /* LocationSearchController.m in Sources */,
 				2C6FE84913B2717700AFD8B8 /* FacilitiesContent.m in Sources */,
-				2CC487CF13B3854700E58350 /* FacilitiesLocationSearch.m in Sources */,
 				DEAF6EF013B3C7B40078AB8F /* PlaceholderTextView.m in Sources */,
 				2C82DDAA13BCCA9C0055D96D /* FacilitiesLocation.m in Sources */,
 				2CE6AC6613BDFB2C0043CFBE /* FacilitiesPropertyOwner.m in Sources */,
@@ -2997,6 +2996,7 @@
 				2C8D4C78150FC3AA00FE7286 /* MGSMapView.m in Sources */,
 				2C8D4C7A150FC3B300FE7286 /* MGSRouteMapLayer.m in Sources */,
 				2C8D4C79150FC3AA00FE7286 /* MGSMapViewController.m in Sources */,
+				2C32D3F115237DA2000873C4 /* LocationSearchOperation.m in Sources */,
 				2CE008CA151B595E000BCE4B /* MGSMapLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
