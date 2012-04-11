@@ -538,7 +538,7 @@
 		2C20332C135F64C00033E80A /* FacilitiesRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacilitiesRootViewController.h; sourceTree = "<group>"; };
 		2C20332D135F64C00033E80A /* FacilitiesRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacilitiesRootViewController.m; sourceTree = "<group>"; };
 		2C20332E135F64C00033E80A /* FacilitiesRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FacilitiesRootViewController.xib; sourceTree = "<group>"; };
-		2C274A3A1534BBA500E9EDFA /* MGSMapLayer+AGS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MGSMapLayer+AGS.h"; sourceTree = "<group>"; };
+		2C274A3A1534BBA500E9EDFA /* MGSMapCoordinate+AGS.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "MGSMapCoordinate+AGS.h"; sourceTree = "<group>"; };
 		2C2E95401382F00200FA5557 /* FacilitiesConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacilitiesConstants.m; sourceTree = "<group>"; };
 		2C2E95411382F00200FA5557 /* FacilitiesConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacilitiesConstants.h; sourceTree = "<group>"; };
 		2C32BD24136F27D40015ACF6 /* FacilitiesLocations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FacilitiesLocations.xcdatamodel; sourceTree = "<group>"; };
