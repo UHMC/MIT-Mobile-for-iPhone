@@ -12,7 +12,6 @@
 #import "HighlightTableViewCell.h"
 #import "MITLoadingActivityView.h"
 #import "UIKit+MITAdditions.h"
-#import "FacilitiesLocationSearch.h"
 #import "LocationSearchController.h"
 #import "CoreDataManager.h"
 
@@ -76,6 +75,8 @@
         LocationSearchController *controller = [[[LocationSearchController alloc] initWithContentsController:self] autorelease];
         controller.resultDelegate = self;
         controller.searchBar.barStyle = UIBarStyleBlackOpaque;
+        controller.allowsFreeTextEntry = YES;
+        
         self.locationSearchController = controller;
         
         [controller.searchBar sizeToFit];
@@ -215,7 +216,6 @@
 
 - (NSArray*)cachedData {
     if (_cachedData == nil) {
-        self.cachedData = [self dataForMainTableView];
         [self loadDataForMainTableView];
     }
     
