@@ -11,9 +11,12 @@
 #import "HighlightTableViewCell.h"
 #import "MITLoadingActivityView.h"
 #import "UIKit+MITAdditions.h"
+#import "CoreDataManager.h"
 
 @interface FacilitiesLocationViewController ()
 @property (nonatomic,retain) FacilitiesLocationSearch *searchHelper;
+- (void)loadDataForMainTableView;
+- (void)configureMainTableCell:(UITableViewCell*)cell forIndexPath:(NSIndexPath*)indexPath;
 @end
 
 @implementation FacilitiesLocationViewController
@@ -151,31 +154,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.locationData addObserver:self
-                         withBlock:^(NSString *notification, BOOL updated, id userData) {
-                             BOOL commandMatch = ([userData isEqualToString:FacilitiesLocationsKey]);
-                             if (commandMatch) {
-                                 [self.loadingView removeFromSuperview];
-                                 self.loadingView = nil;
-                                 self.tableView.hidden = NO;
-                                 
-                                 if ((self.cachedData == nil) || updated) {
-                                     self.cachedData = nil;
-                                     [self.tableView reloadData];
-                                 }
-                                 
-                                 if ([self.searchDisplayController isActive] && ((self.filteredData == nil) || updated)) {
-                                     self.filteredData = nil;
-                                     [self.searchDisplayController.searchResultsTableView reloadData];
-                                 }
-                             }
-                         }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.locationData removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -185,57 +167,52 @@
 }
 
 
-
 #pragma mark - Public Methods
-- (NSArray*)dataForMainTableView {
-    NSMutableArray *data = nil;
-    data = [NSMutableArray arrayWithArray:[self.locationData locationsInCategory:self.category.uid]];
-    [data removeObjectsInArray:[self.locationData hiddenBuildings]];
-    [data sortUsingComparator: ^(id obj1, id obj2) {
-        FacilitiesLocation *l1 = (FacilitiesLocation*)obj1;
-        FacilitiesLocation *l2 = (FacilitiesLocation*)obj2;
-        NSString *k1 = nil;
-        NSString *k2 = nil;
-
-        if ([l1.number length] == 0) {
-            k1 = l1.name;
-        } else {
-            k1 = l1.number;
-        }
-
-        if ([l2.number length] == 0) {
-            k2 = l2.name;
-        } else {
-            k2 = l2.number;
-        }
-
-        return [k1 compare:k2
-                   options:(NSCaseInsensitiveSearch | NSNumericSearch)];
-    }];
+- (void)loadDataForMainTableView {
+    static BOOL requestActive = NO;
     
-    return [NSArray arrayWithArray:data];
-}
-
-- (NSArray*)resultsForSearchString:(NSString *)searchText {
-    if (self.searchHelper == nil) {
-        self.searchHelper = [[[FacilitiesLocationSearch alloc] init] autorelease];
+    if (requestActive == NO)
+    {
+        requestActive = YES;
+        [self.locationData allLocations:^(NSSet *objectIDs, NSError *error) {
+            NSMutableArray *locations = [NSMutableArray array];
+            [locations addObjectsFromArray:[[[CoreDataManager coreDataManager] objectsForObjectIDs:objectIDs] allObjects]];
+            
+            [locations filterUsingPredicate:[NSPredicate predicateWithFormat:@"isLeased == NO"]];
+            [locations sortUsingComparator:^(id obj1, id obj2) {
+                FacilitiesLocation *l1 = (FacilitiesLocation*)obj1;
+                FacilitiesLocation *l2 = (FacilitiesLocation*)obj2;
+                NSString *k1 = nil;
+                NSString *k2 = nil;
+                
+                if ([l1.number length] == 0) {
+                    k1 = l1.name;
+                } else {
+                    k1 = l1.number;
+                }
+                
+                if ([l2.number length] == 0) {
+                    k2 = l2.name;
+                } else {
+                    k2 = l2.number;
+                }
+                
+                return [k1 compare:k2
+                           options:(NSCaseInsensitiveSearch | NSNumericSearch)];
+            }];
+            
+            requestActive = NO;
+            
+            if ([self.loadingView superview]) {
+                [self.loadingView removeFromSuperview]; 
+                self.loadingView = nil;
+                self.tableView.hidden = NO;
+            }
+            
+            self.cachedData = locations;
+            [self.tableView reloadData];
+        }];
     }
-    
-    self.searchHelper.category = self.category;
-    self.searchHelper.searchString = searchText;
-    NSArray *results = [self.searchHelper searchResults];
-    
-    results = [results sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSString *key1 = [obj1 valueForKey:FacilitiesSearchResultDisplayStringKey];
-        NSString *key2 = [obj2 valueForKey:FacilitiesSearchResultDisplayStringKey];
-        
-        return [key1 compare:key2
-                     options:(NSCaseInsensitiveSearch |
-                              NSNumericSearch |
-                              NSForcedOrderingSearch)];
-    }];
-    
-    return results;
 }
 
 - (void)configureMainTableCell:(UITableViewCell*)cell
@@ -277,7 +254,7 @@
 
 - (NSArray*)cachedData {
     if (_cachedData == nil) {
-        [self setCachedData:[self dataForMainTableView]];
+        [self loadDataForMainTableView];
     }
     
     return _cachedData;

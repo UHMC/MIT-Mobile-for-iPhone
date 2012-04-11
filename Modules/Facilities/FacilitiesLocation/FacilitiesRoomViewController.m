@@ -9,6 +9,7 @@
 #import "HighlightTableViewCell.h"
 #import "MITLoadingActivityView.h"
 #import "UIKit+MITAdditions.h"
+#import "CoreDataManager.h"
 
 @implementation FacilitiesRoomViewController
 @synthesize tableView = _tableView;
@@ -132,30 +133,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.locationData addObserver:self
-                         withBlock:^(NSString *notification, BOOL updated, id userData) {
-                             if ((notification == nil) || [userData isEqualToString:FacilitiesRoomsKey]) {
-                                 [self.loadingView removeFromSuperview];
-                                 self.loadingView = nil;
-                                 self.tableView.hidden = NO;
-                                 
-                                 if ((self.cachedData == nil) || updated) {
-                                     self.cachedData = nil;
-                                     [self.tableView reloadData];
-                                 }
-                                 
-                                 if ([self.searchDisplayController isActive] && ((self.filteredData == nil) || updated)) {
-                                     self.filteredData = nil;
-                                     [self.searchDisplayController.searchResultsTableView reloadData];
-                                 }
-                             }
-                         }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.locationData removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -166,18 +147,30 @@
 
 
 #pragma mark - Public Methods
-- (NSArray*)dataForMainTableView {
-    NSArray *data = [self.locationData roomsForBuilding:self.location.number];
-    data = [data sortedArrayUsingComparator: ^(id obj1, id obj2) {
-        FacilitiesRoom *r1 = (FacilitiesRoom*)obj1;
-        FacilitiesRoom *r2 = (FacilitiesRoom*)obj2;
-        NSString *s1 = [r1 displayString];
-        NSString *s2 = [r2 displayString];
-        
-        return [s1 caseInsensitiveCompare:s2];
-    }];
+- (void)loadDataForMainTableView {
+    static BOOL requestIsActive = NO;
     
-    return data;
+    if (requestIsActive == NO)
+    {
+        requestIsActive = YES;
+        [self.locationData roomsForBuilding:self.location.number
+                           requestCompleted:^(NSSet *objectIDs, NSError *error) {
+                               NSMutableArray *rooms = [NSMutableArray array];
+                               [rooms addObjectsFromArray:[[[CoreDataManager coreDataManager] objectsForObjectIDs:objectIDs] allObjects]];
+                               [rooms sortUsingComparator: ^(id obj1, id obj2) {
+                                   FacilitiesRoom *r1 = (FacilitiesRoom*)obj1;
+                                   FacilitiesRoom *r2 = (FacilitiesRoom*)obj2;
+                                   NSString *s1 = [r1 displayString];
+                                   NSString *s2 = [r2 displayString];
+                                   
+                                   return [s1 caseInsensitiveCompare:s2];
+                               }];
+                               
+                               requestIsActive = NO;
+                               self.cachedData = rooms;
+                               [self.tableView reloadData];
+                           }];
+    }
 }
 
 - (NSArray*)resultsForSearchString:(NSString *)searchText {
@@ -260,7 +253,7 @@
 
 - (NSArray*)cachedData {
     if (_cachedData == nil) {
-        [self setCachedData:[self dataForMainTableView]];
+        [self loadDataForMainTableView];
     }
     
     return _cachedData;

@@ -31,7 +31,7 @@
 
 @property (nonatomic,retain) FacilitiesLocation* location;
 
-- (NSArray*)dataForMainTableView;
+- (void)loadDataForMainTableView;
 - (NSArray*)resultsForSearchString:(NSString*)searchText;
 
 - (void)configureMainTableCell:(UITableViewCell*)cell forIndexPath:(NSIndexPath*)indexPath;

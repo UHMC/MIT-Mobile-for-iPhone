@@ -14,6 +14,7 @@
 #import "UIKit+MITAdditions.h"
 #import "FacilitiesLocationSearch.h"
 #import "LocationSearchController.h"
+#import "CoreDataManager.h"
 
 
 @interface FacilitiesCategoryViewController ()
@@ -21,7 +22,7 @@
 @property (nonatomic,strong) NSArray *cachedData;
 
 - (BOOL)shouldShowLocationSection;
-- (NSArray*)dataForMainTableView;
+- (void)loadDataForMainTableView;
 - (void)configureMainTableCell:(UITableViewCell*)cell forIndexPath:(NSIndexPath*)indexPath;
 @end
 
@@ -141,31 +142,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.locationData addObserver:self
-                         withBlock:^(NSString *notification, BOOL updated, id userData) {
-                             if ([userData isEqualToString:FacilitiesCategoriesKey]) {
-                                 if ([self.loadingView superview]) {
-                                     [self.loadingView removeFromSuperview];
-                                     self.loadingView = nil;
-                                     self.tableView.hidden = NO;
-                                 }
-                                 
-                                 if ((self.cachedData == nil) || updated) {
-                                     self.cachedData = nil;
-                                     [self.tableView reloadData];
-                                 }
-                             } else if ([userData isEqualToString:FacilitiesLocationsKey]) {
-                                 if ([self.searchDisplayController isActive] && updated) {
-                                     [self.searchDisplayController.searchResultsTableView reloadData];
-                                 }
-                             }
-                         }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.locationData removeObserver:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -186,16 +166,33 @@
 
 
 #pragma mark - Public Methods
-- (NSArray*)dataForMainTableView {
-    NSArray *data = [self.locationData allCategories];
-    data = [data sortedArrayUsingComparator: ^(id obj1, id obj2) {
-        FacilitiesCategory *c1 = (FacilitiesCategory*)obj1;
-        FacilitiesCategory *c2 = (FacilitiesCategory*)obj2;
-        
-        return [c1.name compare:c2.name];
-    }];
+- (void)loadDataForMainTableView {
+    static BOOL requestActive = NO;
     
-    return data;
+    if (requestActive == NO)
+    {
+        requestActive = YES;
+        [self.locationData allCategories:^(NSSet *objectIDs, NSError *error) {
+            NSArray *categories = [[[CoreDataManager coreDataManager] objectsForObjectIDs:objectIDs] allObjects];
+            categories = [categories sortedArrayUsingComparator: ^(id obj1, id obj2) {
+                FacilitiesCategory *c1 = (FacilitiesCategory*)obj1;
+                FacilitiesCategory *c2 = (FacilitiesCategory*)obj2;
+                
+                return [c1.name compare:c2.name];
+            }];
+            
+            requestActive = NO;
+            
+            if ([self.loadingView superview]) {
+                [self.loadingView removeFromSuperview]; 
+                self.loadingView = nil;
+                self.tableView.hidden = NO;
+            }
+            
+            self.cachedData = categories;
+            [self.tableView reloadData];
+        }];
+    }
 }
 
 - (void)configureMainTableCell:(UITableViewCell *)cell
@@ -219,6 +216,7 @@
 - (NSArray*)cachedData {
     if (_cachedData == nil) {
         self.cachedData = [self dataForMainTableView];
+        [self loadDataForMainTableView];
     }
     
     return _cachedData;

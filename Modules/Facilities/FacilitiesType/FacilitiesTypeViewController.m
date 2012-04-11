@@ -26,7 +26,7 @@
 {
     self.userData = nil;
     self.tableView = nil;
-    self.view = nil;
+    self.loadingView = nil;
     [super dealloc];
 }
 
@@ -36,7 +36,20 @@
 }
 
 - (NSArray*)repairTypes {
-    return [[FacilitiesLocationData sharedData] allRepairTypes];
+    if (_repairTypes == nil)
+    {
+        [[FacilitiesLocationData sharedData] allRepairTypes:^(NSSet *objectIDs, NSError *error) {
+            [self.loadingView removeFromSuperview];
+            self.loadingView = nil;
+            self.tableView.hidden = NO;
+            
+            NSSet *repairTypes = [[CoreDataManager coreDataManager] objectsForObjectIDs:objectIDs];
+            self.repairTypes = [repairTypes allObjects];
+            [self.tableView reloadData];
+        }];
+    }
+    
+    return _repairTypes;
 }
 
 #pragma mark - View lifecycle
@@ -86,18 +99,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[FacilitiesLocationData sharedData] addObserver:self
-                                           withBlock:^(NSString *name, BOOL dataUpdated, id userData) {
-                                               if ([userData isEqualToString:FacilitiesRepairTypesKey]) {
-                                                   [self.loadingView removeFromSuperview];
-                                                   self.loadingView = nil;
-                                                   self.tableView.hidden = NO;
-                                                   
-                                                   if (dataUpdated) {
-                                                       [self.tableView reloadData];
-                                                   }
-                                               }
-                                           }];
 }
 
 - (void)viewDidUnload

@@ -3,39 +3,28 @@
 
 #import "MITMobileWebAPI.h"
 
-extern NSString* const FacilitiesDidLoadDataNotification;
-extern NSString* const FacilitiesCategoriesKey;
-extern NSString* const FacilitiesLocationsKey;
-extern NSString* const FacilitiesRoomsKey;
-extern NSString* const FacilitiesRepairTypesKey;
-
-typedef void (^FacilitiesDidLoadBlock)(NSString *name, BOOL dataUpdated, id userData);
+typedef void (^LocationResultBlock)(NSSet *objectIDs, NSError *error);
 
 @class FacilitiesLocation;
 
 @interface FacilitiesLocationData : NSObject
 
 + (FacilitiesLocationData*)sharedData;
-
 - (id)init;
-- (void)dealloc;
 
-- (NSArray*)allCategories;
+#pragma mark -
+// All of the resultBlock arguments in the below methods
+//  will be invoked on the main queue when the operation is
+//  complete. Be sure to avoid performing any long running
+//  tasks in the callbacks to avoid locking up the UI
 
-- (NSArray*)allLocations;
-- (NSArray*)locationsInCategory:(NSString*)categoryId;
-- (NSArray*)locationsWithinRadius:(CLLocationDistance)radiusInMeters
-                       ofLocation:(CLLocation*)location
-                     withCategory:(NSString*)categoryId;
-
-- (NSArray*)roomsForBuilding:(NSString*)bldgnum;
-- (NSArray*)roomsMatchingPredicate:(NSPredicate*)predicate;
-
-- (NSArray*)hiddenBuildings;
-- (NSArray*)leasedBuildings;
-
-- (NSArray*)allRepairTypes;
-
-- (void)addObserver:(id)observer withBlock:(FacilitiesDidLoadBlock)block;
-- (void)removeObserver:(id)observer;
+- (void)allCategories:(LocationResultBlock)resultBlock;
+- (void)allLocations:(LocationResultBlock)resultBlock;
+- (void)locationsInCategory:(NSString*)categoryId
+           requestCompleted:(LocationResultBlock)resultBlock;
+- (void)roomsForBuilding:(NSString*)bldgnum
+        requestCompleted:(LocationResultBlock)resultBlock;
+- (void)hiddenBuildings:(LocationResultBlock)resultBlock;
+- (void)leasedBuildings:(LocationResultBlock)resultBlock;
+- (void)allRepairTypes:(LocationResultBlock)resultBlock;
 @end

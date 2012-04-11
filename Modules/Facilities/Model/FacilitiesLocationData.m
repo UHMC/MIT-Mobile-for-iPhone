@@ -11,6 +11,7 @@
 #import "FacilitiesRepairType.h"
 #import "ModuleVersions.h"
 #import "MobileRequestOperation.h"
+#import "Foundation+MITAdditions.h"
 
 NSString* const FacilitiesDidLoadDataNotification = @"MITFacilitiesDidLoadData";
 
@@ -25,17 +26,10 @@ static FacilitiesLocationData *_sharedData = nil;
 
 @interface FacilitiesLocationData ()
 @property (nonatomic,retain) NSOperationQueue* requestQueue;
-@property (nonatomic,retain) NSMutableDictionary* notificationBlocks;
 
 - (BOOL)shouldUpdateDataWithRequest:(MobileRequestOperation*)request;
 
-- (void)updateCategoryData;
-- (void)updateLocationData;
-- (void)updateRoomData;
-- (void)updateRoomDataForBuilding:(NSString*)bldgnum;
-- (void)updateRepairTypeData;
-- (void)updateDataForCommand:(NSString*)command params:(NSDictionary*)params;
-
+- (void)loadRequestData:(id)data requestCommand:(NSString*)command;
 - (void)loadCategoriesWithArray:(id)categories;
 - (void)loadLocationsWithArray:(NSArray*)locations;
 - (void)loadContentsForLocation:(FacilitiesLocation*)location withData:(NSArray*)contents;
@@ -45,25 +39,19 @@ static FacilitiesLocationData *_sharedData = nil;
 - (FacilitiesCategory*)categoryForId:(NSString*)categoryId;
 - (FacilitiesLocation*)locationForId:(NSString*)locationId;
 - (FacilitiesLocation*)locationWithNumber:(NSString*)bldgNumber;
-- (void)sendNotificationToObservers:(NSString*)notificationName
-                       withUserData:(id)userData
-                   newDataAvailable:(BOOL)updated;
 
 - (BOOL)hasActiveRequest:(MobileRequestOperation*)request;
 @end
 
 @implementation FacilitiesLocationData
 @synthesize requestQueue = _requestQueue;
-@synthesize notificationBlocks = _notificationBlocks;
 
 - (id)init {
     self = [super init]; 
     
     if (self) {
         self.requestQueue = [[[NSOperationQueue alloc] init] autorelease];
-        self.requestQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
-        
-        self.notificationBlocks = [NSMutableDictionary dictionary];
+        self.requestQueue.maxConcurrentOperationCount = 1;
     }
     
     return self;
@@ -71,127 +59,8 @@ static FacilitiesLocationData *_sharedData = nil;
 
 - (void)dealloc {
     self.requestQueue = nil;
-    self.notificationBlocks = nil;
     [super dealloc];
 }
-
-
-#pragma mark -
-#pragma mark Public Methods
-- (NSArray*)allCategories {
-    [self updateCategoryData];
-    return [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesCategory"
-                                             matchingPredicate:[NSPredicate predicateWithValue:YES]];
-}
-
-- (NSArray*)allLocations {
-    [self updateLocationData];
-    return [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesLocation"
-                                             matchingPredicate:[NSPredicate predicateWithValue:YES]];
-}
-
-- (NSArray*)locationsInCategory:(NSString*)categoryId {
-    [self updateLocationData];
-    return [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesLocation"
-                                             matchingPredicate:[NSPredicate predicateWithFormat:@"(ANY categories.uid == %@)", categoryId]];
-}
-
-- (NSArray*)locationsWithinRadius:(CLLocationDistance)radiusInMeters
-                       ofLocation:(CLLocation*)location
-                     withCategory:(NSString*)categoryId {
-    NSMutableArray *local = [NSMutableArray array];
-    NSArray *locations = nil;
-    
-    if (categoryId) {
-        locations = [self locationsInCategory:categoryId];
-    } else {
-        locations = [self allLocations];
-    }
-    
-    for (FacilitiesLocation *loc in locations) {
-        CLLocation *bldgLocation = [[[CLLocation alloc] initWithLatitude:[loc.latitude doubleValue]
-                                                               longitude:[loc.longitude doubleValue]] autorelease];
-        if ([bldgLocation distanceFromLocation:location] <= radiusInMeters) {
-            if ((categoryId == nil) || [loc.categories containsObject:categoryId]) {
-                [local addObject:loc];
-            }
-        }
-    }
-    
-    NSArray *sortedArray = [local sortedArrayUsingComparator:^(id obj1, id obj2) {
-        FacilitiesLocation *b1 = (FacilitiesLocation*)obj1;
-        FacilitiesLocation *b2 = (FacilitiesLocation*)obj2;
-        CLLocation *loc1 = [[[CLLocation alloc] initWithLatitude:[b1.latitude doubleValue]
-                                                       longitude:[b1.longitude doubleValue]] autorelease];
-        CLLocation *loc2 = [[[CLLocation alloc] initWithLatitude:[b2.latitude doubleValue]
-                                                       longitude:[b2.longitude doubleValue]] autorelease];
-        CLLocationDistance d1 = [loc1 distanceFromLocation:location];
-        CLLocationDistance d2 = [loc2 distanceFromLocation:location];
-
-        if (d1 > d2) {
-            return NSOrderedDescending;
-        } else if (d2 < d1) {
-            return NSOrderedAscending;
-        } else {
-            return NSOrderedSame;
-        }
-    }];
-    return sortedArray;
-}
-
-- (NSArray*)roomsForBuilding:(NSString*)bldgnum {
-    [self updateRoomDataForBuilding:bldgnum];
-    return [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesRoom"
-                                             matchingPredicate:[NSPredicate predicateWithFormat:@"building == %@",bldgnum]];
-}
-
-- (NSArray*)roomsMatchingPredicate:(NSPredicate*)predicate {
-    [self updateRoomData];
-    return [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesRoom"
-                                             matchingPredicate:predicate];
-}
-
-- (FacilitiesRoom*)roomInBuilding:(NSString*)building onFloor:(NSString*)floor withNumber:(NSString*)number {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(building == %@) AND (floor == %@) AND (number == %@)",
-                              building,
-                              floor,
-                              number];
-    
-    NSArray *results = [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesRoom"
-                                                         matchingPredicate:predicate];
-    
-    return ([results count] > 0) ? [results objectAtIndex:0] : nil;
-}
-
-- (NSArray*)allRepairTypes {
-    [self updateRepairTypeData];
-    NSArray *types = [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesRepairType"
-                                                       matchingPredicate:[NSPredicate predicateWithValue:YES]];
-    return [types sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [[obj1 valueForKey:@"order"] compare:[obj2 valueForKey:@"order"]];
-    }];
-}
-
-- (NSArray*)hiddenBuildings {
-    return [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesLocation"
-                                             matchingPredicate:[NSPredicate predicateWithFormat:@"isHiddenInBldgServices == YES"]];
-}
-
-- (NSArray*)leasedBuildings {
-    return [[CoreDataManager coreDataManager] objectsForEntity:@"FacilitiesLocation"
-                                             matchingPredicate:[NSPredicate predicateWithFormat:@"isLeased == YES"]];
-}
-
-
-- (void)addObserver:(id)observer withBlock:(FacilitiesDidLoadBlock)block {
-    [self.notificationBlocks setObject:[[block copy] autorelease]
-                                forKey:[observer description]];
-}
-
-- (void)removeObserver:(id)observer {
-    [self.notificationBlocks removeObjectForKey:[observer description]];
-}
-
 
 #pragma mark - Private Methods
 - (NSString*)stringForRequestParameters:(NSDictionary*)params {
@@ -262,101 +131,6 @@ static FacilitiesLocationData *_sharedData = nil;
     return NO;
 }
 
-- (void)updateCategoryData {
-    [self updateDataForCommand:FacilitiesCategoriesKey
-                        params:nil];
-}
-
-- (void)updateLocationData {
-    [self updateDataForCommand:FacilitiesLocationsKey
-                        params:nil];
-}
-
-- (void)updateRoomData {
-    [self updateDataForCommand:FacilitiesRoomsKey
-                        params:nil];
-}
-
-- (void)updateRoomDataForBuilding:(NSString*)bldgnum {
-    if ((bldgnum == 0) || ([bldgnum length] == 0)) {
-        [self sendNotificationToObservers:FacilitiesDidLoadDataNotification
-                             withUserData:FacilitiesRoomsKey
-                         newDataAvailable:NO];
-        return;
-    } else {
-        [self updateDataForCommand:FacilitiesRoomsKey
-                            params:[NSDictionary dictionaryWithObject:bldgnum forKey:@"building"]];
-    }
-}
-
-- (void)updateRepairTypeData {
-    [self updateDataForCommand:FacilitiesRepairTypesKey
-                        params:nil];
-}
-
-- (void)updateDataForCommand:(NSString*)command params:(NSDictionary*)params {
-    MobileRequestOperation *request = [[[MobileRequestOperation alloc] initWithModule:@"facilities"
-                                                                              command:command
-                                                                           parameters:params] autorelease];
-    
-    request.completeBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error) {
-        NSString *command = operation.command;
-        NSDictionary *parameters = operation.parameters;
-        dispatch_queue_t handlerQueue = dispatch_queue_create(NULL, 0);
-        
-        if (error) {
-            ELog(@"Request failed with error: %@",[error localizedDescription]);
-        } else {
-            dispatch_async(handlerQueue, ^(void) {
-                if ([command isEqualToString:FacilitiesCategoriesKey]) {
-                    [self loadCategoriesWithArray:(NSArray*)jsonResult];
-                } else if ([command isEqualToString:FacilitiesLocationsKey]) {
-                    [self loadLocationsWithArray:(NSArray*)jsonResult];
-                } else if ([command isEqualToString:FacilitiesRepairTypesKey]) {
-                    [self loadRepairTypesWithArray:(NSArray*)jsonResult];
-                } else if ([command isEqualToString:FacilitiesRoomsKey]) {
-                    NSDictionary *roomData = (NSDictionary*)jsonResult;
-                    NSString *requestedId = [parameters objectForKey:@"building"];
-                    
-                    if (requestedId) {
-                        roomData = [NSDictionary dictionaryWithObject:[roomData objectForKey:requestedId]
-                                                               forKey:requestedId];
-                    }
-                    
-                    [self loadRoomsWithData:roomData];
-                }
-            
-                BOOL shouldUpdateDate = !([command isEqualToString:FacilitiesRoomsKey] && [parameters objectForKey:@"building"]);
-                
-                if (shouldUpdateDate) {
-                    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:FacilitiesFetchDatesKey]];
-                    [dict setObject:[NSDate date]
-                             forKey:command];
-                    [[NSUserDefaults standardUserDefaults] setObject:dict
-                                                              forKey:FacilitiesFetchDatesKey];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                }
-                
-                [self sendNotificationToObservers:FacilitiesDidLoadDataNotification
-                                     withUserData:command
-                                 newDataAvailable:YES];
-            });
-            
-            dispatch_release(handlerQueue);
-        }
-    };
-
-    if ([self hasActiveRequest:request] == NO) {
-        if ([self shouldUpdateDataWithRequest:request]) {
-            [self.requestQueue addOperation:request];
-        } else {
-            [self sendNotificationToObservers:FacilitiesDidLoadDataNotification
-                                 withUserData:command
-                             newDataAvailable:NO];
-        }
-    } 
-}
-
 
 #pragma mark - Internal ID accessors
 - (FacilitiesCategory*)categoryForId:(NSString*)categoryId {
@@ -398,20 +172,32 @@ static FacilitiesLocationData *_sharedData = nil;
     }
 }
 
-- (void)sendNotificationToObservers:(NSString*)notificationName
-                       withUserData:(id)userData
-                   newDataAvailable:(BOOL)updated
-{
-    dispatch_async(dispatch_get_main_queue(),^{
-        NSArray *blocks = [_notificationBlocks allValues];
-        for(FacilitiesDidLoadBlock block in blocks) {
-            dispatch_async(dispatch_get_main_queue(),^{ block(notificationName,updated,userData); } );
-        }
-    });
-}
-
 
 #pragma mark - JSON Loading/Updating methods
+- (void)loadRequestData:(id)data requestCommand:(NSString*)command
+{
+    if ([command isEqualToString:FacilitiesCategoriesKey])
+    {
+        [self loadCategoriesWithArray:data];
+    }
+    else if ([command isEqualToString:FacilitiesLocationsKey])
+    {
+        [self loadLocationsWithArray:data];
+    }
+    else if ([command isEqualToString:FacilitiesRoomsKey])
+    {
+        [self loadRoomsWithData:data];
+    }
+    else if ([command isEqualToString:FacilitiesRepairTypesKey])
+    {
+        [self loadRepairTypesWithArray:data];
+    }
+    else
+    {
+        ELog(@"Error: Unknown command type '%@'", command);
+    }
+}
+
 - (void)loadCategoriesWithArray:(id)categories {
     CoreDataManager *cdm = [CoreDataManager coreDataManager];
     [cdm deleteObjectsForEntity:@"FacilitiesCategory"];
@@ -654,6 +440,129 @@ static FacilitiesLocationData *_sharedData = nil;
 #pragma mark - MITMobileWebAPI request management
 - (BOOL)hasActiveRequest:(MobileRequestOperation*)request {
     return [[self.requestQueue operations] containsObject:request];
+}
+
+
+#pragma mark - Asynchronous request methods
+- (void)allCategories:(LocationResultBlock)resultBlock
+{
+    [self performRequestForType:FacilitiesCategoriesKey
+                  forEntityName:@"FacilitiesCategory"
+              matchingPredicate:[NSPredicate predicateWithValue:YES]
+                      completed:resultBlock];
+}
+
+- (void)allLocations:(LocationResultBlock)resultBlock
+{
+    [self performRequestForType:FacilitiesLocationsKey
+                  forEntityName:@"FacilitiesLocation"
+              matchingPredicate:[NSPredicate predicateWithValue:YES]
+                      completed:resultBlock];
+}
+
+- (void)locationsInCategory:(NSString*)categoryId
+           requestCompleted:(LocationResultBlock)resultBlock
+{
+    [self performRequestForType:FacilitiesLocationsKey
+                  forEntityName:@"FacilitiesLocation"
+              matchingPredicate:[NSPredicate predicateWithFormat:@"(ANY categories.uid == %@)", categoryId]
+                      completed:resultBlock];
+}
+
+- (void)roomsForBuilding:(NSString*)bldgnum
+        requestCompleted:(LocationResultBlock)resultBlock
+{
+    [self performRequestForType:FacilitiesLocationsKey
+                  forEntityName:@"FacilitiesRoom"
+              matchingPredicate:[NSPredicate predicateWithFormat:@"building == %@",bldgnum]
+                      completed:resultBlock];
+}
+
+- (void)hiddenBuildings:(LocationResultBlock)resultBlock
+{
+    [self performRequestForType:FacilitiesLocationsKey
+                  forEntityName:@"FacilitiesLocation"
+              matchingPredicate:[NSPredicate predicateWithFormat:@"isHiddenInBldgServices == YES"]
+                      completed:resultBlock];
+}
+
+- (void)leasedBuildings:(LocationResultBlock)resultBlock
+{
+    [self performRequestForType:FacilitiesLocationsKey
+                  forEntityName:@"FacilitiesLocation"
+              matchingPredicate:[NSPredicate predicateWithFormat:@"isLeased == YES"]
+                      completed:resultBlock];
+}
+
+- (void)allRepairTypes:(LocationResultBlock)resultBlock
+{
+    [self performRequestForType:FacilitiesLocationsKey
+                  forEntityName:@"FacilitiesRepairType"
+              matchingPredicate:[NSPredicate predicateWithValue:YES]
+                      completed:resultBlock];
+}
+
+
+#pragma mark - Notification Block Management
+- (void)performRequestForType:(NSString*)dataKey
+                forEntityName:(NSString*)entity
+            matchingPredicate:(NSPredicate*)predicate
+                    completed:(LocationResultBlock)resultBlock
+{
+    MobileRequestOperation *request = [[[MobileRequestOperation alloc] initWithModule:@"facilities"
+                                                                              command:dataKey
+                                                                           parameters:nil] autorelease];
+    LocationResultBlock localResultBlock = [[resultBlock copy] autorelease];
+    
+    dispatch_block_t execBlock = ^{
+        if (localResultBlock)
+        {
+            NSSet *objectIDs = [[CoreDataManager coreDataManager] objectIDsForEntity:entity
+                                                                   matchingPredicate:predicate];
+            localResultBlock(objectIDs, nil);
+        }
+    };
+    
+    if (([self hasActiveRequest:request] == NO) && [self shouldUpdateDataWithRequest:request])
+    {
+        request.requestCompleteBlock = ^(MobileRequestOperation *operation, id jsonResult, NSError *error)
+        {
+            if (error)
+            {
+                ELog(@"Request failed with error: %@",[error localizedDescription]);
+                [self performBlockOnMainThread:execBlock
+                                 waitUntilDone:NO];
+            }
+            else
+            {
+                NSBlockOperation *opBlock = [NSBlockOperation blockOperationWithBlock: ^{
+                    [self loadRequestData:jsonResult
+                           requestCommand:dataKey];
+             
+                    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:FacilitiesFetchDatesKey]];
+                    [dict setObject:[NSDate date]
+                             forKey:dataKey];
+                    [[NSUserDefaults standardUserDefaults] setObject:dict
+                                                              forKey:FacilitiesFetchDatesKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    [self performBlockOnMainThread:execBlock
+                                     waitUntilDone:NO];
+                }];
+                
+                [self.requestQueue addOperation:opBlock];
+            }
+        };
+        
+        [self.requestQueue addOperation:request];
+    }
+    else if ([self hasActiveRequest:request] == NO)
+    {
+        [self.requestQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
+            [self performBlockOnMainThread:execBlock
+                             waitUntilDone:NO];
+        }]];
+    } 
 }
 
 
