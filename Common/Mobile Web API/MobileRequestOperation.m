@@ -520,9 +520,8 @@ typedef enum {
 
 - (void)dispatchCompleteBlockWithResult:(id)jsonResult error:(NSError*)error {
     if (self.requestCompleteBlock) {
-        dispatch_sync(dispatch_get_main_queue(), ^(void) {
-            self.requestCompleteBlock(self,jsonResult,error);
-        });
+        [self performBlockOnMainThread:^{ self.requestCompleteBlock(self,jsonResult,error); }
+                         waitUntilDone:NO];
     }
 }
 
