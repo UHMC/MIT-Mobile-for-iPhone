@@ -465,7 +465,7 @@ static FacilitiesLocationData *_sharedData = nil;
 {
     [self performRequestForType:FacilitiesLocationsKey
                   forEntityName:@"FacilitiesLocation"
-              matchingPredicate:[NSPredicate predicateWithFormat:@"(ANY categories.uid == %@)", categoryId]
+              matchingPredicate:[NSPredicate predicateWithFormat:@"ANY categories.uid == %@", categoryId]
                       completed:resultBlock];
 }
 
