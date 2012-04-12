@@ -472,9 +472,9 @@ static FacilitiesLocationData *_sharedData = nil;
 - (void)roomsForBuilding:(NSString*)bldgnum
         requestCompleted:(LocationResultBlock)resultBlock
 {
-    [self performRequestForType:FacilitiesLocationsKey
+    [self performRequestForType:FacilitiesRoomsKey
                   forEntityName:@"FacilitiesRoom"
-              matchingPredicate:[NSPredicate predicateWithFormat:@"building == %@",bldgnum]
+              matchingPredicate:[NSPredicate predicateWithFormat:@"building LIKE[cd] %@",bldgnum]
                       completed:resultBlock];
 }
 
@@ -496,7 +496,7 @@ static FacilitiesLocationData *_sharedData = nil;
 
 - (void)allRepairTypes:(LocationResultBlock)resultBlock
 {
-    [self performRequestForType:FacilitiesLocationsKey
+    [self performRequestForType:FacilitiesRepairTypesKey
                   forEntityName:@"FacilitiesRepairType"
               matchingPredicate:[NSPredicate predicateWithValue:YES]
                       completed:resultBlock];
