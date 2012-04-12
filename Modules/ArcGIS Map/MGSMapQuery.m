@@ -13,6 +13,9 @@ NSString * const MapQueryOptionFloor = @"edu.mit.mobile.map.query.Floor";
 @synthesize color = _color;
 @synthesize searchType = _searchType;
 @synthesize options = _options;
+@synthesize name = _name;
+@synthesize completionBlock = _completionBlock;
+
 
 @dynamic queryOptions;
 @dynamic building;
