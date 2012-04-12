@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @class FacilitiesLocation;
 @class FacilitiesCategory;
@@ -7,29 +8,11 @@
 @class HighlightTableViewCell;
 
 @interface FacilitiesRoomViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate> {
-    UITableView *_tableView;
-    MITLoadingActivityView *_loadingView;
-    
-    FacilitiesLocationData *_locationData;
     NSArray *_cachedData;
-    NSArray *_filteredData;
     NSPredicate *_filterPredicate;
-    NSString *_searchString;
-    NSString *_trimmedString;
-	FacilitiesLocation *_location;
 }
 
-@property (nonatomic,retain) UITableView* tableView;
-@property (nonatomic,retain) MITLoadingActivityView* loadingView;
-@property (retain) FacilitiesLocationData* locationData;
-@property (nonatomic,retain) NSPredicate* filterPredicate;
-
-@property (nonatomic,retain) NSArray* cachedData;
-@property (nonatomic,retain) NSArray* filteredData;
-@property (nonatomic,retain) NSString* searchString;
-@property (nonatomic,retain) NSString *trimmedString;
-
-@property (nonatomic,retain) FacilitiesLocation* location;
+@property (nonatomic,assign) NSManagedObjectID* locationID;
 
 - (void)loadDataForMainTableView;
 - (NSArray*)resultsForSearchString:(NSString*)searchText;

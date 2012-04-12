@@ -11,6 +11,21 @@
 #import "UIKit+MITAdditions.h"
 #import "CoreDataManager.h"
 
+@interface FacilitiesRoomViewController ()
+@property (nonatomic,retain) UITableView* tableView;
+@property (nonatomic,retain) MITLoadingActivityView* loadingView;
+@property (retain) FacilitiesLocationData* locationData;
+@property (nonatomic,retain) NSPredicate* filterPredicate;
+
+@property (nonatomic,retain) NSArray* cachedData;
+@property (nonatomic,retain) NSArray* filteredData;
+@property (nonatomic,retain) NSString* searchString;
+@property (nonatomic,retain) NSString* trimmedString;
+
+@property (nonatomic,strong) FacilitiesLocation* location;
+
+@end
+
 @implementation FacilitiesRoomViewController
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
@@ -24,6 +39,7 @@
 
 @dynamic cachedData;
 @dynamic filterPredicate;
+@dynamic locationID;
 
 - (id)init
 {
@@ -166,6 +182,13 @@
                                    return [s1 caseInsensitiveCompare:s2];
                                }];
                                
+                               if (self.loadingView)
+                               {
+                                   [self.loadingView removeFromSuperview]; 
+                                   self.loadingView = nil;
+                                   self.tableView.hidden = NO;
+                               }
+                               
                                requestIsActive = NO;
                                self.cachedData = rooms;
                                [self.tableView reloadData];
@@ -270,6 +293,22 @@
     }
     
     return _filteredData;
+}
+
+- (void)setLocationID:(NSManagedObjectID *)locationID
+{
+    NSManagedObjectContext *context = [[CoreDataManager coreDataManager] managedObjectContext];
+    NSManagedObject *mo = [context objectWithID:locationID];
+    
+    if ([mo isKindOfClass:[FacilitiesLocation class]])
+    {
+        self.location = (FacilitiesLocation*)mo;
+    }
+}
+
+- (NSManagedObjectID*)locationID
+{
+    return [self.location objectID];
 }
 
 

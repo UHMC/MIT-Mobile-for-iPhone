@@ -19,6 +19,7 @@
 @property (nonatomic,strong) UITableView* tableView;
 @property (nonatomic,strong) MITLoadingActivityView* loadingView;
 @property (nonatomic,strong) FacilitiesLocationData* locationData;
+@property (nonatomic,strong) FacilitiesCategory *category;
 
 - (void)loadDataForMainTableView;
 - (void)configureMainTableCell:(UITableViewCell*)cell forIndexPath:(NSIndexPath*)indexPath;
@@ -32,6 +33,8 @@
 @synthesize locationSearchController = _locationSearchController;
 @synthesize cachedData = _cachedData;
 
+@dynamic categoryID;
+
 
 - (id)init
 {
@@ -39,6 +42,7 @@
     if (self) {
         self.title = @"Where is it?";
         self.locationData = [FacilitiesLocationData sharedData];
+        self.category = nil;
     }
     return self;
 }
@@ -170,7 +174,17 @@
             NSMutableArray *locations = [NSMutableArray array];
             [locations addObjectsFromArray:[[[CoreDataManager coreDataManager] objectsForObjectIDs:objectIDs] allObjects]];
             
-            [locations filterUsingPredicate:[NSPredicate predicateWithFormat:@"isLeased == NO"]];
+            NSMutableArray *predicates = [NSMutableArray array];
+            [predicates addObject:[NSPredicate predicateWithFormat:@"isLeased == NO"]];
+            
+            if (self.category)
+            {
+                [predicates addObject:[NSPredicate predicateWithFormat:@"ANY categories.uid == %@",self.category.uid]];
+            }
+            
+            NSCompoundPredicate *predicate = [[[NSCompoundPredicate alloc] initWithType:NSAndPredicateType
+                                                                         subpredicates:predicates] autorelease];
+            [locations filterUsingPredicate:predicate];
             [locations sortUsingComparator:^(id obj1, id obj2) {
                 FacilitiesLocation *l1 = (FacilitiesLocation*)obj1;
                 FacilitiesLocation *l2 = (FacilitiesLocation*)obj2;
@@ -195,7 +209,8 @@
             
             requestActive = NO;
             
-            if ([self.loadingView superview]) {
+            if (self.loadingView)
+            {
                 [self.loadingView removeFromSuperview]; 
                 self.loadingView = nil;
                 self.tableView.hidden = NO;
@@ -233,6 +248,24 @@
 }
 
 
+
+- (void)setCategoryID:(NSManagedObjectID *)categoryID
+{
+    NSManagedObjectContext *context = [[CoreDataManager coreDataManager] managedObjectContext];
+    NSManagedObject *mo = [context objectWithID:categoryID];
+    
+    if ([[[mo entity] name] isEqualToString:@"FacilitiesCategory"])
+    {
+        self.category = (FacilitiesCategory*)mo;
+    }
+}
+
+- (NSManagedObjectID*)categoryID
+{
+    return [self.category objectID];
+}
+
+
 #pragma mark - UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     FacilitiesLocation *location = (FacilitiesLocation*)[self.cachedData objectAtIndex:indexPath.row];
@@ -244,7 +277,7 @@
                                              animated:YES];
     } else {
         FacilitiesRoomViewController *controller = [[[FacilitiesRoomViewController alloc] init] autorelease];
-        controller.location = location;
+        controller.locationID = [location objectID];
         
         [self.navigationController pushViewController:controller
                                              animated:YES];

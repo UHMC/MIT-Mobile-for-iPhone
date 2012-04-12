@@ -254,7 +254,7 @@ static const NSUInteger kMaxResultCount = 10;
                                              animated:YES];
     } else {    
         FacilitiesRoomViewController *controller = [[[FacilitiesRoomViewController alloc] init] autorelease];
-        controller.location = location;
+        controller.locationID = [location objectID];
         
         [self.navigationController pushViewController:controller
                                              animated:YES];

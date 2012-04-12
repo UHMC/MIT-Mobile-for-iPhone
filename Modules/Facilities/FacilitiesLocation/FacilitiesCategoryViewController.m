@@ -231,7 +231,7 @@
     } else {
         FacilitiesCategory *category = (FacilitiesCategory*)[self.cachedData objectAtIndex:indexPath.row];
         FacilitiesLocationViewController *controller = [[[FacilitiesLocationViewController alloc] init] autorelease];
-        controller.category = category;
+        controller.categoryID = [category objectID];
         nextViewController = controller;
     }
     
@@ -294,7 +294,7 @@
     else
     {
         FacilitiesRoomViewController *controller = [[[FacilitiesRoomViewController alloc] init] autorelease];
-        controller.location = location;
+        controller.locationID = [location objectID];
         nextViewController = controller;
     }
     
