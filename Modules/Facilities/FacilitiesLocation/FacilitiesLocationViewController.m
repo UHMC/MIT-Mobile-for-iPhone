@@ -78,7 +78,7 @@
     
     {
         LocationSearchController *controller = [[[LocationSearchController alloc] initWithContentsController:self] autorelease];
-        //controller.resultDelegate = self;
+        controller.resultDelegate = self;
         controller.searchBar.barStyle = UIBarStyleBlackOpaque;
         controller.allowsFreeTextEntry = YES;
         
@@ -312,5 +312,39 @@
     [self configureMainTableCell:cell 
                     forIndexPath:indexPath];
     return cell;
+}
+
+#pragma mark - LocationSearchDelelgate
+- (void)locationSearch:(LocationSearchController*)controller didFailWithError:(NSError*)error
+{
+    
+}
+
+- (void)locationSearch:(LocationSearchController*)controller didFinishWithSearchString:(NSString*)string
+{
+    FacilitiesTypeViewController *vc = [[[FacilitiesTypeViewController alloc] init] autorelease];
+    vc.userData = [NSDictionary dictionaryWithObject: string
+                                              forKey: FacilitiesRequestLocationUserBuildingKey];
+    [self.navigationController pushViewController:vc
+                                         animated:YES];
+}
+
+- (void)locationSearch:(LocationSearchController*)controller didFinishWithResult:(FacilitiesLocation*)location
+{
+    UIViewController *nextViewController = nil;
+    if ([location.isLeased boolValue])
+    {
+        FacilitiesLeasedViewController *controller = [[[FacilitiesLeasedViewController alloc] initWithLocation:location] autorelease];
+        nextViewController = controller;
+    }
+    else
+    {
+        FacilitiesRoomViewController *controller = [[[FacilitiesRoomViewController alloc] init] autorelease];
+        controller.locationID = [location objectID];
+        nextViewController = controller;
+    }
+    
+    [self.navigationController pushViewController:nextViewController
+                                         animated:YES];
 }
 @end
