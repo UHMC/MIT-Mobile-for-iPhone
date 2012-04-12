@@ -3,12 +3,15 @@
 #import "MGSMapView.h"
 
 #import "MGSMapLayer+AGS.h"
+#import "MGSAnnotationMapLayer.h"
+
 #import "MGSMapAnnotation.h"
 #import "MGSMapRoute.h"
 
 #import "MGSMapQuery.h"
 #import "MGSMapCoordinate.h"
-#import "MGSAnnotationMapLayer.h"
+#import "MGSMapCoordinate+AGS.h"
+
 #import "MITLogging.h"
 
 static NSString *MITBaseMapURL = @"http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer";
@@ -32,11 +35,6 @@ static NSString *MITBuildingsMapPath = @"base/WhereIs_Base/MapServer/9";
 - (void)initLayers;
 
 - (AGSGraphicsLayer*)graphicsLayerWithName:(NSString*)layerName;
-
-#pragma mark - Annotation Layer Management
-- (MGSAnnotationMapLayer *)annotationLayerForName:(NSString *)layerName;
-- (MGSAnnotationMapLayer *)annotationLayerForName:(NSString *)layerName
-                                   createIfNeeded:(BOOL)shouldCreate;
 @end
 
 @implementation MGSMapView
@@ -249,14 +247,14 @@ __TODO(Implement this method)
 }
 
 #pragma mark - Annotation Management
-- (MGSAnnotationMapLayer*)annotationLayerForName:(NSString*)layerName
+- (MGSAnnotationMapLayer*)annotationLayerWithName:(NSString*)layerName
 {
-    return [self annotationLayerForName:layerName
-                      shouldCreateLayer:NO];
+    return [self annotationLayerWithName:layerName
+                       shouldCreateLayer:NO];
 }
 
-- (MGSAnnotationMapLayer*)annotationLayerForName:(NSString*)layerName
-                               shouldCreateLayer:(BOOL)shouldCreate
+- (MGSAnnotationMapLayer*)annotationLayerWithName:(NSString*)layerName
+                                shouldCreateLayer:(BOOL)shouldCreate
 {
     MGSMapLayer* mapLayer = [self layerForName:layerName];
     
@@ -284,7 +282,7 @@ __TODO(Implement this method)
 
 - (void)removeAnnotationLayer:(NSString*)layerName
 {
-    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerForName:layerName];
+    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerWithName:layerName];
     
     if (annotationLayer)
     {
@@ -294,7 +292,7 @@ __TODO(Implement this method)
 
 - (void)clearAnnotationsForLayer:(NSString*)layerName
 {
-    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerForName:layerName];
+    MGSAnnotationMapLayer *annotationLayer = [self annotationLayerWithName:layerName];
     
     if (annotationLayer)
     {
