@@ -109,6 +109,7 @@
 		2CB6459F134CAF1A00E85E64 /* QRReaderModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB6459E134CAF1A00E85E64 /* QRReaderModule.m */; };
 		2CB645EC134CC63800E85E64 /* QRReaderHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB645EA134CC63800E85E64 /* QRReaderHistoryViewController.m */; };
 		2CB64608134CF13500E85E64 /* QRReaderScanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2CB64606134CF13500E85E64 /* QRReaderScanViewController.mm */; };
+		2CBB4590153DA2B900DDE133 /* ArcGIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CBB458F153DA2B900DDE133 /* ArcGIS.framework */; };
 		2CC2E9CC144DC9B000151C71 /* MITTabHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2E9CB144DC9B000151C71 /* MITTabHeaderView.m */; };
 		2CC689B012F73071002B9A50 /* MITMobileServerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC689AE12F73071002B9A50 /* MITMobileServerConfiguration.m */; };
 		2CCB85F91361F44E0024E474 /* FacilitiesLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB85F81361F44E0024E474 /* FacilitiesLocationData.m */; };
@@ -586,7 +587,7 @@
 		2C99DCAE1370508D00114A9A /* HighlightLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightLabel.m; sourceTree = "<group>"; };
 		2C99DCDF1370782200114A9A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2C9A4BD215191490006B8588 /* MGSRouteMapLayer+AGS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MGSRouteMapLayer+AGS.h"; sourceTree = "<group>"; };
-		2C9FD03014D6FC300030151B /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = "~/Library/SDKs/ArcGIS/iOS.sdk/usr/local/resources/ArcGIS.bundle"; sourceTree = "<absolute>"; };
+		2C9FD03014D6FC300030151B /* ArcGIS.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ArcGIS.bundle; path = "~/Library/SDKs/ArcGIS/ArcGIS.framework/Versions/Current/Resources/ArcGIS.bundle"; sourceTree = "<absolute>"; };
 		2CA454F113C7468F00891428 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2CAAF3F1150905BC004E7BF0 /* MGSAnnotationMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSAnnotationMapLayer.h; sourceTree = "<group>"; };
 		2CAAF3F2150905BC004E7BF0 /* MGSAnnotationMapLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSAnnotationMapLayer.m; sourceTree = "<group>"; };
@@ -609,6 +610,7 @@
 		2CB645EA134CC63800E85E64 /* QRReaderHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRReaderHistoryViewController.m; sourceTree = "<group>"; };
 		2CB64605134CF13500E85E64 /* QRReaderScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRReaderScanViewController.h; sourceTree = "<group>"; };
 		2CB64606134CF13500E85E64 /* QRReaderScanViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QRReaderScanViewController.mm; sourceTree = "<group>"; };
+		2CBB458F153DA2B900DDE133 /* ArcGIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ArcGIS.framework; path = "~/Library/SDKs/ArcGIS/ArcGIS.framework"; sourceTree = "<absolute>"; };
 		2CC2E9CA144DC9B000151C71 /* MITTabHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITTabHeaderView.h; sourceTree = "<group>"; };
 		2CC2E9CB144DC9B000151C71 /* MITTabHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITTabHeaderView.m; sourceTree = "<group>"; };
 		2CC689AD12F73071002B9A50 /* MITMobileServerConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITMobileServerConfiguration.h; sourceTree = "<group>"; };
@@ -784,7 +786,6 @@
 		569DC33E1282ADC000BA0794 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = iphoneos4.0/System/Library/Frameworks/CoreVideo.framework; sourceTree = "<group>"; };
 		569DC3411282ADCE00BA0794 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = iphoneos4.0/usr/lib/libiconv.dylib; sourceTree = "<group>"; };
 		56D7D2951282B2ED00E9E5C9 /* ZXingWidget.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingWidget.xcodeproj; path = ZXing/ZXingWidget/ZXingWidget.xcodeproj; sourceTree = SOURCE_ROOT; };
-		56D7D7BA12846C4100E9E5C9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = iphoneos4.0/System/Library/Frameworks/MapKit.framework; sourceTree = "<group>"; };
 		56D7DF51128854DF00E9E5C9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = iphoneos4.0/System/Library/Frameworks/MapKit.framework; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MIT_Mobile-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MIT_Mobile-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A63DEE271353CF37001C52BF /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -1141,6 +1142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CBB4590153DA2B900DDE133 /* ArcGIS.framework in Frameworks */,
 				2C5DECDC13E9BEF400F9C089 /* libz.dylib in Frameworks */,
 				2CA454F213C7468F00891428 /* AssetsLibrary.framework in Frameworks */,
 				2C3676B813C5F854003CB7A4 /* MobileCoreServices.framework in Frameworks */,
@@ -1309,35 +1311,35 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C5DECDB13E9BEF400F9C089 /* libz.dylib */,
-				2CA454F113C7468F00891428 /* AssetsLibrary.framework */,
-				2C3676B613C5F7FF003CB7A4 /* MobileCoreServices.framework */,
-				2C3676B413C5F6B1003CB7A4 /* ImageIO.framework */,
-				2C99DCDF1370782200114A9A /* CoreText.framework */,
-				A63DEE271353CF37001C52BF /* EventKit.framework */,
-				EBF8A77A12AF09CD00D39AE6 /* MediaPlayer.framework */,
-				EB4C40D41288988900058748 /* OpenGLES.framework */,
-				56D7D7BA12846C4100E9E5C9 /* MapKit.framework */,
-				56D7DF51128854DF00E9E5C9 /* MapKit.framework */,
-				569DC3381282ADAB00BA0794 /* AVFoundation.framework */,
-				569DC33B1282ADBC00BA0794 /* CoreMedia.framework */,
-				569DC33E1282ADC000BA0794 /* CoreVideo.framework */,
-				569DC3411282ADCE00BA0794 /* libiconv.dylib */,
-				296F9EDC110A0F5400EC8FCA /* AudioToolbox.framework */,
-				4463CCB110D6F5750048CA83 /* CoreLocation.framework */,
-				EB7F32D610CD6FBB00188BCD /* AddressBookUI.framework */,
 				EB7F32D210CD6FB300188BCD /* AddressBook.framework */,
-				BD9FA7ED1047A05E00BC3C0A /* MessageUI.framework */,
-				3A82708C103DAA2400BB4109 /* SystemConfiguration.framework */,
+				EB7F32D610CD6FBB00188BCD /* AddressBookUI.framework */,
+				2CBB458F153DA2B900DDE133 /* ArcGIS.framework */,
+				2CA454F113C7468F00891428 /* AssetsLibrary.framework */,
+				296F9EDC110A0F5400EC8FCA /* AudioToolbox.framework */,
+				569DC3381282ADAB00BA0794 /* AVFoundation.framework */,
 				3AA2194F1039D74700DB7637 /* CoreData.framework */,
-				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				DE7720D810C57DBC00620A7D /* CoreGraphics.framework */,
-				DE7720DF10C57E1C00620A7D /* QuartzCore.framework */,
-				29366C19118E401C009D6863 /* libxml2.dylib */,
-				29366C1D118E4151009D6863 /* Security.framework */,
+				4463CCB110D6F5750048CA83 /* CoreLocation.framework */,
+				569DC33B1282ADBC00BA0794 /* CoreMedia.framework */,
+				2C99DCDF1370782200114A9A /* CoreText.framework */,
+				569DC33E1282ADC000BA0794 /* CoreVideo.framework */,
 				A63DEE271353CF37001C52BF /* EventKit.framework */,
 				A69826E41354A488004A8258 /* EventKitUI.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2C3676B413C5F6B1003CB7A4 /* ImageIO.framework */,
+				569DC3411282ADCE00BA0794 /* libiconv.dylib */,
+				29366C19118E401C009D6863 /* libxml2.dylib */,
+				2C5DECDB13E9BEF400F9C089 /* libz.dylib */,
+				56D7DF51128854DF00E9E5C9 /* MapKit.framework */,
+				EBF8A77A12AF09CD00D39AE6 /* MediaPlayer.framework */,
+				BD9FA7ED1047A05E00BC3C0A /* MessageUI.framework */,
+				2C3676B613C5F7FF003CB7A4 /* MobileCoreServices.framework */,
+				EB4C40D41288988900058748 /* OpenGLES.framework */,
+				DE7720DF10C57E1C00620A7D /* QuartzCore.framework */,
+				29366C1D118E4151009D6863 /* Security.framework */,
+				3A82708C103DAA2400BB4109 /* SystemConfiguration.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				A63DEE271353CF37001C52BF /* EventKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2680,7 +2682,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /usr/bin/osascript;
-			shellScript = "#!/usr/bin/osascript\n\nset agsSdkPath to system attribute \"ARCGIS_SDK\"\n\nif (agsSdkPath is missing value) or (agsSdkPath is equal to \"\") then\n    set userLibrary to POSIX path of (path to library folder from user domain as string)\n    set agsSdkPath to (userLibrary & \"SDKs/ArcGIS/iOS.sdk\")\nend if\n\nlog (\"Using SDK path: \" & agsSdkPath)\n\ntry\n    set agsSdkFolder to (POSIX file agsSdkPath) as alias\non error\n    tell app \"Xcode\"\n        activate\n        display alert \"ArcGIS iOS SDK Missing\" message \"You must install the ArcGIS iOS SDK in order to build \" & (system attribute \"PRODUCT_NAME\") & \". You can download the latest SDK from http://resources.arcgis.com/content/arcgis-iphone/api\" as critical buttons {\"OK\"} giving up after 15\n    end tell\n\n    error \"ArcGIS iOS SDK missing\"\nend try";
+			shellScript = "#!/usr/bin/osascript\n\nset agsSdkPath to system attribute \"ARCGIS_SDK\"\n\nif (agsSdkPath is missing value) or (agsSdkPath is equal to \"\") then\n    set userLibrary to POSIX path of (path to library folder from user domain as string)\n    set agsSdkPath to (userLibrary & \"SDKs/ArcGIS/ArcGIS.framework\")\nend if\n\nlog (\"Using SDK path: \" & agsSdkPath)\n\ntry\n    set agsSdkFolder to (POSIX file agsSdkPath) as alias\non error\n    tell app \"Xcode\"\n        activate\n        display alert \"ArcGIS iOS SDK Missing\" message \"You must install the ArcGIS iOS SDK in order to build \" & (system attribute \"PRODUCT_NAME\") & \". You can download the latest SDK from http://resources.arcgis.com/content/arcgis-iphone/api\" as critical buttons {\"OK\"} giving up after 15\n    end tell\n\n    error \"ArcGIS iOS SDK missing\"\nend try";
 			showEnvVarsInLog = 0;
 		};
 		DEE2B550104C17860037A4AB /* Run Script */ = {
@@ -3032,6 +3034,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/**";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3047,11 +3050,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
-					"\"$(ARCGIS_SDK)/usr/local/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = MITMobile;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"$(ARCGIS_SDK)/usr/local/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -3061,6 +3067,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
@@ -3074,18 +3081,20 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
-					"\"$(ARCGIS_SDK)/usr/local/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = MITMobile;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"$(ARCGIS_SDK)/usr/local/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCGIS_SDK = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/iOS.sdk";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -3101,7 +3110,6 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
-					"$(ARCGIS_SDK)/usr/local/lib/libArcGIS.a",
 				);
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3111,7 +3119,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCGIS_SDK = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/iOS.sdk";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -3126,7 +3133,6 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
-					"$(ARCGIS_SDK)/usr/local/lib/libArcGIS.a",
 				);
 				SDKROOT = iphoneos;
 			};
@@ -3135,7 +3141,6 @@
 		DE30C9EE112205BA00598A1A /* Distribution - App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCGIS_SDK = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/iOS.sdk";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Massachusetts Institute of Technology";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -3151,7 +3156,6 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
-					"$(ARCGIS_SDK)/usr/local/lib/libArcGIS.a",
 				);
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3165,6 +3169,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
@@ -3178,19 +3183,21 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
-					"\"$(ARCGIS_SDK)/usr/local/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = MITMobile;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"$(ARCGIS_SDK)/usr/local/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = "Distribution - App Store";
 		};
 		DEF93C661110C9C4009DF154 /* Distribution - Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCGIS_SDK = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/iOS.sdk";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Massachusetts Institute of Technology";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -3207,7 +3214,6 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
-					"$(ARCGIS_SDK)/usr/local/lib/libArcGIS.a",
 				);
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3221,6 +3227,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/SDKs/ArcGIS/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
@@ -3234,12 +3241,15 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Common/Libraries & Headers/OAuthConsumer\"",
-					"\"$(ARCGIS_SDK)/usr/local/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = MITMobile;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"$(ARCGIS_SDK)/usr/local/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = "Distribution - Ad Hoc";
 		};
