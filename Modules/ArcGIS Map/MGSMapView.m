@@ -1,4 +1,4 @@
-#import "ArcGIS.h"
+#import <ArcGIS/ArcGIS.h>
 
 #import "MGSMapView.h"
 

@@ -1,5 +1,5 @@
 #import "MGSMapLayer.h"
-#import "ArcGIS.h"
+#import <ArcGIS/ArcGIS.h>
 
 @interface MGSMapLayer ()
 @property (nonatomic,strong) NSString *name;

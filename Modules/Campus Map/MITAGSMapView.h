@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-#import "ArcGIS.h"
+#import <ArcGIS/ArcGIS.h>
 #import "MITMapViewDelegate.h"
 
 @class MapLevel;

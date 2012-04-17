@@ -1,5 +1,5 @@
 #import "MITAGSMapView.h"
-#import "ArcGIS.h"
+#import <ArcGIS/ArcGIS.h>
 
 static NSUInteger kWGS84Wkid = 4326;
 
