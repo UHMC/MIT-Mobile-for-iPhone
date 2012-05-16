@@ -1,8 +1,10 @@
 #import "MGSMapLayer.h"
 
+@class MGSMapAnnotation;
+
 @interface MGSAnnotationLayer : MGSMapLayer
 @property (nonatomic, strong) NSSet *annotations;
 
-- (void)addAnnotation:(id<MGSMapAnnotation>)annotation;
-- (void)deleteAnnotation:(id<MGSMapAnnotation>)annotation;
+- (void)addAnnotation:(MGSMapAnnotation*)annotation;
+- (void)deleteAnnotation:(MGSMapAnnotation*)annotation;
 @end

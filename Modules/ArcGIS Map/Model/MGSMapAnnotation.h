@@ -12,15 +12,16 @@ typedef enum {
 } MITMapAnnotationType;
 
 @interface MGSMapAnnotation : NSObject
+@property (nonatomic, strong) MGSMapCoordinate *coordinate;
+
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *detail;
-@property (nonatomic, strong) MGSMapCoordinate *coordinate;
+@property (nonatomic, strong) UIImage *image;
+
 @property (nonatomic, assign) MITMapAnnotationType annotationType;
+@property (nonatomic, strong) UIColor *pinColor;
+@property (nonatomic, strong) UIImage *pinIcon;
 
-@property (nonatomic, strong) UIColor *color;
-@property (nonatomic, strong) UIImage *icon;
-
-@property (nonatomic, strong) UIImage *calloutImage;
 
 - (id)initWithTitle:(NSString*)title
          detailText:(NSString*)detail

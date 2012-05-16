@@ -1,4 +1,5 @@
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface MGSMapCoordinate : NSObject <NSCopying, NSCoding>
 @property (nonatomic,readonly,assign) double longitude;

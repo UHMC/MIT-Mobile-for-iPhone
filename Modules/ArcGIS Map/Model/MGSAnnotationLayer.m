@@ -28,7 +28,7 @@
 }
 
 #pragma mark - Public Methods
-- (void)addAnnotation:(id<MGSMapAnnotation>)annotation
+- (void)addAnnotation:(MGSMapAnnotation*)annotation
 {
     if (annotation)
     {
@@ -36,7 +36,7 @@
     }
 }
 
-- (void)deleteAnnotation:(id<MGSMapAnnotation>)annotation
+- (void)deleteAnnotation:(MGSMapAnnotation*)annotation
 {
     if (annotation)
     {

@@ -1,8 +1,9 @@
 #import "MGSMapCoordinate.h"
-#import "MGSMapCoordinate+AGS.h"
-#import <ArcGIS/ArcGIS.h>
 
-@interface MGSMapCoordinate ()
-@property (nonatomic,strong) AGSPoint *point;
+@class AGSPoint;
+@class AGSGeometryEngine;
+
+@interface MGSMapCoordinate (AGS)
+@property (nonatomic, strong) AGSPoint *agsPoint;
 + (AGSGeometryEngine*)sharedGeometryEngine;
 @end

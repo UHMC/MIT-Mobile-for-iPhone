@@ -1,32 +1,13 @@
 #import <MapKit/MapKit.h>
 #import "MGSMapCoordinate.h"
-#import "MGSMapCoordinate+AGS.h"
+#import "MGSMapCoordinate+Protected.h"
 
-static AGSGeometryEngine *_sharedEngine = nil;
-
-@interface MGSMapCoordinate ()
-@property (nonatomic,assign) double longitude;
-@property (nonatomic,assign) double x;
-@property (nonatomic,assign) double latitude;
-@property (nonatomic,assign) double y;
-@end
 
 @implementation MGSMapCoordinate
 @synthesize longitude = _longitude;
 @synthesize latitude = _latitude;
 
-@dynamic point;
 @dynamic x, y;
-
-+ (AGSGeometryEngine*)sharedGeometryEngine
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedEngine = [AGSGeometryEngine defaultGeometryEngine];
-    });
-    
-    return _sharedEngine;
-}
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -120,26 +101,4 @@ static AGSGeometryEngine *_sharedEngine = nil;
 {
     return self.latitude;
 }
-
-- (void)setPoint:(AGSPoint *)point
-{
-    AGSPoint *sourcePoint = point;
-    
-    if ([[point spatialReference] wkid] != WKID_WGS84)
-    {
-        sourcePoint = (AGSPoint*)[[AGSGeometryEngine defaultGeometryEngine] projectGeometry:point
-                                                                         toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:WKID_WGS84]];
-    }
-    
-    self.x = point.x;
-    self.y = point.y;
-}
-
-- (AGSPoint*)point
-{
-    return [AGSPoint pointWithX:self.x
-                              y:self.y
-               spatialReference:[AGSSpatialReference spatialReferenceWithWKID:WKID_WGS84]];
-}
-
 @end

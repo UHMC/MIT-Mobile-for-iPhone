@@ -2,6 +2,7 @@
 
 @implementation MGSMapLayer
 @synthesize name = _name;
+@synthesize calloutView = _calloutView;
 
 - (id)initWithName:(NSString *)name
 {
