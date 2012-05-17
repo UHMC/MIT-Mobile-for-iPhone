@@ -1,13 +1,13 @@
-//
-//  MGSLayerManager.h
-//  MIT Mobile
-//
-//  Created by Blake Skinner on 5/17/12.
-//  Copyright (c) 2012 MIT. All rights reserved.
-//
+#import <UIKit/UIKit.h>
+#import <ArcGIS/ArcGIS.h>
 
-#import <Foundation/Foundation.h>
+@class MGSMapLayer;
 
 @interface MGSLayerManager : NSObject
+@property (nonatomic, readonly, strong) MGSMapLayer *dataLayer;
+@property (nonatomic, readonly, strong) AGSGraphicsLayer *graphicsLayer;
 
++ (BOOL)canManageLayer:(MGSMapLayer*)layer;
+- (id)initWithLayer:(MGSMapLayer*)layer graphicsLayer:(AGSGraphicsLayer*)graphicLayer;
+- (void)refreshLayer;
 @end
