@@ -49,9 +49,16 @@ static NSString const * MGSAnnotationSetAttributeKey = @"MGSAnnotationSetAttribu
         }
 
         case MGSMapAnnotationSquare:
-            
         case MGSMapAnnotationCircle:
+            break;
+
+        case MGSMapAnnotationIcon:
+            break;
+        default:
+            break;
     }
+
+    return nil;
 }
 
 /* TODO: Rewrite this method, it's going to be *SLOW* */
@@ -61,11 +68,7 @@ static NSString const * MGSAnnotationSetAttributeKey = @"MGSAnnotationSetAttribu
     [self.graphicsLayer removeAllGraphics];
 
     [self.annotationLayer.annotations enumerateObjectsUsingBlock:^(MGSMapAnnotation *annotation, BOOL *stop) {
-        AGSSymbol *symbol =
-        AGSGraphic *graphic = [AGSGraphic graphicWithGeometry:<#(AGSGeometry *)geometry#>
-                                                       symbol:<#(AGSSymbol *)symbol#>
-                                                   attributes:<#(NSMutableDictionary *)attributes#>
-                                         infoTemplateDelegate:<#(id<AGSInfoTemplateDelegate>)infoTemplateDelegate#>];
+
     }];
 }
 @end
