@@ -14,12 +14,8 @@
     return self;
 }
 
-- (void) dealloc {
-    [super dealloc];
-}
-
 - (void)loadModuleHomeController
 {
-    self.moduleHomeController = [[[MGSMapViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    self.moduleHomeController = [[MGSMapViewController alloc] initWithNibName:nil bundle:nil];
 }
 @end

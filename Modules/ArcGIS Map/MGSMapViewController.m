@@ -30,7 +30,7 @@
     }
     
     {
-        mainView = [[[UIView alloc] initWithFrame:mainFrame] autorelease];
+        mainView = [[UIView alloc] initWithFrame:mainFrame];
         mainView.autoresizesSubviews = YES;
         mainView.autoresizingMask = (UIViewAutoresizingFlexibleHeight |
                                      UIViewAutoresizingFlexibleWidth);
@@ -40,7 +40,7 @@
     }
     
     {
-        MGSMapView *mapView = [[[MGSMapView alloc] initWithFrame:mainBounds] autorelease];
+        MGSMapView *mapView = [[MGSMapView alloc] initWithFrame:mainBounds];
         mapView.autoresizingMask = (UIViewAutoresizingFlexibleHeight |
                                     UIViewAutoresizingFlexibleWidth);
         

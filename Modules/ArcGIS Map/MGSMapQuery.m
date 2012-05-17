@@ -33,16 +33,6 @@ NSString * const MapQueryOptionFloor = @"edu.mit.mobile.map.query.Floor";
     return self;
 }
 
-- (void)dealloc
-{
-    self.options = nil;
-    
-    self.marker = nil;
-    self.color = nil;
-    self.searchType = nil;
-    [super dealloc];
-}
-
 - (void)removeQueryOptionForKey:(NSString*)key
 {
     [self.options removeObjectForKey:key];

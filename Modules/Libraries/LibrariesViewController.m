@@ -18,7 +18,7 @@
 #define LINK_TITLE_TAG 1
 #define PADDING 10
 
-@interface LibrariesViewController (Private)
+@interface LibrariesViewController ()
 
 - (void)loadLinksFromUserDefaults;
 - (void)loadLinksFromServer;
