@@ -27,6 +27,8 @@
 @implementation MGSMapView
 @synthesize mapViewDelegate = _mapViewDelegate;
 @synthesize preferVectorGraphics = _preferVectorGraphics;
+@synthesize layerIdentifiers = _layerIdentifiers;
+@synthesize basemapLayer = _basemapLayer;
 
 @synthesize agsLayers = _agsLayers;
 @synthesize mapView = _mapView;
@@ -136,6 +138,8 @@
     
     if (self)
     {
+        self.layerIdentifiers = [NSMutableSet set];
+        self.agsLayers = [NSMutableSet set];
         [self initView];
         [self initBaseLayers];
     }
@@ -337,7 +341,13 @@
 - (void)addLayer:(MGSMapLayer*)layer
   withIdentifier:(NSString*)layerIdentifier
 {
-    
+    if ([self.layerIdentifiers containsObject:layerIdentifier] == NO)
+    {
+        [self.layerIdentifiers addObject:layerIdentifier];
+        
+        MGSLayerManager *manager = [MGSMapView layerManagerForLayer:layer
+                                                     withIdentifier:layerIdentifier];
+    }
 }
 
 - (BOOL)containsLayerWithIdentifier:(NSString*)layerIdentifier
@@ -356,6 +366,11 @@
 }
 
 - (void)setHidden:(BOOL)hidden forLayerIdentifier:(NSString*)layerIdentifier
+{
+    
+}
+
+- (void)dataChangedForLayerNamed:(NSString *)layerName
 {
     
 }
