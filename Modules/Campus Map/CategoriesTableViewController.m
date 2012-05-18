@@ -181,8 +181,7 @@
 		[self.mapSelectionController.mapVC showListView:NO];
 		
 		// clear the search bar
-		self.mapSelectionController.mapVC.searchBar.text = @"";
-		self.mapSelectionController.mapVC.lastSearchText = nil;
+		[self.mapSelectionController.mapVC updateSearchBarWithString:nil];
 		
 		NSMutableArray* searchResultsArray = [NSMutableArray array];
 
@@ -190,7 +189,7 @@
 		[searchResultsArray addObject:annotation];
 		
 		// this will remove any old annotations and add the new ones. 
-		[self.mapSelectionController.mapVC setSearchResults:searchResultsArray];
+		self.mapSelectionController.mapVC.searchResults = searchResultsArray;
 		
 		// on the map, select the current annotation
 		//[[self.mapSelectionController.mapVC mapView] selectAnnotation:annotation animated:NO withRecenter:YES];
@@ -261,8 +260,7 @@
 	[self.mapSelectionController.mapVC showListView:NO];
 	
 	// clear the search bar
-	self.mapSelectionController.mapVC.searchBar.text = @"";
-	self.mapSelectionController.mapVC.lastSearchText = nil;
+	[self.mapSelectionController.mapVC updateSearchBarWithString:nil];
 	
 	NSMutableArray* searchResultsArray = [NSMutableArray array];
 	

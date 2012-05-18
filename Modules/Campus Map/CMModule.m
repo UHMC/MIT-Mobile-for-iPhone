@@ -110,8 +110,7 @@
             [[MITAppDelegate() springboardController] pushModuleWithTag:self.tag];
             
             // populate search bar
-            self.campusMapVC.searchBar.text = query;
-            self.campusMapVC.lastSearchText = query;
+            [self.campusMapVC updateSearchBarWithString:query];
             self.campusMapVC.hasSearchResults = YES;
             
             // grab our search results
@@ -132,7 +131,8 @@
                     [searchResultsArr addObject:annotation];
                 }
                 // this will remove old annotations and add the new ones. 
-                [self.campusMapVC setSearchResultsWithoutRecentering:searchResultsArr];
+                [self.campusMapVC setSearchResults:searchResultsArr
+                                       recenterMap:NO];
             } else {
                 // perform the search from the network
                 [self.campusMapVC search:query];
