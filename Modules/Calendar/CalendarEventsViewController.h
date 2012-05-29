@@ -4,7 +4,7 @@
 #import "EventCategoriesTableView.h"
 #import "OpenHouseTableView.h"
 #import "EventListTableView.h"
-#import "CalendarMapView.h"
+#import "CalendarMap.h"
 #import "DatePickerViewController.h"
 #import "MITSearchDisplayController.h"
 #import "CalendarDataManager.h"
@@ -28,7 +28,7 @@ DatePickerViewControllerDelegate, CalendarDataManagerDelegate> {
 	
 	// views in the body
 	UITableView *theTableView;
-	CalendarMapView *theMapView;
+	CalendarMap *theMapView;
 	
 	// views in the header
 	NavScrollerView *navScrollView;
@@ -40,7 +40,7 @@ DatePickerViewControllerDelegate, CalendarDataManagerDelegate> {
 	MITSearchDisplayController *searchController;
 	UIView *loadingIndicator;
 	EventListTableView *searchResultsTableView;
-	CalendarMapView *searchResultsMapView;
+	CalendarMap *searchResultsMapView;
 	
 	// category parameter for list of events in a category
 	//NSInteger theCatID;
@@ -76,7 +76,7 @@ DatePickerViewControllerDelegate, CalendarDataManagerDelegate> {
 @property (nonatomic, retain) UIViewController *childViewController;
 
 @property (nonatomic, retain) UITableView *tableView;
-@property (nonatomic, retain) CalendarMapView *mapView;
+@property (nonatomic, retain) CalendarMap *mapView;
 
 @property (nonatomic, retain) NSDate *startDate;
 @property (nonatomic, retain) NSDate *endDate;

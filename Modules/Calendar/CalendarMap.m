@@ -1,14 +1,37 @@
-#import "CalendarMapView.h"
+#import "CalendarMap.h"
 #import "MITCalendarEvent.h"
 #import "CalendarEventMapAnnotation.h"
 
-@implementation CalendarMapView
+@implementation CalendarMap
+@synthesize events = _events;
+@synthesize view = _view;
 
-@dynamic events;
-
-- (NSArray *)events
+- (id)init
 {
-	return _events;
+    return [self initWithFrame:CGRectZero];
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super init];
+
+    if (self)
+    {
+        self.events = nil;
+        self.view = [[[MITMapView alloc] initWithFrame:frame] autorelease];
+    }
+
+    return self;
+}
+
+- (void)dealloc
+{
+    self.events = nil;
+
+    [self.view removeFromSuperview];
+    self.view = nil;
+
+    [super dealloc];
 }
 
 /*
@@ -18,7 +41,7 @@
  */
 - (void)setEvents:(NSArray *)events
 {
-    [self removeAllAnnotations:YES];
+    [self.view removeAllAnnotations:YES];
     
     [_events release];
 	_events = [events retain];
@@ -33,7 +56,7 @@
         for (MITCalendarEvent *event in [events reverseObjectEnumerator]) {
             if ([event hasCoords]) {
                 CalendarEventMapAnnotation *annotation = [[[CalendarEventMapAnnotation alloc] initWithEvent:event] autorelease];
-                [self addAnnotation:annotation];
+                [self.view addAnnotation:annotation];
 				
                 double eventLat = [event.latitude doubleValue];
                 double eventLon = [event.longitude doubleValue];
@@ -64,19 +87,12 @@
         
         MKCoordinateSpan span = MKCoordinateSpanMake(latDelta + latDelta / 4, lonDelta + lonDelta / 4);
         
-        [self setRegion:MKCoordinateRegionMake(center, span)];
+        [self.view setRegion:MKCoordinateRegionMake(center, span)];
 
     } else {
-        
-        [self setRegion:MKCoordinateRegionMake(DEFAULT_MAP_CENTER, DEFAULT_MAP_SPAN)];
+        [self.view setRegion:MKCoordinateRegionMake(DEFAULT_MAP_CENTER, DEFAULT_MAP_SPAN)];
     }
     
-}
-
-- (void)dealloc {
-    [_events release];
-    _events = nil;
-    [super dealloc];
 }
 
 @end

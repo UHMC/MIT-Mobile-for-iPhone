@@ -298,7 +298,7 @@
 		EB07B06C12B8971D005D6A4C /* calendar in Resources */ = {isa = PBXBuildFile; fileRef = EB07B06912B8971D005D6A4C /* calendar */; };
 		EB13860D12F1FC8E004DBB7C /* Secret.m in Sources */ = {isa = PBXBuildFile; fileRef = EB13860B12F1FC8E004DBB7C /* Secret.m */; };
 		EB3294701166777500DEDC8A /* CalendarEventMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EB32946E1166777500DEDC8A /* CalendarEventMapAnnotation.m */; };
-		EB3F0952118F0FFE00540B8A /* CalendarMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3F0950118F0FFE00540B8A /* CalendarMapView.m */; };
+		EB3F0952118F0FFE00540B8A /* CalendarMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3F0950118F0FFE00540B8A /* CalendarMap.m */; };
 		EB4C1E9B127723B700058748 /* ToursModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4C1E99127723B700058748 /* ToursModule.m */; };
 		EB4C215D1277786300058748 /* CampusTourHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4C215B1277786300058748 /* CampusTourHomeController.m */; };
 		EB4C21DA12777C8D00058748 /* StartingLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4C21D812777C8D00058748 /* StartingLocationViewController.m */; };
@@ -996,8 +996,8 @@
 		EB13860B12F1FC8E004DBB7C /* Secret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secret.m; sourceTree = "<group>"; };
 		EB32946D1166777500DEDC8A /* CalendarEventMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarEventMapAnnotation.h; sourceTree = "<group>"; };
 		EB32946E1166777500DEDC8A /* CalendarEventMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarEventMapAnnotation.m; sourceTree = "<group>"; };
-		EB3F094F118F0FFE00540B8A /* CalendarMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMapView.h; sourceTree = "<group>"; };
-		EB3F0950118F0FFE00540B8A /* CalendarMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMapView.m; sourceTree = "<group>"; };
+		EB3F094F118F0FFE00540B8A /* CalendarMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMap.h; sourceTree = "<group>"; };
+		EB3F0950118F0FFE00540B8A /* CalendarMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMap.m; sourceTree = "<group>"; };
 		EB4C1E98127723B700058748 /* ToursModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToursModule.h; sourceTree = "<group>"; };
 		EB4C1E99127723B700058748 /* ToursModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToursModule.m; sourceTree = "<group>"; };
 		EB4C215A1277786300058748 /* CampusTourHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampusTourHomeController.h; sourceTree = "<group>"; };
@@ -2489,8 +2489,8 @@
 				EB976D16116CF6630036A18E /* EventListTableView.m */,
 				EB976D19116CF6A10036A18E /* EventCategoriesTableView.h */,
 				EB976D1A116CF6A10036A18E /* EventCategoriesTableView.m */,
-				EB3F094F118F0FFE00540B8A /* CalendarMapView.h */,
-				EB3F0950118F0FFE00540B8A /* CalendarMapView.m */,
+				EB3F094F118F0FFE00540B8A /* CalendarMap.h */,
+				EB3F0950118F0FFE00540B8A /* CalendarMap.m */,
 				EBAB15C111BE970900D481B5 /* DatePickerViewController.h */,
 				EBAB15C211BE970900D481B5 /* DatePickerViewController.m */,
 			);
@@ -2747,7 +2747,7 @@
 				EB83923D1163ECC20067C0A3 /* CalendarDetailViewController.m in Sources */,
 				EB3294701166777500DEDC8A /* CalendarEventMapAnnotation.m in Sources */,
 				EB86CAC6115D4ED500C8F3D1 /* CalendarEventsViewController.m in Sources */,
-				EB3F0952118F0FFE00540B8A /* CalendarMapView.m in Sources */,
+				EB3F0952118F0FFE00540B8A /* CalendarMap.m in Sources */,
 				EB86CA6F115D276700C8F3D1 /* CalendarModule.m in Sources */,
 				44C1A2A811A2F49B000FD653 /* CampusMap.xcdatamodeld in Sources */,
 				441009DE110A6DAF00451B23 /* CampusMapToolbar.m in Sources */,

@@ -68,7 +68,7 @@
 	[theTableView release];
     [queuedButton release];
     
-    theMapView.delegate = nil;
+    theMapView.view.delegate = nil;
 	[theMapView release];
 	
 	[navScrollView release];
@@ -300,9 +300,10 @@
 
 - (void)reloadView:(MITEventList *)listType {
 
-	[searchResultsMapView removeFromSuperview];
+	[searchResultsMapView.view removeFromSuperview];
     [searchResultsMapView release];
     searchResultsMapView = nil;
+
 	[searchResultsTableView removeFromSuperview];
     [searchResultsTableView release];
     searchResultsTableView = nil;
@@ -332,8 +333,8 @@
 	if (![self canShowMap:activeEventList]) {
 		showList = YES;
 	} else if (self.mapView == nil) {
-		self.mapView = [[[CalendarMapView alloc] initWithFrame:contentFrame] autorelease];
-		self.mapView.delegate = self;
+		self.mapView = [[[CalendarMap alloc] initWithFrame:contentFrame] autorelease];
+		self.mapView.view.delegate = self;
 	}
 
 	if (dateRangeDidChange && [self shouldShowDatePicker:activeEventList]) {
@@ -426,7 +427,7 @@
 										   action:@selector(mapButtonToggled)] autorelease]
 		: nil;
 		
-		[self.mapView removeFromSuperview];
+		[self.mapView.view removeFromSuperview];
 
 	} else {
 		
@@ -439,7 +440,7 @@
             self.mapView.events = events;
         }
 
-        [self.view addSubview:self.mapView];
+        [self.view addSubview:self.mapView.view];
 	}
 	
 	if ([self shouldShowDatePicker:activeEventList]) {
@@ -578,9 +579,9 @@
 	}
 	
 	if (searchResultsMapView == nil) {
-		searchResultsMapView = [[CalendarMapView alloc] initWithFrame:frame];
-        searchResultsMapView.region = self.mapView.region;
-		searchResultsMapView.delegate = self;
+		searchResultsMapView = [[CalendarMap alloc] initWithFrame:frame];
+        searchResultsMapView.view.region = self.mapView.view.region;
+		searchResultsMapView.view.delegate = self;
 	}
     
     if (searchController == nil) {
@@ -618,7 +619,7 @@
     [searchController release];
     searchController = nil;
     
-	[searchResultsMapView removeFromSuperview];
+	[searchResultsMapView.view removeFromSuperview];
     [searchResultsMapView release];
     searchResultsMapView = nil;
 
@@ -648,7 +649,7 @@
 
 - (void)showSearchResultsMapView {
 	showList = NO;
-	[self.view addSubview:searchResultsMapView];
+	[self.view addSubview:searchResultsMapView.view];
 	[searchResultsTableView removeFromSuperview];
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"List"
 																			   style:UIBarButtonItemStylePlain
@@ -659,7 +660,7 @@
 - (void)showSearchResultsTableView {
 	showList = YES;
 	[self.view addSubview:searchResultsTableView];
-	[searchResultsMapView removeFromSuperview];
+	[searchResultsMapView.view removeFromSuperview];
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Map"
 																			   style:UIBarButtonItemStylePlain
 																			  target:self
@@ -699,7 +700,7 @@
 {
 	CalendarEventMapAnnotation *annotation = view.annotation;
 	MITCalendarEvent *event = nil;
-	CalendarMapView *calMapView = (CalendarMapView *)mapView;
+	CalendarMap *calMapView = (CalendarMap *)mapView;
 
 	for (event in calMapView.events) {
 		if (event.eventID == annotation.event.eventID) {
@@ -864,7 +865,7 @@
 		} else {
 			label.frame = CGRectMake(spinny.frame.size.width + horizontalPadding + horizontalSpacing, verticalPadding, stringSize.width, stringSize.height + 2.0);
 			spinny.center = CGPointMake(spinny.center.x + horizontalPadding, spinny.center.y + verticalPadding);
-			loadingIndicator.center = self.mapView.center;
+			loadingIndicator.center = self.mapView.view.center;
 		}
 		
 		[loadingIndicator addSubview:spinny];
