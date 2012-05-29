@@ -41,6 +41,21 @@
 
 
 @implementation MITMapView
+{
+    BOOL _stayCenteredOnUserLocation;
+    id<MITMapViewDelegate> _mapDelegate;
+
+    NSMutableArray* _routes;
+    NSMutableDictionary *_routePolylines; // kluge way to associate routes with polylines
+
+    MITMapAnnotationCalloutView * customCallOutView;
+
+    // didDeselectAnnotationView is always triggered after didSelectAnnotationView.
+    // This BOOL value helps when selecting another Annotation while one is already displaying a custom callout
+    BOOL addRemoveCustomAnnotationCombo;
+
+    MapTileOverlay *tileOverlay;
+}
 
 @synthesize stayCenteredOnUserLocation = _stayCenteredOnUserLocation;
 @synthesize delegate = _mapDelegate;
