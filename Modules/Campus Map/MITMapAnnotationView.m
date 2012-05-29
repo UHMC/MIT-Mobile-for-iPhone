@@ -5,7 +5,6 @@
 @implementation MITMapAnnotationView
 @synthesize annotation = _annotation;
 @synthesize showsCustomCallout = _showsCustomCallout;
-@synthesize mapView = _mapView;
 @synthesize centeredVertically = _centeredVertically;
 
 - (id)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
@@ -23,7 +22,6 @@
 
 - (void)dealloc {
 	self.annotation = nil;
-	self.mapView = nil;
 	
     [super dealloc];
 }
