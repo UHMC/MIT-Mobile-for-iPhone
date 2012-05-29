@@ -125,7 +125,7 @@
 		return 1;
 	}
 	
-	return self.sections.count;
+	return [self.sections count];
 }
 
 
@@ -134,17 +134,17 @@
 	
 	NSArray* routes = [[self.sections objectAtIndex:section] objectForKey:@"routes"];
 	if (nil != routes) {
-		return routes.count;
+		return [routes count];
 	}
 	
 	NSArray* phoneNumbers = [[self.sections objectAtIndex:section] objectForKey:@"phoneNumbers"];
 	if (nil != phoneNumbers) {
-		return phoneNumbers.count;
+		return [phoneNumbers count];
 	}
     
 	NSArray* urls = [[self.sections objectAtIndex:section] objectForKey:@"urls"];
 	if (nil != urls) {
-		return urls.count;
+		return [urls count];
 	}
     
 	// one row for "no data found"
@@ -304,8 +304,8 @@
 	
 	
 	// create saferide and non saferide arrays based on the data. 
-	NSMutableArray* saferideRoutes = [NSMutableArray arrayWithCapacity:self.shuttleRoutes.count];
-	NSMutableArray* nonSaferideRoutes = [NSMutableArray arrayWithCapacity:self.shuttleRoutes.count];
+	NSMutableArray* saferideRoutes = [NSMutableArray arrayWithCapacity:[self.shuttleRoutes count]];
+	NSMutableArray* nonSaferideRoutes = [NSMutableArray arrayWithCapacity:[self.shuttleRoutes count]];
 	
 	for (ShuttleRoute* route in self.shuttleRoutes) {
 		if (route.isSafeRide) {
@@ -321,7 +321,7 @@
 	
 	NSMutableArray* sections = [NSMutableArray array];
 	
-	if (self.shuttleRoutes.count > 0) {
+	if ([self.shuttleRoutes count] > 0) {
 
 		[sections addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Daytime Shuttles:", @"title", 
 							 self.nonSaferideRoutes, @"routes", nil, nil]];

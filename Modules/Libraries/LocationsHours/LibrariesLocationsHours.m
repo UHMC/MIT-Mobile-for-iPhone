@@ -64,14 +64,14 @@
     }
     if ([scheduleDict objectForKey:@"next_terms"]) {
         NSArray *nextTerms = [scheduleDict objectForKey:@"next_terms"];
-        for (NSInteger index=0; index < nextTerms.count; index++) {
+        for (NSInteger index=0; index < [nextTerms count]; index++) {
             NSDictionary *term = [nextTerms objectAtIndex:index];
             [self addTermWithDict:term sortOrder:(index+1)]; 
         }
     }
     if ([scheduleDict objectForKey:@"previous_terms"]) {
         NSArray *previousTerms = [scheduleDict objectForKey:@"previous_terms"];
-        for (NSInteger index=0; index < previousTerms.count; index++) {
+        for (NSInteger index=0; index < [previousTerms count]; index++) {
             NSDictionary *term = [previousTerms objectAtIndex:index];
             [self addTermWithDict:term sortOrder:(-1 * (index+1))]; 
         }
@@ -91,7 +91,7 @@
     
     NSArray *hoursArray = [dict objectForKey:@"hours"];
     NSMutableSet *hoursSet = [NSMutableSet set];
-    for (NSInteger index=0; index < hoursArray.count; index++) {
+    for (NSInteger index=0; index < [hoursArray count]; index++) {
         LibrariesLocationsHoursTermHours *hours = [CoreDataManager insertNewObjectForEntityForName:LibrariesLocationsHoursTermHoursEntity];
         NSDictionary *hoursDict = [hoursArray objectAtIndex:index];
         hours.title = [hoursDict objectForKey:@"title"];

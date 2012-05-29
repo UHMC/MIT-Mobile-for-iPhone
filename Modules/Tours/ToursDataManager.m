@@ -104,7 +104,7 @@ static ToursDataManager *s_toursDataManager = nil;
     NSMutableArray *routes = [NSMutableArray array];
     
     NSSet *components = _activeTour.components;
-    if (!components.count) {
+    if (![components count]) {
         [self requestTour:_activeTour.tourID];
         return;
     }

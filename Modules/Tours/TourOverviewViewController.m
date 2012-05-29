@@ -201,9 +201,9 @@ enum {
 
     if (self.hideSideTrips) {
         NSMutableArray *indexPathsToDelete = 
-        [NSMutableArray arrayWithCapacity:self.components.count];
+        [NSMutableArray arrayWithCapacity:[self.components count]];
         NSMutableArray *componentsToRemove = 
-        [NSMutableArray arrayWithCapacity:self.components.count];
+        [NSMutableArray arrayWithCapacity:[self.components count]];
         
         [self.components enumerateObjectsUsingBlock:
          ^(id obj, NSUInteger idx, BOOL *stop) {
@@ -226,7 +226,7 @@ enum {
     }
     else {
         NSMutableArray *indexPathsToAdd = 
-        [NSMutableArray arrayWithCapacity:self.components.count];
+        [NSMutableArray arrayWithCapacity:[self.components count]];
         NSArray *currentlyShowingComponents = [self.components copy];
         [self updateTourComponents];
         [self.components enumerateObjectsUsingBlock:
@@ -442,7 +442,7 @@ enum {
         
         CGRect frame = CGRectZero;
         frame.origin.x = keyPadding;
-        for (NSInteger i = 0; i < images.count; i++) {
+        for (NSInteger i = 0; i < [images count]; i++) {
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:[images objectAtIndex:i]] autorelease];
             frame.size = imageView.frame.size;
             imageView.frame = frame;
@@ -627,7 +627,7 @@ enum {
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.components.count;
+    return [self.components count];
 }
 
 
@@ -752,7 +752,7 @@ enum {
 }
 
 - (void)connection:(ConnectionWrapper *)wrapper handleData:(NSData *)data {
-    for (int i = 0; i < self.components.count; i++) {
+    for (int i = 0; i < [self.components count]; i++) {
         TourSiteOrRoute *aSite = [self.components objectAtIndex:i];
         if ([aSite.photoURL isEqualToString:[wrapper.theURL absoluteString]]) {
             aSite.photo = data;
@@ -987,7 +987,6 @@ enum {
 
 - (void)mapView:(MITMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     if (selectedAnnotation) {
-        //[self.mapView selectAnnotation:selectedAnnotation animated:YES withRecenter:YES];
         self.selectedAnnotation = nil;
     }
 }

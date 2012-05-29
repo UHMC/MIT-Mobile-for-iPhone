@@ -123,7 +123,7 @@
                 }
         
             
-                NSMutableArray* searchResultsArr = [NSMutableArray arrayWithCapacity:searchResultsArray.count];
+                NSMutableArray* searchResultsArr = [NSMutableArray arrayWithCapacity:[searchResultsArray count]];
             
                 for (NSDictionary* info in searchResultsArray)
                 {
@@ -141,21 +141,24 @@
 
             MITMapSearchResultAnnotation* currentAnnotation = nil;
 
-            if (components.count > 1) {
+            if ([components count] > 1) {
                 // if there is a building number, show callout
                 NSString* annotationUniqueID = nil;
-                if ([pathRoot isEqualToString:@"list"] && components.count > 2) {
+
+                if ([pathRoot isEqualToString:@"list"] && [components count] > 2) {
                     annotationUniqueID = [components objectAtIndex:2];
-                } else {
+                }
+                else if ([components count] > 0)
+                {
                     annotationUniqueID = [components objectAtIndex:1];
                 }
 
                 
                 // look for the selected annotation among the array of annotations
                 for (MITMapSearchResultAnnotation* annotation in self.campusMapVC.mapView.annotations) {
-                    if([[(MITMapSearchResultAnnotation*)annotation uniqueID] isEqualToString:annotationUniqueID]) {
+                    if([[annotation uniqueID] isEqualToString:annotationUniqueID]) {
                         [self.campusMapVC.mapView selectAnnotation:annotation animated:NO withRecenter:NO];
-                        currentAnnotation = (MITMapSearchResultAnnotation*)annotation;
+                        currentAnnotation = annotation;
                     }
                 }
             }
@@ -165,7 +168,7 @@
             if ([pathRoot isEqualToString:@"list"]) {
                 [self.campusMapVC showListView:YES];
                 
-                if (components.count > 1) {
+                if ([components count] > 1) {
                     [components removeObjectAtIndex:0];
                 }
             }
@@ -178,7 +181,7 @@
                 detailsVC.annotation = currentAnnotation;
                 detailsVC.title = @"Info";
                 detailsVC.campusMapVC = self.campusMapVC;
-                if (components.count > 2)
+                if ([components count] > 2)
                     detailsVC.startingTab = [[components objectAtIndex:2] intValue];
                 
                 if(self.campusMapVC.lastSearchText != nil && self.campusMapVC.lastSearchText.length > 0) {

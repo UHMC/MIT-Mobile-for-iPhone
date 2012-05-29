@@ -107,7 +107,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.libraries.count;
+    return [self.libraries count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,7 +182,7 @@
     [LibrariesLocationsHours removeAllLibraries];
      
     NSArray *libraryItems = jsonObject;
-    NSMutableArray *mutableLibraries = [NSMutableArray arrayWithCapacity:libraryItems.count];
+    NSMutableArray *mutableLibraries = [NSMutableArray arrayWithCapacity:[libraryItems count]];
     for (NSDictionary *libraryItem in libraryItems) {
         LibrariesLocationsHours *library = [LibrariesLocationsHours libraryWithDict:libraryItem];
         [mutableLibraries addObject:library];

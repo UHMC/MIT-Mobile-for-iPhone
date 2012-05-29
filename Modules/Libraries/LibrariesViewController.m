@@ -128,7 +128,7 @@
             
         case EXTERNAL_URLS_SECTION:
             if (self.linksStatus == LinksStatusLoaded) {
-                return self.links.count;
+                return [self.links count];
             } else {
                 return 1;
             }

@@ -437,7 +437,7 @@ NSString* placeholderText(NSString *displayLabel, BOOL required) {
 
 
 - (NSInteger)numberOfRows {
-    return formElements.count;
+    return [formElements count];
 }
 
 - (void)setFormViewController:(LibraryEmailFormViewController *)aFormViewController {
@@ -606,7 +606,7 @@ NSString* placeholderText(NSString *displayLabel, BOOL required) {
 }
 
 - (NSIndexPath *)indexPathForTextInput:(UIView *)textInput {
-    for (int section=0; section < [self nonHiddenFormGroups].count; section++) {
+    for (int section=0; section < [[self nonHiddenFormGroups] count]; section++) {
         LibraryFormElementGroup *group = [[self nonHiddenFormGroups] objectAtIndex:section];
         NSArray *elements = [group elements];
         for (int row=0; row < [elements count]; row++) {
@@ -657,7 +657,7 @@ NSString* placeholderText(NSString *displayLabel, BOOL required) {
     UISegmentedControl *segmentedControl = sender;
     if (segmentedControl.selectedSegmentIndex == 0 && textInputIndex > 0) { // previous button
         nextTextInput = [textInputs objectAtIndex:textInputIndex-1];
-    } else if (segmentedControl.selectedSegmentIndex == 1 && textInputIndex < textInputs.count) {
+    } else if (segmentedControl.selectedSegmentIndex == 1 && textInputIndex < [textInputs count]) {
         nextTextInput = [textInputs objectAtIndex:textInputIndex+1];
     }
 
@@ -698,7 +698,7 @@ NSString* placeholderText(NSString *displayLabel, BOOL required) {
             NSArray *textInputs = [self textInputs];
             NSInteger textInputIndex = [textInputs indexOfObject:self.currentTextView];
             BOOL previousEnabled = (textInputIndex != 0);
-            BOOL nextEnabled = (textInputIndex !=  (textInputs.count - 1));
+            BOOL nextEnabled = (textInputIndex !=  ([textInputs count] - 1));
             [self.prevNextSegmentedControl setEnabled:previousEnabled forSegmentAtIndex:0];
             [self.prevNextSegmentedControl setEnabled:nextEnabled forSegmentAtIndex:1];
             
@@ -783,7 +783,7 @@ NSString* placeholderText(NSString *displayLabel, BOOL required) {
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self nonHiddenFormGroups].count;
+    return [[self nonHiddenFormGroups] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

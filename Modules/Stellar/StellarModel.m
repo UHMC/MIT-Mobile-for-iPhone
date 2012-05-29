@@ -316,7 +316,7 @@ NSString* cleanPersonName(NSString *personName);
 
 - (void)request:(MITMobileWebAPI *)request jsonLoaded: (id)object {
 	NSArray *courses = (NSArray *)object;
-	if (courses.count == 0) {
+	if ([courses count] == 0) {
 		// no courses to save
 		return;
 	}
@@ -344,13 +344,13 @@ NSString* cleanPersonName(NSString *personName);
 }
 
 - (void)handleConnectionFailureForRequest:(MITMobileWebAPI *)request {
-	if([StellarModel allCourses].count) {
+	if([[StellarModel allCourses] count]) {
 		// courses failed to load, but we still have courses save on disk so it is okay
 		[self.coursesLoadedDelegate coursesLoaded];
 	}
 }
 - (BOOL)request:(MITMobileWebAPI *)request shouldDisplayStandardAlertForError: (NSError *)error {
-	return ([StellarModel allCourses].count == 0);
+	return ([[StellarModel allCourses] count] == 0);
 }
 
 - (NSString *)request:(MITMobileWebAPI *)request displayHeaderForError: (NSError *)error {

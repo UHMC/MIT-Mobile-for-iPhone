@@ -89,7 +89,7 @@
 			if (([pathComponents count] > 3) && [[pathComponents objectAtIndex:2] isEqualToString:@"News"]) {
 				NSInteger announcementIndex = [[pathComponents objectAtIndex:3] integerValue];
 				NSArray *announcements = [StellarModel sortedAnnouncements:stellarClass];
-				if (announcements.count > announcementIndex) {
+				if ([announcements count] > announcementIndex) {
 					StellarAnnouncement *announcement = [announcements objectAtIndex:announcementIndex];
 					detailViewController.refreshClass = NO;
 					StellarAnnouncementViewController *announcementViewController = [[StellarAnnouncementViewController alloc] 

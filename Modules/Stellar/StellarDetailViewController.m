@@ -286,10 +286,10 @@ NSString * termText(NSString *termCode) {
 
 - (void) setCurrentTab: (NSString *)tabName {
 	[self setCurrentTabName:tabName];
-	if (currentTabNames.count) {
+	if ([currentTabNames count]) {
 		// manually search for the tab, could not find a builtin API to do this
 		NSUInteger activeIndex = NSNotFound;
-		for (NSUInteger index=0; index < currentTabNames.count; index++) {
+		for (NSUInteger index=0; index < [currentTabNames count]; index++) {
 			if ([[currentTabNames objectAtIndex:index] isEqualToString:tabName]) {
 				activeIndex = index;
 				break;

@@ -90,7 +90,7 @@ static MapBookmarkManager* s_mapBookmarksManager = nil;
 {
 	NSString* idfield = @"id";
 	
-	for(int idx = _bookmarks.count - 1; idx >= 0; idx--)
+	for(int idx = [_bookmarks count] - 1; idx >= 0; idx--)
 	{
 		NSDictionary* dictionary = [_bookmarks objectAtIndex:idx];
 		NSString* uniqueID = [dictionary objectForKey:idfield];

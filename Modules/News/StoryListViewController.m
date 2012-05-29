@@ -929,14 +929,14 @@ NSString *titleForCategoryId(NewsCategoryId category_id) {
 #pragma mark UITableViewDataSource and UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return (self.stories.count > 0) ? 1 : 0;
+    return ([self.stories count] > 0) ? 1 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger n = 0;
     switch (section) {
         case 0:
-            n = self.stories.count;
+            n = [self.stories count];
 			// don't show "load x more" row if
 			if (!showingBookmarks && // showing bookmarks
 				!(searchResults && n >= searchTotalAvailableResults) && // showing all search results
@@ -973,7 +973,7 @@ NSString *titleForCategoryId(NewsCategoryId category_id) {
 
     switch (indexPath.section) {
         case 0: {
-            if (indexPath.row < self.stories.count) {
+            if (indexPath.row < [self.stories count]) {
                 rowHeight = THUMBNAIL_WIDTH;
             } else {
                 rowHeight = 50; // "Load more articles..."
@@ -991,7 +991,7 @@ NSString *titleForCategoryId(NewsCategoryId category_id) {
     
     switch (indexPath.section) {
         case 0: {
-            if (indexPath.row < self.stories.count) {
+            if (indexPath.row < [self.stories count]) {
                 NewsStory *story = [self.stories objectAtIndex:indexPath.row];
                 
                 static NSString *StoryCellIdentifier = @"StoryCell";
@@ -1070,7 +1070,7 @@ NSString *titleForCategoryId(NewsCategoryId category_id) {
                 
                 result = cell;
             }
-            else if (indexPath.row == self.stories.count) {
+            else if (indexPath.row == [self.stories count]) {
                 NSString *MyIdentifier = @"moreArticles";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
                 if (cell == nil) {
@@ -1110,7 +1110,7 @@ NSString *titleForCategoryId(NewsCategoryId category_id) {
 				
                 result = cell;
             } else {
-                ELog(@"%s attempted to show non-existent row (%d) with actual count of %d", NSStringFromSelector(_cmd), indexPath.row, self.stories.count);
+                ELog(@"%s attempted to show non-existent row (%d) with actual count of %d", NSStringFromSelector(_cmd), indexPath.row, [self.stories count]);
             }
         }
             break;
@@ -1119,7 +1119,7 @@ NSString *titleForCategoryId(NewsCategoryId category_id) {
 }
 
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(indexPath.row == self.stories.count)
+	if(indexPath.row == [self.stories count])
 	{
 		if (!self.xmlParser) { // only "load x more..." if no other load is going on
 			if (!self.searchResults) {

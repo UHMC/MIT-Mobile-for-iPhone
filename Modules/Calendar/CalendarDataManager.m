@@ -43,7 +43,7 @@ static CalendarDataManager *s_sharedManager = nil;
 }
 
 - (NSArray *)eventLists {
-	if (_eventLists.count)
+	if ([_eventLists count])
 		return _eventLists;
 	return nil;
 }
@@ -70,7 +70,7 @@ static CalendarDataManager *s_sharedManager = nil;
 
 	NSArray *staticLists = [CalendarDataManager staticEventTypes];
 	
-	NSMutableArray *mutableStaticEvents = [NSMutableArray arrayWithCapacity:staticLists.count];
+	NSMutableArray *mutableStaticEvents = [NSMutableArray arrayWithCapacity:[staticLists count]];
 	for (MITEventList *aList in staticLists) {
 		[mutableStaticEvents addObject:aList.listID];
 	}
@@ -151,7 +151,7 @@ static CalendarDataManager *s_sharedManager = nil;
 		[CoreDataManager saveData];
 
 		// check for deleted categories
-		NSMutableSet *newEventListIDs = [NSMutableSet setWithCapacity:newLists.count];
+		NSMutableSet *newEventListIDs = [NSMutableSet setWithCapacity:[newLists count]];
 		for (MITEventList *newEventList in newLists) {
 			[newEventListIDs addObject:newEventList.listID];
 		}

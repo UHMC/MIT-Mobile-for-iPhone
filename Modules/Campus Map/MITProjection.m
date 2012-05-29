@@ -396,7 +396,7 @@ static NSString * kMapPathExtension = @"map/";
     
     _mapLevels = [[NSArray arrayWithArray:zoomLevels] retain];
     
-    if (_mapLevels.count) {
+    if ([_mapLevels count]) {
         _minimumZoomScale = [(MapZoomLevel *)[_mapLevels objectAtIndex:0] zoomScale];
         _maximumZoomScale = [(MapZoomLevel *)[_mapLevels lastObject] zoomScale];
     }

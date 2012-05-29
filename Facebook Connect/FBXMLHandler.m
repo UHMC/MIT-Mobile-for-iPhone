@@ -30,22 +30,22 @@
 }
 
 - (id)topObject:(BOOL)create {
-    id object = [_stack objectAtIndex:_stack.count-1];
+    id object = [_stack objectAtIndex:[_stack count]-1];
     if (object == [NSNull null] && create) {
         object = [NSMutableDictionary dictionary];
-        [_stack replaceObjectAtIndex:_stack.count-1 withObject:object];
+        [_stack replaceObjectAtIndex:[_stack count]-1 withObject:object];
     }
     return object;
 }
 
 - (id)topContainer {
-    if (_stack.count < 2) {
+    if ([_stack count] < 2) {
         return nil;
     } else {
-        id object = [_stack objectAtIndex:_stack.count-2];
+        id object = [_stack objectAtIndex:[_stack count]-2];
         if (object == [NSNull null]) {
             object = [NSMutableDictionary dictionary];
-            [_stack replaceObjectAtIndex:_stack.count-2 withObject:object];
+            [_stack replaceObjectAtIndex:[_stack count]-2 withObject:object];
         }
         return object;
     }
@@ -59,9 +59,9 @@
             id topContainer = self.topContainer;
             if ([topContainer isKindOfClass:[NSMutableArray class]]) {
                 id object = [NSDictionary dictionaryWithObject:_chars forKey:self.topName];
-                [_stack replaceObjectAtIndex:_stack.count-1 withObject:object];
+                [_stack replaceObjectAtIndex:[_stack count]-1 withObject:object];
             } else {
-                [_stack replaceObjectAtIndex:_stack.count-1 withObject:_chars];
+                [_stack replaceObjectAtIndex:[_stack count]-1 withObject:_chars];
             }
             break;
         }
@@ -133,7 +133,7 @@
     [_stack removeLastObject];
     [_nameStack removeLastObject];
     
-    if (!_stack.count) {
+    if (![_stack count]) {
         _rootObject = [object retain];
         _rootName = [name retain];
     } else {

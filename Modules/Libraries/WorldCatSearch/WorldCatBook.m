@@ -229,14 +229,14 @@ static NSString * const WCHoldingAvailableKey = @"available";
 
 - (NSString *)yearWithAuthors {
     NSString *yearWithAuthors = [self.authors componentsJoinedByString:@", "];
-    if (self.years.count > 0) {
+    if ([self.years count] > 0) {
         yearWithAuthors = [NSString stringWithFormat:@"%@; %@", [self.years objectAtIndex:0], yearWithAuthors];
     }
     return yearWithAuthors;
 }
 
 - (NSString *)isbn {
-    if (self.isbns.count >= 2) {
+    if ([self.isbns count] >= 2) {
         return [self.isbns objectAtIndex:1];
     }
     return nil;

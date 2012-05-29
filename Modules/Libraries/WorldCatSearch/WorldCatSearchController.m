@@ -344,7 +344,7 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.searchResults) {
-        return self.searchResults.count;
+        return [self.searchResults count];
     }
     return 1;  // returning 1 prevents "No results"
 }

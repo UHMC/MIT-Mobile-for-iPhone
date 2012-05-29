@@ -100,7 +100,7 @@ typedef enum {
                                     fontSize:BookDetailFontSizeDefault]];
             
             // format
-            if (self.book.formats.count) {
+            if ([self.book.formats count]) {
                 [bookAttribs addObject:[BookDetailTableViewCell 
                                         displayStringWithTitle:@"Format" 
                                         subtitle:[self.book.formats componentsJoinedByString:@","] 
@@ -109,7 +109,7 @@ typedef enum {
             }
 
             // summary
-            if (self.book.summarys.count) {
+            if ([self.book.summarys count]) {
                 [bookAttribs addObject:[BookDetailTableViewCell 
                                         displayStringWithTitle:@"Summary"
                                         subtitle:[self.book.summarys componentsJoinedByString:@"; "]
@@ -128,7 +128,7 @@ typedef enum {
             }
 
             // edition
-            if (self.book.editions.count) {
+            if ([self.book.editions count]) {
                 [bookAttribs addObject:[BookDetailTableViewCell 
                                         displayStringWithTitle:@"Edition"
                                         subtitle:[self.book.editions componentsJoinedByString:@", "]
@@ -137,7 +137,7 @@ typedef enum {
             }
 
             // description
-            if (self.book.extents.count) {
+            if ([self.book.extents count]) {
                 [bookAttribs addObject:[BookDetailTableViewCell 
                                         displayStringWithTitle:@"Description"
                                         subtitle:[self.book.extents componentsJoinedByString:@", "]
@@ -146,7 +146,7 @@ typedef enum {
             }
 
             // isbn
-            if (self.book.isbns.count) {
+            if ([self.book.isbns count]) {
                 [bookAttribs addObject:[BookDetailTableViewCell 
                                         displayStringWithTitle:@"ISBN"
                                         subtitle:[self.book.isbns componentsJoinedByString:@" : "]
@@ -171,7 +171,7 @@ typedef enum {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger sections = 2; // one for book info, one for email & cite
     if (self.loadingStatus == BookLoadingStatusCompleted) {
-        NSInteger numHoldings = self.book.holdings.count;
+        NSInteger numHoldings = [self.book.holdings count];
         if ([self.book.holdings objectForKey:MITLibrariesOCLCCode]) {
             sections++; // one section for MIT holdings
             numHoldings--;
@@ -188,7 +188,7 @@ typedef enum {
         NSInteger rows = 0;
         switch (section) {
             case kInfoSection:
-                rows = self.bookInfo.count;
+                rows = [self.bookInfo count];
                 break;
             case kEmailAndCiteSection:
                 rows = 1;

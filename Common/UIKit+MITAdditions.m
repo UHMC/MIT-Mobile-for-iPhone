@@ -7,10 +7,10 @@
 - (NSInteger)lengthOfLineWithFont:(UIFont *)font constrainedToSize:(CGSize)size {
     NSMutableString *mutableString = [NSMutableString string];
     NSArray *lines = [self componentsSeparatedByString:@"\n"];
-    if (lines.count > 0) {
+    if ([lines count] > 0) {
         NSString *line = [lines objectAtIndex:0];
         NSArray *words = [line componentsSeparatedByString:@" "];
-        NSInteger count = words.count;
+        NSInteger count = [words count];
         if (count > 0) {
             NSInteger index = 0;
             [mutableString appendString:[words objectAtIndex:index]];
@@ -121,7 +121,7 @@
 + (UIImageView *)accessoryViewForInternalURL:(NSString *)url {
 	// we should really check for whether this url fits our internal scheme
 	NSArray *pathComponents = [url pathComponents];
-	if (pathComponents.count > 1) {
+	if ([pathComponents count] > 1) {
 		NSString *localPath = [pathComponents objectAtIndex:1];
 		if ([localPath isEqualToString:CampusMapTag]) {
 			return [UIImageView accessoryViewWithMITType:MITAccessoryViewMap];

@@ -89,7 +89,7 @@
 			
 			ShuttleStop *stop = nil;
 			ShuttleStopMapAnnotation *annotation = nil;
-			if (components.count > 2) {
+			if ([components count] > 2) {
 				NSString *stopID = [components objectAtIndex:2];
                 NSError *error = nil;
 				stop = [ShuttleDataManager stopWithRoute:routeID stopID:stopID error:&error];
@@ -121,7 +121,7 @@
                                          animated:NO];
 				}
 				
-				if (components.count > 3 && 
+				if ([components count] > 3 && 
 					[@"stops" isEqualToString:[components objectAtIndex:3]]) {
 						[routeViewController pushStopViewControllerWithStop:stop
                                                                  annotation:annotation

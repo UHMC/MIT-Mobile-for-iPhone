@@ -32,7 +32,7 @@
 	[self.view addSubview:_tableView];
 	
 	// setup nav bar
-	if (self.events.count > 1) {
+	if ([self.events count] > 1) {
 		eventPager = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:
                                                                 [UIImage imageNamed:MITImageNameUpArrow],
                                                                 [UIImage imageNamed:MITImageNameDownArrow], nil]];

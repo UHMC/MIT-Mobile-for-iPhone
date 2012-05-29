@@ -73,7 +73,7 @@
 	CGFloat selectedComponents[8] = {  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
 	CGFloat pressedComponents[8] = {  0.4, 0.4, 0.4, 1.0, 0.54, 0.54, 0.54, 1.0 };
 	
-	for (int tabIdx = 0; tabIdx < self.tabs.count; tabIdx++) 
+	for (int tabIdx = 0; tabIdx < [self.tabs count]; tabIdx++)
 	{
 		
 		NSString* tabText = [self.tabs objectAtIndex:tabIdx];
@@ -174,7 +174,7 @@
 	
 	int tabOffset = 20;
 	
-	for (int tabIdx = 0; tabIdx < self.tabs.count; tabIdx++) {
+	for (int tabIdx = 0; tabIdx < [self.tabs count]; tabIdx++) {
 		NSString* tabText = [self.tabs objectAtIndex:tabIdx];
 		
 		// construct the rect for this tab
@@ -250,7 +250,7 @@
 		self.tabs = [NSArray arrayWithArray:tabs];
 	}
 	
-	return self.tabs.count - 1;
+	return [self.tabs count] - 1;
 
 }
 

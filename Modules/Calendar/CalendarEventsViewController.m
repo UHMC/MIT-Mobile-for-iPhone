@@ -103,7 +103,7 @@
 	
 	if (!activeEventList) {
 		NSArray *lists = [[CalendarDataManager sharedManager] eventLists];
-		if (lists.count) {
+		if ([lists count]) {
 			activeEventList = [lists objectAtIndex:0];
 		} else {
 			// TODO: show failure state

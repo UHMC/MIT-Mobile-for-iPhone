@@ -98,7 +98,7 @@
 
 - (NSString *)fieldWithPrefix:(NSString *)prefix terminator:(NSString *)term {
   NSArray *fields = [self fieldsWithPrefix:prefix terminator:term];
-  if (fields.count == 0) {
+  if ([fields count] == 0) {
     return nil;
   } else {
     return [fields lastObject];

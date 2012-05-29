@@ -235,7 +235,7 @@ static const CGFloat kPadding = 10;
     if (!_points) {
         _points = [[NSMutableArray alloc] init];
     }
-    if (_points.count > 3) {
+    if ([_points count] > 3) {
         [_points removeObjectAtIndex:0];
     }
     [_points addObject:[NSValue valueWithCGPoint:point]];

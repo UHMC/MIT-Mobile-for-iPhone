@@ -56,7 +56,7 @@ static MapTileCache* s_cache;
 	
 	NSArray* levels = [mapInfo objectForKey:@"MapLevels"];
 	
-	NSMutableArray* mapLevels = [NSMutableArray arrayWithCapacity:levels.count];
+	NSMutableArray* mapLevels = [NSMutableArray arrayWithCapacity:[levels count]];
 	for (NSDictionary* levelInfo in levels) {
 		MapLevel* level = [MapLevel levelWithInfo:levelInfo];
 		[mapLevels addObject:level];
@@ -158,7 +158,7 @@ static MapTileCache* s_cache;
 		
 		[_recentTilesIndex insertObject:cacheIndex atIndex:0];
 		[_recentTiles setObject:image forKey:cacheIndex];
-		if (_recentTilesIndex.count > kInMemoryTileLimit)
+		if ([_recentTilesIndex count] > kInMemoryTileLimit)
 		{
 			cacheIndex = [_recentTilesIndex lastObject];
 			[_recentTiles removeObjectForKey:cacheIndex];

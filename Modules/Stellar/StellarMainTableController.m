@@ -131,9 +131,9 @@
 }
 	
 - (void) reloadMyStellarNotifications {
-	if(myStellar.count) {
+	if([myStellar count]) {
 		NSMutableArray *indexPaths = [NSMutableArray array];
-		for (NSUInteger rowIndex=0; rowIndex < myStellar.count; rowIndex++) {
+		for (NSUInteger rowIndex=0; rowIndex < [myStellar count]; rowIndex++) {
 			[indexPaths addObject:[NSIndexPath indexPathForRow:rowIndex inSection:myStellarGroup]];
 		}
 		if (self.mainTableView.dataSource) {

@@ -65,7 +65,7 @@
 		
 		
 		NSArray* contents = [info objectForKey:@"contents"];
-		NSMutableArray* contentsArr = [NSMutableArray arrayWithCapacity:contents.count];
+		NSMutableArray* contentsArr = [NSMutableArray arrayWithCapacity:[contents count]];
 		for (NSDictionary* contentInfo in contents)
 		{
 			NSString* content = [contentInfo objectForKey:@"name"];
@@ -105,7 +105,7 @@
 	
 	if(nil != self.contents)
 	{
-		NSMutableArray* contents = [NSMutableArray arrayWithCapacity:self.contents.count];
+		NSMutableArray* contents = [NSMutableArray arrayWithCapacity:[self.contents count]];
 		for (NSString* content in self.contents) {
 			[contents addObject:[NSDictionary dictionaryWithObject:content forKey:@"name"]];
 		}

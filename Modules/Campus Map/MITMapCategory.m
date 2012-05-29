@@ -25,7 +25,7 @@
 		if ([categoryItems isKindOfClass:[NSArray class]]) 
 		{
 			  
-			NSMutableArray* annotations = [NSMutableArray arrayWithCapacity:categoryItems.count];
+			NSMutableArray* annotations = [NSMutableArray arrayWithCapacity:[categoryItems count]];
 			
 			for (NSDictionary* item in categoryItems)
 			{

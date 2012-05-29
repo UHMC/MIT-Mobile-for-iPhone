@@ -93,7 +93,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return _searches.count;
+    return [_searches count];
 }
 
 
@@ -110,7 +110,7 @@
     }
     
 	int row = indexPath.row;
-    if(row < _searches.count)
+    if(row < [_searches count])
 	{
 		MapSearch* search = [_searches objectAtIndex:row];
 		cell.textLabel.text = search.searchTerm;

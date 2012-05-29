@@ -100,7 +100,7 @@
         [outgoingImage removeFromSuperview];
     
     currentPosition++;
-    if (currentPosition == animationImages.count)
+    if (currentPosition == [animationImages count])
         currentPosition = 0;
     
     outgoingImage = centerImage;

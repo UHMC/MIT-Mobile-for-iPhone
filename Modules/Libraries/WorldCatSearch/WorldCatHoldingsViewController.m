@@ -85,7 +85,7 @@ typedef enum {
         case LinkSection:
             return 1;
         case OwnerSection:
-            return self.holdings.count;
+            return [self.holdings count];
     }
     return 0;
 }

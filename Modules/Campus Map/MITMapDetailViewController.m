@@ -169,7 +169,7 @@
 	_nameLabel.hidden = NO;
 	_locationLabel.hidden = NO;
 	
-	if (self.annotationDetails.contents.count > 0) {
+	if ([self.annotationDetails.contents count] > 0) {
 		
 		CGFloat padding = 10.0;
 		CGFloat currentHeight = padding;
@@ -237,7 +237,7 @@
 	}
 	
 	// if no tabs have been added, remove the tab view control and its container view. 
-	if (_tabViewControl.tabs.count <= 0) {
+	if ([_tabViewControl.tabs count] <= 0) {
 		_tabViewControl.hidden = YES;
 		_tabViewContainer.hidden = YES;
 	}
@@ -288,10 +288,10 @@
 	}
 	
 	// force the correct tab to load
-	if(_tabViews.count > 0)
+	if([_tabViews count] > 0)
 	{
 
-		if (self.annotationDetails.contents.count == 0 && _tabViews.count > 1) {
+		if ([self.annotationDetails.contents count] == 0 && [_tabViews count] > 1) {
 			_tabViewControl.selectedTab = 1;
 			[self tabControl:_tabViewControl changedToIndex:1 tabText:nil];
 		}

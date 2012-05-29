@@ -28,7 +28,7 @@
 		CGContextSetStrokeColorWithColor(c, route.lineColor.CGColor);
 		
 		// move to the first point in this route
-		if (route.pathLocations.count > 0) 
+		if ([route.pathLocations count] > 0) 
 		{
 			
 			

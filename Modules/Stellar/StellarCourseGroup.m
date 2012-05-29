@@ -71,7 +71,7 @@ NSString *stripLetters(NSString *courseNumber);
 	NSArray *partsByColon = [serializedCourseGroup componentsSeparatedByString:@":"];
 	NSString *title = [partsByColon objectAtIndex:0];
 	NSArray *courseIds = [[partsByColon objectAtIndex:1] componentsSeparatedByString:@"-"];
-	NSMutableArray *courses = [NSMutableArray arrayWithCapacity:courseIds.count];
+	NSMutableArray *courses = [NSMutableArray arrayWithCapacity:[courseIds count]];
 	for (NSString *courseId in courseIds) {
 		StellarCourse *course = [StellarModel courseWithId:courseId];
 		if (course) {

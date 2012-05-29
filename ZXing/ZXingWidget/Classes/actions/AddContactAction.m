@@ -72,7 +72,7 @@
     }
   } else {
     NSArray *nameParts = [name componentsSeparatedByCharactersInSet:whitespaceSet];
-    int nParts = nameParts.count;
+    int nParts = [nameParts count];
     if (nParts == 1) {
       ABRecordSetValue(person, kABPersonFirstNameProperty, name, error);
     } else if (nParts >= 2) {
@@ -89,7 +89,7 @@
     ABRecordSetValue(person, kABPersonNoteProperty, self.note, error);
   }
   
-  if (self.phoneNumbers && self.phoneNumbers.count > 0) {
+  if (self.phoneNumbers && [self.phoneNumbers count] > 0) {
     // multi-values: nultiple phone numbers
     ABMutableMultiValueRef phoneNumberMultiValue = 
     ABMultiValueCreateMutable(kABStringPropertyType);

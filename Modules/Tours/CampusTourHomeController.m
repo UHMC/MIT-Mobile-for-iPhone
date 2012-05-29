@@ -171,7 +171,7 @@
     switch (section) {
         case 0:
             if (self.tours) {
-                num = self.tours.count;
+                num = [self.tours count];
             } else {
                 num = 1;
             }

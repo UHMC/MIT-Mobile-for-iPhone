@@ -213,7 +213,6 @@ static const CGFloat kSubTitleFontSize = 12;
 
 
 - (void)calloutAccessoryTapped:(id)sender {
-    // _mapView.mapView is the MKMapView object attached to the MITMapView
     [self.mapView calloutAccessoryControlTapped:sender forAnnotationView:self.annotationView];
 }
 

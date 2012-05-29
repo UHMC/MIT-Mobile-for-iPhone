@@ -59,7 +59,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.searchResults.count;
+    return [self.searchResults count];
 }
 
 
@@ -147,7 +147,7 @@
 
 - (UIView *) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	return [UITableView ungroupedSectionHeaderWithTitle:
-			[NSString stringWithFormat:@"%d found", self.searchResults.count]];
+			[NSString stringWithFormat:@"%d found", [self.searchResults count]]];
 }
 
 - (CGFloat)tableView: (UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

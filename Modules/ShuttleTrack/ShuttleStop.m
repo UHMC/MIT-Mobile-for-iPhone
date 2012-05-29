@@ -123,7 +123,7 @@
     if (self.nextScheduled == 0) {
         return [NSArray array];
     } else {
-        NSMutableArray *absPredictions = [NSMutableArray arrayWithCapacity:_predictions.count];
+        NSMutableArray *absPredictions = [NSMutableArray arrayWithCapacity:[_predictions count]];
         for (NSString *prediction in _predictions) {
             NSTimeInterval predictionTime = [prediction doubleValue] + self.now;
             [absPredictions addObject:[NSNumber numberWithDouble:predictionTime]];
@@ -226,7 +226,7 @@
 
 -(NSInteger) predictionCount
 {
-	return self.predictions.count + 1;
+	return [self.predictions count] + 1;
 }
 
 -(NSDate*) dateForPredictionAtIndex:(int)index

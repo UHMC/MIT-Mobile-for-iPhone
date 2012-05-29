@@ -23,7 +23,7 @@
 		
 		NSArray* predictionsArr = [dictionary objectForKey:@"predictions"];
 		
-		NSMutableArray* predictions = [NSMutableArray arrayWithCapacity:predictionsArr.count];
+		NSMutableArray* predictions = [NSMutableArray arrayWithCapacity:[predictionsArr count]];
 		
 		for (NSString* prediction in predictionsArr) 
 		{
@@ -39,7 +39,7 @@
 
 -(NSInteger) predictionCount
 {
-	return self.predictions.count + 1;
+	return [self.predictions count] + 1;
 }
 
 -(NSDate*) dateForPredictionAtIndex:(int)index

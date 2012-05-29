@@ -317,7 +317,7 @@
         frame.size.height = fakeToolbarHeightFromNIB;
         fakeToolbar.frame = frame;
         
-        progressbar.numberOfSegments = self.sites.count;
+        progressbar.numberOfSegments = [self.sites count];
         [progressbar setNeedsDisplay];
         
         progressbar.hidden = NO;
@@ -392,7 +392,7 @@
     
     // table header
     NSSet *tourLinks = [[ToursDataManager sharedManager] activeTour].links;
-    NSInteger numRows = tourLinks.count + 1;
+    NSInteger numRows = [tourLinks count] + 1;
     CGFloat currentTableHeight = tableView.rowHeight * numRows + wrapperView.frame.size.height + 10;
     CGFloat headerHeight = tableFrame.size.height - currentTableHeight - 10;
     
@@ -799,7 +799,7 @@
 
 - (TourComponent *)tripForRequest:(NSURLRequest *)request {
     NSArray *pathComponents = [[request.URL path] pathComponents];
-    if (pathComponents.count) {
+    if ([pathComponents count]) {
         NSString *maybeTripID = [pathComponents lastObject];
         for (CampusTourSideTrip *aTrip in self.siteOrRoute.sideTrips) {
             if ([maybeTripID isEqualToString:aTrip.componentID]) {
@@ -857,7 +857,7 @@
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
     NSSet *tourLinks = [[ToursDataManager sharedManager] activeTour].links;
-    return tourLinks.count + 1;
+    return [tourLinks count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

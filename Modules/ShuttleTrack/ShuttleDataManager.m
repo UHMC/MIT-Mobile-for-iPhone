@@ -350,7 +350,7 @@ NSString * const shuttlePathExtension = @"shuttles/";
 
 		NSArray* routesAtStop = [result objectForKey:@"stops"]; // the api should've called this "routes", this is confusing
 		
-		NSMutableArray* schedules = [NSMutableArray arrayWithCapacity:routesAtStop.count];
+		NSMutableArray* schedules = [NSMutableArray arrayWithCapacity:[routesAtStop count]];
 		NSString* stopID = [request.params objectForKey:@"id"];
 		
 		for (NSDictionary* routeAtStop in routesAtStop) 

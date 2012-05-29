@@ -330,7 +330,7 @@
 
 -(MKCoordinateRegion)regionForAnnotations:(NSArray *) annotations {
 	
-	if (annotations.count > 0) 
+	if ([annotations count] > 0) 
 	{
 		// determine the region for the search results
 		double minLat = 90;
@@ -415,7 +415,7 @@
 -(void) addAnnotationsForShuttleStops:(NSArray*)shuttleStops
 {
 	if (self.shuttleAnnotations == nil) {
-		self.shuttleAnnotations = [[NSMutableArray alloc] initWithCapacity:shuttleStops.count];
+		self.shuttleAnnotations = [[NSMutableArray alloc] initWithCapacity:[shuttleStops count]];
 	}
 	
 	for (ShuttleStop* shuttleStop in shuttleStops) 
@@ -613,7 +613,7 @@
 -(void) receivedNewSearchResults:(NSArray*)searchResults forQuery:(NSString *)searchQuery
 {
 	
-	NSMutableArray* searchResultsArr = [NSMutableArray arrayWithCapacity:searchResults.count];
+	NSMutableArray* searchResultsArr = [NSMutableArray arrayWithCapacity:[searchResults count]];
 	
 	for (NSDictionary* info in searchResults)
 	{
@@ -720,7 +720,7 @@
 		[limitFetchRequest setFetchLimit:1];
 		NSArray* overLimit = [[CoreDataManager managedObjectContext] executeFetchRequest: limitFetchRequest error:nil];
         
-		if(overLimit && overLimit.count == 1)
+		if(overLimit && [overLimit count] == 1)
 		{
 			[[CoreDataManager managedObjectContext] deleteObject:[overLimit objectAtIndex:0]];
 		}
@@ -901,7 +901,7 @@
                                   forQuery:self.lastSearchText];
             
 			// if there were no search results, tell the user about it. 
-			if(nil == searchResults || searchResults.count <= 0) {
+			if(nil == searchResults || [searchResults count] <= 0) {
 				[self noSearchResultsAlert];
 				self.hasSearchResults = NO;
 			} else {
@@ -916,7 +916,7 @@
 		MITMapSearchResultAnnotation* oldAnnotation = request.userData;
 		NSArray* results = JSONObject;
 		
-		if (results.count > 0) 
+		if ([results count] > 0) 
 		{
 			MITMapSearchResultAnnotation* newAnnotation = [[MITMapSearchResultAnnotation alloc] initWithInfo:[results objectAtIndex:0]];
 			

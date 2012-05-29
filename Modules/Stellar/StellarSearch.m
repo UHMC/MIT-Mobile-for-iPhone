@@ -104,7 +104,7 @@
 		self.lastResults = classes;
 		[viewController hideLoadingView];
 		
-		if(self.lastResults.count) {		
+		if([self.lastResults count]) {		
 			[viewController.searchResultsTableView applyStandardCellHeight];
 			viewController.searchResultsTableView.allowsSelection = YES;
 			[viewController.searchResultsTableView reloadData];
@@ -151,7 +151,7 @@
 	NSString *query = nil;
 	
 	[aSearchBar setShowsCancelButton:YES animated:YES];
-	if(self.lastResults.count || searchBar.text.length) {
+	if([self.lastResults count] || [searchBar.text length]) {
 		query = aSearchBar.text;
 	}
 	

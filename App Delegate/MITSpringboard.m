@@ -250,7 +250,7 @@
                     animated:(BOOL)animated
 {
     /*
-	NSInteger newStackDepth = navigationController.viewControllers.count;
+	NSInteger newStackDepth = [navigationController.viewControllers count];
 	if (newStackDepth < navStackDepth) {
 		if ([self.delegate respondsToSelector:@selector(springboardDidPopModule:)]) {
 			[self.delegate springboardDidPopModule:self];
