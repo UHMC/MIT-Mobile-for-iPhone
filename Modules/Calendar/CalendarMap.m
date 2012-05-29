@@ -27,8 +27,6 @@
 - (void)dealloc
 {
     self.events = nil;
-
-    [self.view removeFromSuperview];
     self.view = nil;
 
     [super dealloc];

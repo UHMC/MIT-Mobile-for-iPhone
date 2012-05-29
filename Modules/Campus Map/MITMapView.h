@@ -11,7 +11,6 @@
 #import "MITMapViewDelegate.h"
 
 @class MapLevel;
-@class MITMapView;
 @class MITMapSearchResultAnnotation;
 @class MapTileOverlay;
 

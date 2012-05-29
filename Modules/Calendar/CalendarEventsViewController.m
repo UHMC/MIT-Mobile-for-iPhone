@@ -5,7 +5,6 @@
 #import "CalendarDataManager.h"
 #import "CalendarEventMapAnnotation.h"
 #import "MultiLineTableViewCell.h"
-#import <QuartzCore/QuartzCore.h>
 #import "MITEventList.h"
 #import "CoreDataManager.h"
 
@@ -698,22 +697,31 @@
  
 - (void)mapView:(MITMapView *)mapView annotationViewCalloutAccessoryTapped:(MITMapAnnotationView *)view
 {
-	CalendarEventMapAnnotation *annotation = view.annotation;
-	MITCalendarEvent *event = nil;
-	CalendarMap *calMapView = (CalendarMap *)mapView;
+	CalendarEventMapAnnotation *annotation = (CalendarEventMapAnnotation*)view.annotation;
+    CalendarMap *activeMap = nil;
 
-	for (event in calMapView.events) {
-		if (event.eventID == annotation.event.eventID) {
-			break;
-		}
-	}
+    if ([self.mapView.view isEqual:mapView])
+    {
+        activeMap = self.mapView;
+    }
+    else if ([searchResultsMapView isEqual:mapView])
+    {
+        activeMap = searchResultsMapView;
+    }
 
-	if (event != nil) {
-		CalendarDetailViewController *detailVC = [[CalendarDetailViewController alloc] init];
-		detailVC.event = event;
-		[self.navigationController pushViewController:detailVC animated:YES];
-		[detailVC release];
-	}
+    [activeMap.events enumerateObjectsUsingBlock:^void(id obj, NSUInteger idx, BOOL *stop) {
+        MITCalendarEvent *evt = (MITCalendarEvent *)obj;
+        if ([evt.eventID isEqual:annotation.event.eventID])
+        {
+            (*stop) = YES;
+
+            CalendarDetailViewController *detailVC = [[CalendarDetailViewController alloc] init];
+            detailVC.event = evt;
+            [self.navigationController pushViewController:detailVC
+                                                 animated:YES];
+            [detailVC release];
+        }
+    }];
 }
 
 - (void)mapView:(MITMapView *)mapView annotationSelected:(id<MKAnnotation>)annotation {
