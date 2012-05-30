@@ -10,7 +10,9 @@
 
 #import "MITLogging.h"
 #import "MITLoadingActivityView.h"
+
 #import "MGSLayerManager.h"
+#import "MGSAnnotationLayerManager.h"
 
 @interface MGSMapView () <AGSMapViewTouchDelegate>
 @property (nonatomic, strong) NSMutableSet *agsLayers;
@@ -45,11 +47,23 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSMutableSet *managers = [NSMutableSet set];
-        [managers addObject:[MGSLayerManager class]];
+        [managers addObject:[MGSAnnotationLayerManager class]];
         layerManagers = managers;
     });
+
+    __block MGSLayerManager *layerManager = nil;
     
+    [layerManagers enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        if ([obj respondsToSelector:@selector(canManageLayer:)])
+        {
+            if ([obj canManageLayer:mapLayer])
+            {
+                layerManager = obj;
+            }
+        }
+    }];
     
+    return layerManager;
 }
 
 + (NSSet*)agsBasemapLayers
@@ -175,14 +189,15 @@
         
         {
             MITLoadingActivityView *loadingView = [[MITLoadingActivityView alloc] initWithFrame:mainBounds];
-            loadingView.backgroundColor = [UIColor lightGrayColor];
+            loadingView.backgroundColor = [UIColor redColor];
             loadingView.usesBackgroundImage = NO;
             
             self.loadingView = loadingView;
-            [self addSubview:loadingView];
+            [self insertSubview:loadingView
+                   aboveSubview:self.mapView];
         }
         
-        double delayInSeconds = 2.0;
+        double delayInSeconds = 5.0;
         dispatch_time_t runTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(runTime, dispatch_get_main_queue(), ^ {
             [self initBaseLayers];
@@ -340,6 +355,16 @@
 #pragma mark - Layer Management
 - (void)addLayer:(MGSMapLayer*)layer
   withIdentifier:(NSString*)layerIdentifier
+{
+    [self insertLayer:layer
+              atIndex:[self.layerIdentifiers count]-1
+       withIdentifier:layerIdentifier];
+}
+
+
+- (void)insertLayer:(MGSMapLayer*)layer
+            atIndex:(NSUInteger)layerIndex
+     withIdentifier:(NSString*)layerIdentifier
 {
     if ([self.layerIdentifiers containsObject:layerIdentifier] == NO)
     {

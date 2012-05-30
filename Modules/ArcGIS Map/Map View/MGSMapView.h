@@ -21,6 +21,7 @@
 
 #pragma mark - Layer Management
 - (void)addLayer:(MGSMapLayer*)layer withIdentifier:(NSString*)layerIdentifier;
+- (void)insertLayer:(MGSMapLayer*)layer atIndex:(NSUInteger)layerIndex withIdentifier:(NSString*)layerIdentifier;
 - (BOOL)containsLayerWithIdentifier:(NSString*)layerIdentifier;
 - (void)removeLayerWithIdentifier:(NSString*)layerIdentifier;
 
