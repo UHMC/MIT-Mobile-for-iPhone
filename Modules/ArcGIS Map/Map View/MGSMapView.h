@@ -12,7 +12,7 @@
 @property (nonatomic,assign) id mapViewDelegate;
 @property (nonatomic,readonly,strong) NSArray *layers;
 
-- (void)dataChangedForLayerNamed:(NSString*)layerName;
+- (void)dataChangedForLayerWithIdentifier:(NSString*)layerIdentifier;
 
 #pragma mark - Basemap Management
 - (NSSet*)availableBasemapLayers;

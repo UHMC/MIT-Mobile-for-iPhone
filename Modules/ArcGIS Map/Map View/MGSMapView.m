@@ -24,7 +24,7 @@
 - (void)initView;
 - (void)initBaseLayers;
 
-- (AGSGraphicsLayer*)graphicsLayerWithName:(NSString*)layerName;
+- (AGSGraphicsLayer*)graphicsLayerWithIdentifier:(NSString*)layerIdentifier;
 @end
 
 @implementation MGSMapView
@@ -280,13 +280,13 @@
 }
 
 #pragma mark - Private Methods
-- (AGSGraphicsLayer*)graphicsLayerWithName:(NSString *)layerName
+- (AGSGraphicsLayer*)graphicsLayerWithIdentifier:(NSString *)layerIdentifier
 {
     __block AGSGraphicsLayer *layer = nil;
     
     [[self.mapView mapLayers] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         BOOL isTargetLayer = ([obj isKindOfClass:[AGSGraphicsLayer class]] &&
-                              [[obj name] isEqualToString:layerName]);
+                              [[obj name] isEqualToString:layerIdentifier]);
         if (isTargetLayer)
         {
             layer = obj;
@@ -323,7 +323,7 @@
 }
 
 
-- (void)dataChangedForLayerWithIdentifier:(NSString*)layerName
+- (void)dataChangedForLayerWithIdentifier:(NSString*)layerIdentifier
 {
     
 }
