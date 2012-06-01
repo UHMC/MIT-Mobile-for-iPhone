@@ -13,6 +13,7 @@
 
 #import "MGSLayerManager.h"
 #import "MGSAnnotationLayerManager.h"
+#import "MITMobileServerConfiguration.h"
 
 @interface MGSMapView () <AGSMapViewTouchDelegate>
 @property (nonatomic, strong) NSMutableSet *agsLayers;
@@ -69,6 +70,7 @@
 + (NSSet*)agsBasemapLayers
 {
     NSMutableSet *layerSet = [NSMutableSet set];
+    NSString *apiBase = [MITMobileWebGetCurrentServerURL() absoluteString];
     
     {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -94,7 +96,7 @@
                 forKey:@"layerIdentifier"];
         [dict setValue:@"Base (MIT)"
                 forKey:@"displayName"];
-        [dict setValue:@"http://ims-pub.mit.edu/ArcGIS/rest/services/mobile/WhereIs_Base_Topo_Mobile/MapServer"
+        [dict setValue:[NSString stringWithFormat:@"%@/arcgis/pub/rest/services/mobile/WhereIs_Base_Topo_Mobile/MapServer", apiBase]
                 forKey:@"url"];
         
         [dict setValue:[NSNumber numberWithBool:YES]
@@ -109,7 +111,7 @@
                 forKey:@"layerIdentifier"];
         [dict setValue:@"MIT Campus"
                 forKey:@"displayName"];
-        [dict setValue:@"http://ims-pub.mit.edu/ArcGIS/rest/services/base/WhereIs_Base_Topo/MapServer"
+        [dict setValue:[NSString stringWithFormat:@"%@/arcgis/pub/rest/services/base/WhereIs_Base_Topo/MapServer", apiBase]
                 forKey:@"url"];
         
         [dict setValue:@"0"
@@ -127,7 +129,7 @@
                 forKey:@"layerIdentifier"];
         [dict setValue:@"MIT Buildings"
                 forKey:@"displayName"];
-        [dict setValue:@"http://ims-pub.mit.edu/ArcGIS/rest/services/base/WhereIs_Base/MapServer/9"
+        [dict setValue:[NSString stringWithFormat:@"%@/arcgis/pub/rest/services/base/WhereIs_Base/MapServer/9", apiBase]
                 forKey:@"url"];
         
         [dict setValue:@"1"
