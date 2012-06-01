@@ -112,8 +112,8 @@
         [dict setValue:@"http://ims-pub.mit.edu/ArcGIS/rest/services/base/WhereIs_Base_Topo/MapServer"
                 forKey:@"url"];
         
-        [dict setValue:@"layerIndex"
-                forKey:@"0"];
+        [dict setValue:@"0"
+                forKey:@"layerIndex"];
         [dict setValue:[NSNumber numberWithBool:NO]
                 forKey:@"isFeatureLayer"];
         
@@ -130,8 +130,8 @@
         [dict setValue:@"http://ims-pub.mit.edu/ArcGIS/rest/services/base/WhereIs_Base/MapServer/9"
                 forKey:@"url"];
         
-        [dict setValue:@"layerIndex"
-                forKey:@"1"];
+        [dict setValue:@"1"
+                forKey:@"layerIndex"];
         [dict setValue:[NSNumber numberWithBool:YES]
                 forKey:@"isFeatureLayer"];
         
@@ -155,7 +155,6 @@
         self.layerIdentifiers = [NSMutableSet set];
         self.agsLayers = [NSMutableSet set];
         [self initView];
-        [self initBaseLayers];
     }
     
     return self;
@@ -212,8 +211,8 @@
     NSArray *sortDescriptors = [NSArray arrayWithObjects:
                                 [NSSortDescriptor sortDescriptorWithKey:@"isEnabled" ascending:NO],
                                 [NSSortDescriptor sortDescriptorWithKey:@"isBasemap" ascending:NO],
-                                [NSSortDescriptor sortDescriptorWithKey:@"isFeatureLayer" ascending:NO],
                                 [NSSortDescriptor sortDescriptorWithKey:@"layerIndex" ascending:YES],
+                                [NSSortDescriptor sortDescriptorWithKey:@"isFeatureLayer" ascending:NO],
                                 nil];
     
     NSArray *defaultLayers = [layers sortedArrayUsingDescriptors:sortDescriptors];
@@ -232,7 +231,7 @@
         BOOL isBasemap = [[layerInfo objectForKey:@"isBasemap"] boolValue];
         BOOL isFeatureLayer = [[layerInfo objectForKey:@"isFeatureLayer"] boolValue];
         
-        NSUInteger layerIndex = [[layerInfo objectForKey:@"layerIndex"] unsignedIntegerValue];
+        NSInteger layerIndex = [[layerInfo objectForKey:@"layerIndex"] integerValue];
         
         if ([self.layerIdentifiers containsObject:layerIdentifier])
         {
@@ -254,7 +253,7 @@
                 DLog(@"Setting baselayer id '%@' [%@]", layerIdentifier, layerName);
             }
         }
-        else if (isFeatureLayer == NO)
+        else if (isFeatureLayer)
         {
             AGSFeatureLayer *featureLayer = [AGSFeatureLayer featureServiceLayerWithURL:layerURL
                                                                                    mode:AGSFeatureLayerModeOnDemand];
@@ -275,6 +274,7 @@
     
     [self.loadingView removeFromSuperview];
     self.loadingView = nil;
+    self.mapView.hidden = NO;
 }
 
 #pragma mark - Private Methods
