@@ -8,6 +8,7 @@
 @synthesize title = _title;
 @synthesize detail = _detail;
 @synthesize image = _image;
+@synthesize userData = _userData;
 
 - (id)initWithTitle:(NSString *)title
          detailText:(NSString *)detail
