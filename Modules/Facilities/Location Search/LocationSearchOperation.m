@@ -139,9 +139,7 @@ static inline NSString* NSStringFromBOOL(BOOL aBool)
         NSMutableSet *matchedLocations = [NSMutableSet set];
         NSMutableSet *searchResults = [NSMutableSet set];
         
-        [locations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            FacilitiesLocation *location = (FacilitiesLocation*)obj;
-            
+        [locations enumerateObjectsUsingBlock:^(FacilitiesLocation *location, NSUInteger idx, BOOL *stop) {
             if ([self isCancelled])
             {
                 (*stop) = YES;
@@ -184,8 +182,7 @@ static inline NSString* NSStringFromBOOL(BOOL aBool)
         if (self.searchCompletedBlock && ([self isCancelled] == NO))
         {
             NSMutableSet *results = [NSMutableSet setWithCapacity:[searchResults count]];
-            [searchResults enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-                NSManagedObject *mo = (NSManagedObject*)obj;
+            [searchResults enumerateObjectsUsingBlock:^(NSManagedObject *mo, BOOL *stop) {
                 [results addObject:mo];
             }];
             [self performBlockOnMainThread:^{ self.searchCompletedBlock(results,nil); }

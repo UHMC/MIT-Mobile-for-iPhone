@@ -64,8 +64,7 @@ static NSString * const WCHoldingAvailableKey = @"available";
     if (_libraryAvailability == nil)
     {
         NSMutableDictionary *availability = [NSMutableDictionary dictionary];
-        [self.availability enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *book = (NSDictionary*)obj;
+        [self.availability enumerateObjectsUsingBlock:^(NSDictionary *book, NSUInteger idx, BOOL *stop) {
             NSString *location = [book objectForKey:WCHoldingLocationKey];
             NSMutableArray *array = [availability objectForKey:location];
             

@@ -202,16 +202,15 @@ static NSString *LocationSearchSectionQueryKey = @"edu.mit.mobile.location.searc
     NSArray* words = [upperQuery componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     upperQuery = [words componentsJoinedByString:@""];
     
-    [self.recentSearches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *result = [(NSString*)obj uppercaseString];
-        NSArray* words = [result componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        result = [words componentsJoinedByString:@""];
+    [self.recentSearches enumerateObjectsUsingBlock:^(NSString *result, NSUInteger idx, BOOL *stop) {
+        NSArray* words = [[result uppercaseString] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString *joinedResult = [words componentsJoinedByString:@""];
         
-        BOOL prefixMatch = (([upperQuery length] == 0) || [result hasPrefix:upperQuery]);
-        BOOL stringMatch = [result isEqualToString:upperQuery];
+        BOOL prefixMatch = (([upperQuery length] == 0) || [joinedResult hasPrefix:upperQuery]);
+        BOOL stringMatch = [joinedResult isEqualToString:upperQuery];
         if (prefixMatch && (stringMatch == NO))
         {
-            [filtered addObject:obj];
+            [filtered addObject:result];
         }
     }];
     

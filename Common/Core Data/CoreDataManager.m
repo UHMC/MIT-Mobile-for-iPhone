@@ -236,9 +236,8 @@
     NSManagedObjectContext *context = [self managedObjectContext];
     NSMutableSet *managedObjects = [NSMutableSet setWithCapacity:[objectIDs count]];
     
-    [objectIDs enumerateObjectsUsingBlock:^(id obj, BOOL *stop)
+    [objectIDs enumerateObjectsUsingBlock:^(NSManagedObjectID *objectID, BOOL *stop)
     {
-        NSManagedObjectID *objectID = (NSManagedObjectID*)obj;
         [managedObjects addObject:[context objectWithID:objectID]];
     }];
     

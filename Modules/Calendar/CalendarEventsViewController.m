@@ -709,8 +709,7 @@
         activeMap = searchResultsMapView;
     }
 
-    [activeMap.events enumerateObjectsUsingBlock:^void(id obj, NSUInteger idx, BOOL *stop) {
-        MITCalendarEvent *evt = (MITCalendarEvent *)obj;
+    [activeMap.events enumerateObjectsUsingBlock:^(MITCalendarEvent *evt, NSUInteger idx, BOOL *stop) {
         if ([evt.eventID isEqual:annotation.event.eventID])
         {
             (*stop) = YES;

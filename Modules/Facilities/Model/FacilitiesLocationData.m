@@ -315,8 +315,7 @@ static FacilitiesLocationData *_sharedData = nil;
     
     NSPredicate *template = [NSPredicate predicateWithFormat:@"uid in $uids"];
     
-    [allCategories enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        FacilitiesCategory *category = obj;
+    [allCategories enumerateObjectsUsingBlock:^(FacilitiesCategory *category, NSUInteger idx, BOOL *stop) {
         NSSet *locationIds = category.locationIds;
         if (locationIds) {
             NSPredicate *predicate = [template predicateWithSubstitutionVariables:[NSDictionary dictionaryWithObject:locationIds forKey:@"uids"]];
