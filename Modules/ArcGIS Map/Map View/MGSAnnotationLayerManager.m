@@ -1,9 +1,12 @@
 #import "MGSAnnotationLayerManager.h"
 #import "MGSAnnotationLayer.h"
 #import "MGSMapAnnotation.h"
+#import "MGSMapCoordinate+AGS.h"
+#import "MGSAnnotationInfoTemplateDelegate.h"
 
+#define unless(x) if (!(x))
 
-static NSString const *MGSAnnotationSetAttributeKey = @"MGSAnnotationSetAttribute";
+NSString const *MGSAnnotationAttributeKey = @"MGSAnnotationSetAttribute";
 
 @interface MGSAnnotationLayerManager ()
 - (AGSRenderer *)agsRenderer;
@@ -20,8 +23,9 @@ static NSString const *MGSAnnotationSetAttributeKey = @"MGSAnnotationSetAttribut
     self = [super initWithLayer:layer
                   graphicsLayer:graphicLayer];
 
-    if (self) {
-        [self refreshLayer];
+    if (self)
+    {
+        self.infoTemplateDelegate = [MGSAnnotationInfoTemplateDelegate annotationInfoTemplate];
     }
 
     return self;
@@ -44,15 +48,8 @@ static NSString const *MGSAnnotationSetAttributeKey = @"MGSAnnotationSetAttribut
     markerSize = (markerSize < 1 ? 32.0 : markerSize);
 
     switch (self.annotationLayer.annotationType) {
-        case MGSMapAnnotationPin: {
-            UIImage *markerImage = [UIImage imageNamed:@"map/pin_complete"];
-            AGSPictureMarkerSymbol *pictureSymbol = [AGSPictureMarkerSymbol pictureMarkerSymbolWithImage:markerImage];
-            pictureSymbol.yoffset = (CGFloat) (ceil(markerImage.size.height / 2.0) - 1);
-            symbol = pictureSymbol;
-            break;
-        }
-
-        case MGSMapAnnotationSquare: {
+        case MGSMapAnnotationSquare:
+        {
             AGSSimpleMarkerSymbolStyle symbolStyle = AGSSimpleMarkerSymbolStyleSquare;
             AGSSimpleMarkerSymbol *markerSymbol = [AGSSimpleMarkerSymbol simpleMarkerSymbolWithColor:markerColor];
             markerSymbol.style = symbolStyle;
@@ -61,7 +58,8 @@ static NSString const *MGSAnnotationSetAttributeKey = @"MGSAnnotationSetAttribut
             break;
         }
 
-        case MGSMapAnnotationCircle: {
+        case MGSMapAnnotationCircle:
+        {
             AGSSimpleMarkerSymbolStyle symbolStyle = AGSSimpleMarkerSymbolStyleCircle;
             AGSSimpleMarkerSymbol *markerSymbol = [AGSSimpleMarkerSymbol simpleMarkerSymbolWithColor:markerColor];
             markerSymbol.style = symbolStyle;
@@ -78,22 +76,54 @@ static NSString const *MGSAnnotationSetAttributeKey = @"MGSAnnotationSetAttribut
             symbol = pictureSymbol;
             break;
         }
-
+            
+            
+        case MGSMapAnnotationPin:
         default:
+        {
+            AGSPictureMarkerSymbol *pictureSymbol = [AGSPictureMarkerSymbol pictureMarkerSymbolWithImageNamed:@"map/map_pin_complete"];
+            pictureSymbol.yoffset = (CGFloat) (ceil(pictureSymbol.image.size.height / 2.0) - 1);
+            symbol = pictureSymbol;
             break;
+        }
     }
 
     return [AGSSimpleRenderer simpleRendererWithSymbol:symbol];
 }
 
-/* TODO: Rewrite this method, it's going to be *SLOW* */
+/* FIXME: Rewrite this method, it's going to be *SLOW* */
 - (void)refreshLayer {
-    AGSRenderer *renderer = [self agsRenderer];
-    [self.graphicsLayer removeAllGraphics];
-    self.graphicsLayer.renderer = renderer;
+    
+    if (self.graphicsView)
+    {
+        AGSSpatialReference *spatialReference = self.graphicsView.mapView.spatialReference;
+        
+        [self.graphicsLayer removeAllGraphics];
+        self.graphicsLayer.renderer = [self agsRenderer];
 
-    [self.annotationLayer.annotations enumerateObjectsUsingBlock:^(MGSMapAnnotation *annotation, BOOL *stop) {
-
-    }];
+        NSMutableArray *newGraphics = [NSMutableArray array];
+        [self.annotationLayer.annotations enumerateObjectsUsingBlock:^(MGSMapAnnotation *annotation, BOOL *stop) {
+            AGSPoint *point = [annotation.coordinate agsPoint];
+            AGSPoint *pointConv = (AGSPoint*)[[AGSGeometryEngine defaultGeometryEngine] projectGeometry:point
+                                                                                     toSpatialReference:spatialReference];
+            
+            AGSGraphic *graphic = [AGSGraphic graphicWithGeometry:pointConv
+                                                           symbol:nil
+                                                       attributes:[NSDictionary dictionaryWithObject:annotation
+                                                                                              forKey:MGSAnnotationAttributeKey]
+                                             infoTemplateDelegate:nil];
+            
+            if (self.infoTemplateDelegate)
+            {
+                graphic.infoTemplateDelegate = self.infoTemplateDelegate;
+            }
+            
+            [newGraphics addObject:graphic];
+        }];
+        
+        [self.graphicsLayer addGraphics:newGraphics];
+        [self.graphicsLayer dataChanged];
+        [self.graphicsView setNeedsDisplay];
+    }
 }
 @end

@@ -1,5 +1,7 @@
 #import "MGSLayerManager.h"
 
+extern NSString const *MGSAnnotationAttributeKey;
+
 @class MGSAnnotationLayer;
 
 @interface MGSAnnotationLayerManager : MGSLayerManager
