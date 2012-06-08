@@ -8,17 +8,27 @@
 @synthesize mutableAnnotations = _mutableAnnotations;
 @dynamic annotations;
 
+- (id)initWithName:(NSString *)name
+{
+    self = [super initWithName:name];
+    
+    if (self)
+    {
+        self.mutableAnnotations = [NSMutableSet set];
+    }
+    
+    return self;
+}
+
 
 #pragma mark - Dynamic Properties
 - (void)setAnnotations:(NSSet *)annotations
 {
+    [self.mutableAnnotations removeAllObjects];
+    
     if (annotations)
     {
-        self.mutableAnnotations = [NSMutableSet setWithSet:annotations];
-    }
-    else
-    {
-        self.mutableAnnotations = nil;
+        [self.mutableAnnotations unionSet:annotations];
     }
 }
 
