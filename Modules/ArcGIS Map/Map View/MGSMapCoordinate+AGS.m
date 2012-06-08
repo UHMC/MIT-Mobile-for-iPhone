@@ -21,14 +21,14 @@
                                                                          toSpatialReference:[AGSSpatialReference spatialReferenceWithWKID:WKID_WGS84]];
     }
     
-    self.x = sourcePoint.x;
-    self.y = sourcePoint.y;
+    self.longitude = sourcePoint.x;
+    self.latitude = sourcePoint.y;
 }
 
 - (AGSPoint*)agsPoint
 {
-    return [AGSPoint pointWithX:self.x
-                              y:self.y
+    return [AGSPoint pointWithX:self.longitude
+                              y:self.latitude
                spatialReference:[AGSSpatialReference spatialReferenceWithWKID:WKID_WGS84]];
 }
 @end
