@@ -9,6 +9,12 @@
 @synthesize pinIcon = _pinIcon;
 @synthesize iconSize = _iconSize;
 
+
+- (id)init
+{
+    return [self initWithName:nil];
+}
+
 - (id)initWithName:(NSString *)name
 {
     self = [super init];
@@ -20,8 +26,4 @@
     
     return self;
 }
-
-
-
-
 @end
