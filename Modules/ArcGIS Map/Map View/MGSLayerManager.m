@@ -6,10 +6,20 @@
 @end
 
 @implementation MGSLayerManager
+@synthesize identifier = _identifier;
 @synthesize dataLayer = _dataLayer;
 @synthesize graphicsLayer = _graphicsLayer;
+@synthesize graphicsView = _graphicsView;
+@synthesize infoTemplateDelegate = _infoTemplateDelegate;
 
-+ (BOOL)canManageLayer:(MGSMapLayer*)layer
++ (MGSLayerManager*)layerManagerWithMapLayer:(MGSMapLayer*)layer
+                               graphicsLayer:(AGSGraphicsLayer*)graphicsLayer
+{
+    return [[self alloc] initWithLayer:layer
+                         graphicsLayer:graphicsLayer];
+}
+
++ (BOOL)canManageLayer:(MGSMapLayer*)mapLayer
 {
     return NO;
 }
@@ -30,5 +40,15 @@
 - (void)refreshLayer
 {
     /* Do Nothing */
+}
+
+- (void)layerDidLoad
+{
+    DLog(@"Layer '%@' successfully loaded with WKID %d", self.identifier, self.graphicsLayer.spatialReference.wkid);
+}
+
+- (void)layerFailedToLoad
+{
+    DLog(@"Layer '%@' failed to load", self.identifier);
 }
 @end
