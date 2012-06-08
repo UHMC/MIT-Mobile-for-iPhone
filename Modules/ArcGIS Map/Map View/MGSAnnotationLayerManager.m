@@ -91,6 +91,16 @@ NSString const *MGSAnnotationAttributeKey = @"MGSAnnotationSetAttribute";
     return [AGSSimpleRenderer simpleRendererWithSymbol:symbol];
 }
 
+- (void)setGraphicsView:(UIView<AGSLayerView> *)graphicsView
+{
+    [super setGraphicsView:graphicsView];
+    
+    if (graphicsView)
+    {
+        [self refreshLayer];
+    }
+}
+
 /* FIXME: Rewrite this method, it's going to be *SLOW* */
 - (void)refreshLayer {
     
