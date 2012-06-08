@@ -10,14 +10,11 @@
 @dynamic x, y;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
+    CGFloat longitude = (CGFloat)[aDecoder decodeDoubleForKey:@"edu.mit.mobile.MITMapCoordinate.longitude"];
+    CGFloat latitude = (CGFloat)[aDecoder decodeDoubleForKey:@"edu.mit.mobile.MITMapCoordinate.latitude"];
 
-    if (self) {
-        self.longitude = [aDecoder decodeIntegerForKey:@"edu.mit.mobile.MITMapCoordinate.longitude"];
-        self.latitude = [aDecoder decodeIntegerForKey:@"edu.mit.mobile.MITMapCoordinate.latitude"];
-    }
-
-    return self;
+    return [self initWithLongitude:longitude
+                          latitude:latitude];
 }
 
 
